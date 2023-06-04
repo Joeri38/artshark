@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 function Carosel() {
   return (
-    <section className="text-gray-600 bg-white body-font">
+    <section className="text-gray-600 bg-[#f7f7f7] body-font">
         <div className="container mx-auto flex px-5 md:px-10 py-24 md:flex-row flex-col items-center">
           <div className="lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center">
             <h1 className="text-lg sm:text-2xl tracking-wider md:text-4xl font-bold text-gray-900">Unleash your creativity</h1>

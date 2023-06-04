@@ -3,11 +3,11 @@ import Link from 'next/link'
 
 function LowerCarousel() {
   return (
-    <section className="text-gray-600 bg-white body-font">
+    <section className="text-gray-600 bg-[#f7f7f7] body-font">
         <div className="container mx-auto flex px-5 md:px-10 py-24 md:flex-row flex-col items-center">
 
           <div className="lg:max-w-lg lg:w-full md:w-1/2 w-5/6">
-            <img className="object-cover object-center rounded" alt="hero" src="https://images.unsplash.com/photo-1556742111-a301076d9d18?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTF8fHNob3BwaW5nJTIwc3RvcmV8ZW58MHwwfDB8fA%3D%3D&auto=format&fit=crop&w=600&q=60"/>
+            <img className="object-cover object-center rounded" alt="hero" src="https://media.istockphoto.com/id/585488832/photo/typing-on-laptop-closeup-chatting-in-facebook.webp?b=1&s=170667a&w=0&k=20&c=qNHtdVUYqmPwUlAHtbdUUTfEG1uHRONdB2-k8ymfk9o="/>
           </div>
           <div className="lg:flex-grow ml-20 md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center">
             <h1 className="text-lg sm:text-2xl md:text-3xl tracking-widest font-bold text-gray-900">Created by your own</h1>

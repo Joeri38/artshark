@@ -23,7 +23,7 @@ export default function Example({logout , user, cart, subTotal, deleteItemFromCa
 
 
   return (
-    <div className="bg-white">
+    <div className="bg-[#f7f7f7]">
 
       
       {/* Mobile menu */}
@@ -76,7 +76,7 @@ export default function Example({logout , user, cart, subTotal, deleteItemFromCa
 
 
 
-      <header className="relative bg-white">
+      <header className="relative bg-[#f7f7f7]">
 
         {/* Laptop View */}
         <nav aria-label="Top" className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -90,7 +90,7 @@ export default function Example({logout , user, cart, subTotal, deleteItemFromCa
               {/* Logo */}
               <div className="ml-4 flex lg:ml-0">
                 {/* <span className="text-black font-bold">Art Shark</span> */}
-                <img className='h-8' src="/logo.png" alt="" />
+                <img className='h-10' src="/logo.png" alt="" />
               </div>
 
               {/* Flyout menus */}
@@ -116,13 +116,13 @@ export default function Example({logout , user, cart, subTotal, deleteItemFromCa
                   </Link>
                 </div>
                         
-                <Menu as="div" className="relative inline-block text-left">
+                {!user && <Menu as="div" className="relative inline-block text-left">
                   <div>
                     <Menu.Button className="inline-flex mt-2">
                       <BiUserCircle className='text-xl md:text-2xl cursor-pointer hover:text-gray-700' aria-hidden="true"/>
                     </Menu.Button>
                   </div>
-                </Menu>
+                </Menu>}
 
 
 
@@ -147,7 +147,7 @@ export default function Example({logout , user, cart, subTotal, deleteItemFromCa
                               <div className="flex h-full flex-col overflow-y-scroll bg-white shadow-xl">
                                 <div className="flex-1 overflow-y-auto py-6 px-4 sm:px-6">
                                   <div className="flex items-start justify-between">
-                                    <Dialog.Title className="text-lg font-medium text-gray-900">Shopping cart</Dialog.Title>
+                                    <Dialog.Title className="text-lg font-semibold text-black">Shopping cart</Dialog.Title>
                                     <div className="ml-3 flex h-7 items-center">
                                       <button type="button" className="-m-2 p-2 text-gray-400 hover:text-gray-500" onClick={() => setOpenCart(false)}>
                                         <span className="sr-only">Close panel</span>
@@ -158,7 +158,7 @@ export default function Example({logout , user, cart, subTotal, deleteItemFromCa
                                   <div className="mt-8">
                                     <div className="flow-root">
                                       <ul role="list" className="-my-6 divide-y divide-gray-200">
-                                      {cart && Object.keys(cart).length == 0 && <div className='text-center mt-10 text-lg'>Your Cart is Empty!</div> }
+                                      {cart && Object.keys(cart).length == 0 && <div className='text-center text-gray-600 mt-10 text-md'>Your Cart is Empty!</div> }
                                       {cart && Object.keys(cart).map((item)=>{
                                           return <li key={item} className="flex py-6">
                                             <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
@@ -196,11 +196,11 @@ export default function Example({logout , user, cart, subTotal, deleteItemFromCa
                                     Shipping and taxes calculated at checkout.
                                   </p>
                                   <div className="mt-6">
-                                    <Link href="/checkout" className="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700">Checkout</Link>
+                                    <Link href="/checkout" className="flex items-center justify-center rounded-md border border-transparent bg-[#29D0d1] px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-[#44B0B7]">Checkout</Link>
                                   </div>
                                   <div className="mt-6 flex justify-center text-center text-sm text-gray-500">
                                     <p>or
-                                      <button type="button" className="font-medium text-indigo-600 hover:text-indigo-500" onClick={() => setOpenCart(false)}>Continue Shopping
+                                      <button type="button" className="font-medium text-[#29D0d1] hover:text-[#44B0B7]" onClick={() => setOpenCart(false)}>Continue Shopping
                                         <span aria-hidden="true"> &rarr;</span>
                                       </button>
                                     </p>

@@ -2,7 +2,7 @@ import React from 'react'
 
 const ClientsClouds = () => {
   return (
-    <div className="bg-white py-24 sm:py-32">
+    <div className="bg-[#f7f7f7] py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <h2 className="text-center text-xl tracking-wide font-bold leading-8 text-gray-900">
           Trusted by the world’s most innovative teams

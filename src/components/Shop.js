@@ -38,7 +38,7 @@ const products = [
 
 function Shop() {
     return (
-      <div className="bg-white">
+      <div className="bg-[#f7f7f7]">
         <div className="mx-auto max-w-2xl py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
           <div className='flex flex-col md:flex-row items-center justify-between'>
             <h2 className="text-xl md:text-2xl font-sans font-bold tracking-tight text-gray-900">Shop by Category</h2>

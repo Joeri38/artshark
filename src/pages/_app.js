@@ -129,7 +129,7 @@ export default function App({ Component, pageProps }) {
   }
 
   return <>
-    <LoadingBar color='#0800FF' height={3} progress={progress} waitingTime={300} onLoaderFinished={() => setProgress(0)}/>
+    <LoadingBar color='#29D0d1' height={3} progress={progress} waitingTime={300} onLoaderFinished={() => setProgress(0)}/>
     
     <Navbar key={key} user={user} logout={logout} cart={cart} deleteItemFromCart={deleteItemFromCart} addToCart={addToCart} removeFromCart={removeFromCart} clearCart={clearCart} subTotal={subTotal} />
     <Component user={user} cart={cart} addToCart={addToCart} removeFromCart={removeFromCart} deleteItemFromCart={deleteItemFromCart} clearCart={clearCart} subTotal={subTotal}  {...pageProps} />
