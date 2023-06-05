@@ -1,59 +1,54 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Link from 'next/link'
+import {AiOutlineArrowRight} from 'react-icons/ai'
 
 const Create = () => {
+  const [message, setMessage] = useState('')
+  const [generatedImages, setGeneratedImages] = useState([])
 
+  const submit = async(e)=>{
+    e.preventDefault();
 
-  const products = [
-    {
-      id: 1,
-      name: 'Frames',
-      href: '/',
-      imageSrc: 'https://images.unsplash.com/photo-1609811692040-35b06faddb8d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDF8fGZyYW1lc3xlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=600&q=60',
-      imageAlt: "Frames",
-    },
-    {
-      id: 2,
-      name: 'Clothing',
-      href: '/',
-      imageSrc: 'https://images.unsplash.com/photo-1619032468883-89a84f565cba?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8dHNoaXJ0JTIwZm9yJTIwc3RvcmV8ZW58MHx8MHx8&auto=format&fit=crop&w=600&q=60',
-      imageAlt: "Clothing"
-    },
-    {
-      id: 3,
-      name: 'Assesories',
-      href: '/',
-      imageSrc: 'https://images.unsplash.com/photo-1508057198894-247b23fe5ade?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8d2F0Y2hlc3xlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=600&q=60',
-      imageAlt: "Assesories"
-    },
-    {
-      id: 4,
-      name: 'Sneakers',
-      href: '/sneakers',
-      imageSrc: 'https://images.unsplash.com/photo-1600269452121-4f2416e55c28?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8c25lYWtlcnN8ZW58MHx8MHx8&auto=format&fit=crop&w=600&q=60',
-      imageAlt: "Front of men's Basic Tee in black."
-    }
-  ]
+    const data = { message }; 
+    const response = await fetch('/api/generateImage', {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    let GeneratedImages= response.data;
+    setGeneratedImages(GeneratedImages)
+  }
 
 
   return (
     <>
     <div className='min-h-screen bg-[#f7f7f7] text-black pb-32'>
-      <div className='py-10 px-20'>
-        <label for="message" className="block mb-2 text-sm font-medium text-gray-900">Enter Prompt</label>
-        <textarea name='message' id="message" rows="4" className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border-2 border-[#245c70] focus:ring-[#245c70] focus:border-[#245c70]" placeholder="Write your thoughts here..."></textarea>
-      </div>
 
-      <div className='px-20'>
+      <form method='POST' onSubmit={submit}>
+        <div className='py-10 px-10 md:px-20'>
+          <label htmlFor="message" className="block mb-2 text-sm font-medium text-gray-900">Enter Prompt</label>
+          <textarea value={message} onChange={(e)=>{setMessage(e.target.value)}} name='message' id="message" rows="4" className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border-2 border-[#245c70] focus:ring-[#245c70] focus:border-[#245c70]" placeholder="Write your thoughts here..."></textarea>
+        <div className="flex justify-center">
+          <button type='submit' className="ml-4 inline-flex items-center bg-[#29D0d1] text-white rounded-xl font-semibold border-0 py-2 px-8 focus:outline-none hover:bg-[#44B0B7] text-base mt-2 md:mt-5"> <span className='mr-2'>Get Result</span>  <AiOutlineArrowRight/> </button>
+        </div>
+        </div>
+      </form>
+
+      {/* No Image Generated Yet */}
+      {generatedImages.length == 0 && <h1 className='text-center text-red-700 font-semibold text-sm'>No Image Generated Yet!</h1>}
+
+      <div className='px-10 md:px-20'>
         <div className="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-          {products.map((product, index) => (
-            <div key={product.id} className="group relative flex flex-col-reverse md:flex-col">
+          {generatedImages && generatedImages.map((item, index) => (
+            <div key={index} className="group relative flex flex-col-reverse md:flex-col">
               <div className="min-h-80 aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:aspect-none lg:h-80">
-                <img src={product.imageSrc} alt={product.imageAlt} className="h-full w-full object-cover object-center lg:h-full lg:w-full"/>
+                <img src={item.url} alt={index} className="h-[33rem] w-full object-cover object-center lg:h-full lg:w-full"/>
               </div>
               <div className="mt-4 flex justify-between">
                   <h3 className="text-base text-gray-700">
-                    <Link href={product.href}>
+                    <Link href={item.href}>
                       <span aria-hidden="true" className="absolute inset-0" />
                       <span className='font-semibold'>Version # {index + 1}</span>
                     </Link>

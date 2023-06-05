@@ -8,28 +8,28 @@ const products = [
     {
       id: 1,
       name: 'Frames',
-      href: '/',
+      href: '/gallery',
       imageSrc: 'https://images.unsplash.com/photo-1609811692040-35b06faddb8d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDF8fGZyYW1lc3xlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=600&q=60',
       imageAlt: "Frames",
     },
     {
       id: 2,
       name: 'Clothing',
-      href: '/',
+      href: '/gallery',
       imageSrc: 'https://images.unsplash.com/photo-1619032468883-89a84f565cba?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8dHNoaXJ0JTIwZm9yJTIwc3RvcmV8ZW58MHx8MHx8&auto=format&fit=crop&w=600&q=60',
       imageAlt: "Clothing"
     },
     {
       id: 3,
       name: 'Assesories',
-      href: '/',
+      href: '/gallery',
       imageSrc: 'https://images.unsplash.com/photo-1508057198894-247b23fe5ade?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8d2F0Y2hlc3xlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=600&q=60',
       imageAlt: "Assesories"
     },
     {
       id: 4,
       name: 'Sneakers',
-      href: '/sneakers',
+      href: '/gallery',
       imageSrc: 'https://images.unsplash.com/photo-1600269452121-4f2416e55c28?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8c25lYWtlcnN8ZW58MHx8MHx8&auto=format&fit=crop&w=600&q=60',
       imageAlt: "Front of men's Basic Tee in black."
     }

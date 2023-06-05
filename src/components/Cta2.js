@@ -10,7 +10,7 @@ function Cta2 () {
         <h1 className='text-3xl sm:text-4xl font-sans tracking-tight text-white text-center font-semibold'>Simple Productivity</h1>
         <p className=' md:w-10/12 mx-auto text-sm sm:text-base px-10 md:px-0 md:text-xl my-4 mb-7 text-center text-gray-200'>Endless tasks, limited hours, a single piece of paper. Not really a haiku, but we're doing our best here. No kanban boards, burdown charts, or tangled flowcharts with our focus system. Just the undeniable urge to fill empty circles.</p>
         <div className='mx-auto justify-center flex'>
-          <button className='button px-3 sm:w-44 text-sm sm:text-base font-semibold'><Link href={'/items'}>Shop Focus</Link></button>       
+          <button className='button px-3 sm:w-44 text-sm sm:text-base font-semibold'><Link href={'/create'}>Shop Focus</Link></button>       
         </div>
       </div>
       <div className=''>
