@@ -9,10 +9,15 @@ const products = {
   pages: [
     { name: 'Home', href: '/' },
     { name: 'Create', href: '/create' },
+    { name: 'Products', href: '/items' },
     { name: 'Gallery', href: '/gallery' },
     { name: 'Prompt Guide', href: '/promptGuide' },
     { name: 'About', href: '/about' },
   ],
+}
+
+function classNames(...classes) {
+  return classes.filter(Boolean).join(' ')
 }
 
 
@@ -106,7 +111,7 @@ export default function Example({logout , user, cart, subTotal, deleteItemFromCa
 
               <div className="ml-auto flex items-center">
 
-                <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
+                {!user.value && <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
                   <Link href={'/login'} className="text-sm font-medium text-gray-700 hover:text-gray-800">
                     Sign in
                   </Link>
@@ -114,15 +119,39 @@ export default function Example({logout , user, cart, subTotal, deleteItemFromCa
                   <Link href={'/signup'} className="text-sm font-medium text-gray-700 hover:text-gray-800">
                     Create account
                   </Link>
-                </div>
+                </div>}
                         
-                {!user && <Menu as="div" className="relative inline-block text-left">
+                <Menu as="div" className="relative inline-block text-left">
                   <div>
                     <Menu.Button className="inline-flex mt-2">
-                      <BiUserCircle className='text-xl md:text-2xl cursor-pointer hover:text-gray-700' aria-hidden="true"/>
+                      {user.value && <BiUserCircle className='text-xl text-black md:text-2xl cursor-pointer' aria-hidden="true"/>}
                     </Menu.Button>
                   </div>
-                </Menu>}
+
+                  <Transition as={Fragment} enter="transition ease-out duration-100" enterFrom="transform opacity-0 scale-95" enterTo="transform opacity-100 scale-100" leave="transition ease-in duration-75" leaveFrom="transform opacity-100 scale-100" leaveTo="transform opacity-0 scale-95">
+                    <Menu.Items className="absolute right-0 z-10 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                      <div className="py-1">
+                        <Menu.Item>
+                          {({ active }) => ( <Link href={'/admin/allproducts'} className={classNames( active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'block px-4 py-2 text-sm' )}>Admin Account</Link>)}
+                        </Menu.Item>
+                        <Menu.Item>
+                          {({ active }) => ( <Link href={'/myaccount'} className={classNames( active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'block px-4 py-2 text-sm' )}>Account settings</Link>)}
+                        </Menu.Item>
+                        <Menu.Item>
+                          {({ active }) => (<Link href={'/orders'} className={classNames( active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'block px-4 py-2 text-sm')}>My Orders</Link>)}
+                        </Menu.Item>
+                        <Menu.Item>
+                          {({ active }) => (<Link href={'/license'} className={classNames( active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'block px-4 py-2 text-sm')}>License</Link>)}
+                        </Menu.Item>
+                        <div>
+                          <Menu.Item> 
+                            {({ active }) => (<button onClick={logout}  className={classNames( active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'block w-full px-4 py-2 text-left text-sm')}>Log Out</button>)}
+                          </Menu.Item>
+                        </div>
+                      </div>
+                    </Menu.Items>
+                  </Transition>
+                </Menu>
 
 
 
@@ -200,7 +229,7 @@ export default function Example({logout , user, cart, subTotal, deleteItemFromCa
                                   </div>
                                   <div className="mt-6 flex justify-center text-center text-sm text-gray-500">
                                     <p>or
-                                      <button type="button" className="font-medium text-[#29D0d1] hover:text-[#44B0B7]" onClick={() => setOpenCart(false)}>Continue Shopping
+                                      <button type="button" className="font-medium text-[#44B0B7]" onClick={() => setOpenCart(false)}>Continue Shopping
                                         <span aria-hidden="true"> &rarr;</span>
                                       </button>
                                     </p>

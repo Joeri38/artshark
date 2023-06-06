@@ -1,3 +1,4 @@
+import Head from 'next/head'
 import React from 'react'
 
 const PromptGuide = () => {
@@ -32,6 +33,11 @@ const PromptGuide = () => {
 
   return (
     <>
+    <Head>
+        <title>Prompt_Art Shark</title>
+        <meta name="description" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0" />
+    </Head>
+
     <div className='min-h-screen text-black bg-[#f7f7f7] p-10 py-10 pb-20'>
       <div>
         <h1 className='text-2xl font-bold pt-5'>Prompt Guide</h1>

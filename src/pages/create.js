@@ -1,32 +1,20 @@
 import React, { useState } from 'react'
 import Link from 'next/link'
 import {AiOutlineArrowRight} from 'react-icons/ai'
+import Head from 'next/head'
 
-const Create = () => {
-  const [message, setMessage] = useState('')
-  const [generatedImages, setGeneratedImages] = useState([])
-
-  const submit = async(e)=>{
-    e.preventDefault();
-
-    const data = { message }; 
-    const response = await fetch('/api/generateImage', {
-      method: 'POST',
-      body: JSON.stringify(data),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-    let GeneratedImages= response.data;
-    setGeneratedImages(GeneratedImages)
-  }
-
+const Create = ({getImages,message, setMessage, generatedImages }) => {
+  
 
   return (
     <>
+    <Head>
+      <title>Create_Art Shark</title>
+      <meta name="description" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0" />
+    </Head>
     <div className='min-h-screen bg-[#f7f7f7] text-black pb-32'>
 
-      <form method='POST' onSubmit={submit}>
+      <form method='POST' onSubmit={getImages}>
         <div className='py-10 px-10 md:px-20'>
           <label htmlFor="message" className="block mb-2 text-sm font-medium text-gray-900">Enter Prompt</label>
           <textarea value={message} onChange={(e)=>{setMessage(e.target.value)}} name='message' id="message" rows="4" className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border-2 border-[#245c70] focus:ring-[#245c70] focus:border-[#245c70]" placeholder="Write your thoughts here..."></textarea>
@@ -60,7 +48,6 @@ const Create = () => {
       </div>
 
     </div>
-
     </>
   )
 }

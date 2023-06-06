@@ -20,12 +20,17 @@ export default function App({ Component, pageProps }) {
   const [user, setUser] = useState({value: null})
   const [key, setKey] = useState(0)
 
+  const [message, setMessage] = useState('')
+  const [generatedImages, setGeneratedImages] = useState([])
+  const [allGeneratedImages, setAllGeneratedImages] = useState([])
+
 
   //  react top loading bar
   const [progress, setProgress] = useState(0)
 
   //  Use Effect for retain same items in shopping Cart
   useEffect(() => {
+    
     router.events.on('routeChangeStart', ()=>{
       setProgress(75);
     });
@@ -79,7 +84,7 @@ export default function App({ Component, pageProps }) {
 
 
   // Add to Cart function like increase quantity of items in cart
-  const addToCart = (itemCode, name, qty, price, img , size, variant) =>{
+  const addToCart = (itemCode, name, qty, price, img, size, variant) =>{
     let newCart = cart;
     if(itemCode in cart){
       newCart[itemCode].qty= cart[itemCode].qty + qty;
@@ -128,11 +133,29 @@ export default function App({ Component, pageProps }) {
     
   }
 
+
+
+  const getImages = async(e)=>{
+    e.preventDefault();
+
+    const data = { message }; 
+    const response = await fetch('/api/generateImage', {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    let GeneratedImages= response.data;
+    setGeneratedImages(GeneratedImages)
+    setAllGeneratedImages(...GeneratedImages, GeneratedImages)
+  }
+
   return <>
     <LoadingBar color='#29D0d1' height={3} progress={progress} waitingTime={300} onLoaderFinished={() => setProgress(0)}/>
     
     <Navbar key={key} user={user} logout={logout} cart={cart} deleteItemFromCart={deleteItemFromCart} addToCart={addToCart} removeFromCart={removeFromCart} clearCart={clearCart} subTotal={subTotal} />
-    <Component user={user} cart={cart} addToCart={addToCart} removeFromCart={removeFromCart} deleteItemFromCart={deleteItemFromCart} clearCart={clearCart} subTotal={subTotal}  {...pageProps} />
+    <Component allGeneratedImages={allGeneratedImages} generatedImages={generatedImages} getImages={getImages} setMessage={setMessage} user={user} cart={cart} addToCart={addToCart} removeFromCart={removeFromCart} deleteItemFromCart={deleteItemFromCart} clearCart={clearCart} subTotal={subTotal}  {...pageProps} />
     <Footer/>
   </>
 }

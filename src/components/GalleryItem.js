@@ -32,17 +32,17 @@ const products = [
   ]
 
 
-function GalleryItem({title}) {
+function GalleryItem({title, allGeneratedImages}) {
     return (
       <div className="bg-[#f7f7f7]">
         <div className="mx-auto max-w-2xl py-10 px-4 sm:py-16 sm:px-6 lg:max-w-7xl lg:px-8">
           <div className='flex flex-col md:flex-row items-center justify-between'>
             <h2 className="text-xl md:text-2xl font-sans font-semibold tracking-tight text-gray-900">{title}</h2>
-            <Link href={'/create'} className='font-semibold text-sm md:text-base flex items-center text-indigo-700 hover:text-indigo-800'>Browse all collections <AiOutlineArrowRight className='ml-1'/></Link>
+            <Link href={'/create'} className='font-semibold text-sm md:text-base flex items-center text-[#44B0B7]'>Browse all collections <AiOutlineArrowRight className='ml-1'/></Link>
           </div>
       
           <div className="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-            {products.map((product) => (
+            {allGeneratedImages && allGeneratedImages.map((product) => (
               <div key={product.id} className="group relative">
                 <div className="min-h-80 aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:aspect-none lg:h-80">
                   <img
@@ -54,6 +54,22 @@ function GalleryItem({title}) {
                 
               </div>
             ))}
+
+            {!allGeneratedImages && products.map((product) => (
+              <div key={product.id} className="group relative">
+                <div className="min-h-80 aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:aspect-none lg:h-80">
+                  <img
+                    src={product.imageSrc}
+                    alt={product.imageAlt}
+                    className="h-[34rem] w-full object-cover object-center lg:h-full lg:w-full"
+                  />
+                </div>
+                
+              </div>
+            ))}
+
+
+
           </div>
         </div>
       </div>

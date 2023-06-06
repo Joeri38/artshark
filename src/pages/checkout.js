@@ -131,7 +131,7 @@ function Checkout({ cart , subTotal, removeFromCart, addToCart }) {
   return (
     <>
     <Head>
-      <title>Checkout_Hunting_Store</title>
+      <title>Checkout_Art Shark</title>
       <meta name="description" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0" />
    </Head>
     {/* React tostify */}

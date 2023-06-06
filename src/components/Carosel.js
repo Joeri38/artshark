@@ -10,7 +10,7 @@ function Carosel() {
             <h1 className="text-lg sm:text-2xl tracking-wider mb-3 md:text-4xl font-bold text-gray-900">with AI</h1>
             <p className="md:mb-8 md:w-8/12 leading-relaxed">Copper mug try-hard pitchfork pour-over freegan heirloom neutra air plant cold-pressed tacos poke beard tote bag.</p>
             <div className="flex justify-center">
-              <button className="ml-4 inline-flex items-center bg-[#29D0d1] text-white rounded-xl font-semibold border-0 py-2 px-8 focus:outline-none hover:bg-[#44B0B7] text-base mt-4 md:mt-0 "><Link href={"/gallery"}>Get Started</Link></button>
+              <button className="ml-4 inline-flex items-center bg-[#29D0d1] hover:bg-[#44B0B7] text-white rounded-xl font-semibold border-0 py-2 px-8 focus:outline-none text-base mt-4 md:mt-0 "><Link href={"/gallery"}>Get Started</Link></button>
             </div>
           </div>
           <div className="lg:max-w-lg lg:w-full md:w-1/2 w-5/6">
