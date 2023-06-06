@@ -17,7 +17,6 @@ function Items({ product }) {
       <div className="mx-auto min-h-screen max-w-2xl py-16 px-4 sm:py-10 sm:px-6 lg:max-w-7xl lg:px-8">
         <h2 className="sr-only">Products</h2>
 
-
         {Object.keys(product).length === 0 && <div className="font-semibold text-center">Sorry! Currently Stock Unavailble right now. Please wait for the new Stock...!</div>}  
         {<div className="text-sm mt-10">Do you want to add Products? <span className='font-semibold text-[#44B0B7]'><Link href={'/'}>Click here!</Link></span></div>}  
 
