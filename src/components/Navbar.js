@@ -199,14 +199,14 @@ export default function Example({logout , user, cart, subTotal, deleteItemFromCa
                                                   <h3 className="w-10/12">
                                                     <Link href={`/product/${cart[item].slug}`}>{cart[item].name}</Link>
                                                   </h3>
-                                                  <p className="ml-4">${cart[item].price}</p>
+                                                  <p className="ml-4">€{cart[item].price}</p>
                                                 </div>
                                                 <p className="mt-1 text-sm text-gray-500">{cart[item].color}</p>
                                               </div>
                                               <div className="flex flex-1 items-end justify-between text-sm">
                                                 <p className="text-gray-500">Qty: {cart[item].qty}</p>
                                                 <div className="flex">
-                                                  <button onClick={()=>{deleteItemFromCart(item,cart[item].name,1,cart[item].price,cart[item].size,cart[item].variant)}} type="button" className="font-medium text-indigo-600 hover:text-indigo-500">Remove</button>
+                                                  <button onClick={()=>{deleteItemFromCart(item,cart[item].name,1,cart[item].price,cart[item].size,cart[item].variant)}} type="button" className="font-medium text-red-600 hover:text-red-500">Remove</button>
                                                 </div>
                                               </div>
                                             </div>
@@ -219,7 +219,7 @@ export default function Example({logout , user, cart, subTotal, deleteItemFromCa
                                 <div className="border-t border-gray-200 py-6 px-4 sm:px-6">
                                   <div className="flex justify-between text-base font-medium text-gray-900">
                                     <p>Subtotal</p>
-                                    <p>${subTotal}</p>
+                                    <p>€{subTotal}</p>
                                   </div>
                                   <p className="mt-0.5 text-sm text-gray-500">
                                     Shipping and taxes calculated at checkout.
@@ -229,7 +229,7 @@ export default function Example({logout , user, cart, subTotal, deleteItemFromCa
                                   </div>
                                   <div className="mt-6 flex justify-center text-center text-sm text-gray-500">
                                     <p>or
-                                      <button type="button" className="font-medium text-[#44B0B7]" onClick={() => setOpenCart(false)}>Continue Shopping
+                                      <button type="button" className="font-medium ml-1 text-[#44B0B7]" onClick={() => setOpenCart(false)}>Continue Shopping
                                         <span aria-hidden="true"> &rarr;</span>
                                       </button>
                                     </p>

@@ -10,6 +10,8 @@ import 'react-toastify/dist/ReactToastify.css';
 function Checkout({ cart , subTotal, removeFromCart, addToCart }) {
 
 
+  let shippingFess = 2;
+
   const router = useRouter()
 
   const products = cart
@@ -26,6 +28,8 @@ function Checkout({ cart , subTotal, removeFromCart, addToCart }) {
   const [streetAddress, setStreetAddress] = useState('')
   const [state, setState] = useState('')
   const [zip, setZip] = useState('')
+
+
 
   useEffect(() => {
     const myUser = JSON.parse(localStorage.getItem('myUser'))
@@ -137,10 +141,10 @@ function Checkout({ cart , subTotal, removeFromCart, addToCart }) {
     {/* React tostify */}
     <ToastContainer position="bottom-center" autoClose={1000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover theme="light"/>
 
-    <div className='py-4 md:my-10'>
+    <div className='py-4 md:py-10 bg-[#f7f7f7] text-black'>
 
-    <div className="flex flex-col items-center border-b bg-white sm:flex-row sm:px-10 lg:px-20 xl:px-32">
-    <a href="#" className="text-2xl font-bold text-gray-800">Hunting_Store</a>
+    <div className="flex flex-col items-center border-b  sm:flex-row sm:px-10 lg:px-20 xl:px-32">
+    <h1 className="text-2xl font-bold text-gray-800">Art Shark</h1>
     <div className="mt-4 py-2 text-xs sm:mt-0 sm:ml-auto sm:text-base">
       <div className="relative">
         <ul className="relative flex w-full items-center justify-between space-x-2 sm:space-x-4">
@@ -168,18 +172,16 @@ function Checkout({ cart , subTotal, removeFromCart, addToCart }) {
     <div className="grid sm:px-10 lg:grid-cols-2 lg:px-20 xl:px-32">
     <div className="px-4 pt-8">
       <p className="text-xl font-medium">Order Summary</p>
-      <p className="text-gray-400">Check your items. And select a suitable shipping method.</p>
+      <p className="text-sm text-gray-400">Check your items. And select a suitable shipping method.</p>
       <div className="mt-8 space-y-3 rounded-lg border bg-white px-2 py-4 sm:px-6">
-
 
         {Object.keys(cart).length == 0 && <div>Your Cart is Empty</div> }
         {Object.keys(cart).map((item)=>{ return <div key={item} className="flex flex-col rounded-lg bg-white sm:flex-row">
           <img className="m-2 h-24 w-28 rounded-md border object-cover object-center" src={cart[item].img} alt="" />
           <div className="flex w-full flex-col px-4 py-4">
             <span className="font-semibold">{cart[item].name}</span>
-            <span className="float-right text-gray-400">({cart[item].size}/{cart[item].variant})</span>
-            <div className='flex'>
-              <p className="text-lg font-bold">${cart[item].price}</p>
+            <div className='flex mt-2'>
+              <p className="text-lg font-bold">€{cart[item].price}</p>
               <p className="flex text-md ml-auto">Qty: <AiFillMinusCircle onClick={()=>{removeFromCart(item,cart[item].name,1,cart[item].price,cart[item].size,cart[item].variant)}} className='my-auto ml-2 text-lg cursor-pointer'/> <span className='mx-2'>{cart[item].qty}</span> <AiFillPlusCircle onClick={()=>{addToCart(item,cart[item].name,1,cart[item].price,cart[item].size,cart[item].variant)}} className='my-auto text-lg cursor-pointer'/></p>
             </div>
           </div>
@@ -215,19 +217,15 @@ function Checkout({ cart , subTotal, removeFromCart, addToCart }) {
       </form>
     </div>
 
-
     <div className="mt-10 bg-gray-50 px-4 pt-8 lg:mt-0">
       <p className="text-xl font-medium">Payment Details</p>
-      <p className="text-gray-400">Complete your order by providing your payment details.</p>
-
-
+      <p className="text-sm text-gray-400">Complete your order by providing your payment details.</p>
 
       <form method='POST' onSubmit={submit}>
         <label htmlFor="email" className="mt-4 mb-2 block text-sm font-medium">Email</label>
         <div className="relative">
 
-
-          {user && user.token ? <input value={user.email} type="text" id="email" name="email" className="w-full rounded-md border border-gray-200 px-4 py-3 pl-11 text-sm shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500" placeholder="your.email@gmail.com" required readOnly />
+          {user && user.token ? <input value={user.email} type="text" id="email" name="email" className="w-full cursor-not-allowed rounded-md border border-gray-200 px-4 py-3 pl-11 text-sm shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500" placeholder="your.email@gmail.com" required readOnly />
            : <input onChange={handleChange} value={email} type="text" id="email" name="email" className="w-full rounded-md border border-gray-200 px-4 py-3 pl-11 text-sm shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500" placeholder="your.email@gmail.com" required />}
           
           <div className="pointer-events-none absolute inset-y-0 left-0 inline-flex items-center px-3">
@@ -261,12 +259,6 @@ function Checkout({ cart , subTotal, removeFromCart, addToCart }) {
         </div>
 
 
-
-
-
-
-
-
         <label htmlFor="phone-no" className="mt-4 mb-2 block text-sm font-medium">Phone No:</label>
         <div className="flex">
           <div className="relative w-7/12 flex-shrink-0">
@@ -294,26 +286,24 @@ function Checkout({ cart , subTotal, removeFromCart, addToCart }) {
         <div className="mt-6 border-t border-b py-2">
           <div className="flex items-center justify-between">
             <p className="text-sm font-medium text-gray-900">Subtotal</p>
-            <p className="font-semibold text-gray-900">${subTotal}</p>
+            <p className="font-semibold text-gray-900">€{subTotal}.00</p>
           </div>
           <div className="flex items-center justify-between">
             <p className="text-sm font-medium text-gray-900">Shipping</p>
-            <p className="font-semibold text-gray-900">$2.00</p>
+            <p className="font-semibold text-gray-900">€{shippingFess}.00</p>
           </div>
         </div>
         <div className="mt-6 flex items-center justify-between">
           <p className="text-sm font-medium text-gray-900">Total</p>
-          <p className="text-2xl font-semibold text-gray-900">${subTotal + 2}</p>
+          <p className="text-2xl font-semibold text-gray-900">{`€${subTotal + shippingFess}.00`}</p>
         </div>
-        <button type='submit' className="mt-4 mb-8 w-full rounded-md bg-gray-900 px-6 py-3 font-medium text-white">Place Order</button>
+        <button type='submit' className="mt-4 mb-8 w-full rounded-md bg-[#29D0d1] hover:bg-[#44B0B7] px-6 py-3 font-medium text-white">Place Order</button>
       </form>
     </div>
     </div>
     </div>
-    </>
-  
+    </> 
   )
 }
-
 
 export default Checkout

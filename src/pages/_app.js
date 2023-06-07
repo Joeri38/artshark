@@ -84,13 +84,13 @@ export default function App({ Component, pageProps }) {
 
 
   // Add to Cart function like increase quantity of items in cart
-  const addToCart = (itemCode, name, qty, price, img, size, variant) =>{
+  const addToCart = (itemCode, name, qty, price, img) =>{
     let newCart = cart;
     if(itemCode in cart){
       newCart[itemCode].qty= cart[itemCode].qty + qty;
     }
     else{
-      newCart[itemCode]= {qty:1, name, price, img, size, variant}   
+      newCart[itemCode]= { qty:1, name, price, img }   
     }
     setCart(newCart);
     saveCart(newCart);

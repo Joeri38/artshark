@@ -15,7 +15,7 @@ const handler = async (req,res)=>{
             price: req.body.price,
         })
         await addProduct.save();
-        res.status(200).json({ success: "Item added succesfully!" })
+        res.status(200).json({ success: true,  message: "Item added succesfully!" })
     }
     else{
         res.status(400).json({ error: "Item not added!" })

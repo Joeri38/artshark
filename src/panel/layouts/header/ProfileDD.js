@@ -41,13 +41,12 @@ const ProfileDD = () => {
     })
       let response = await res.json()
       setEmail(response.email)
-      setName(response.firstname + ' ' + response.lastname)
-  }
-
-  // Logout function
-  const logout = ()=>{
-    localStorage.removeItem("myUser");
-    setUser({value:null});
+      if(response.firstname){
+        setName(response.firstname)
+      }
+      else{
+        setName('Unknown')
+      }
   }
 
 

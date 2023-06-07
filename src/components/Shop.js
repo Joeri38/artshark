@@ -7,31 +7,31 @@ import { AiOutlineArrowRight } from 'react-icons/ai';
 const products = [
     {
       id: 1,
-      name: 'Frames',
-      href: '/gallery',
+      name: 'Posters',
+      href: '/items',
       imageSrc: 'https://images.unsplash.com/photo-1609811692040-35b06faddb8d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDF8fGZyYW1lc3xlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=600&q=60',
-      imageAlt: "Frames",
+      imageAlt: "Poster",
     },
     {
       id: 2,
-      name: 'Clothing',
-      href: '/gallery',
+      name: 'Tshirts',
+      href: '/items',
       imageSrc: 'https://images.unsplash.com/photo-1619032468883-89a84f565cba?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8dHNoaXJ0JTIwZm9yJTIwc3RvcmV8ZW58MHx8MHx8&auto=format&fit=crop&w=600&q=60',
-      imageAlt: "Clothing"
+      imageAlt: "Tshirts"
     },
     {
       id: 3,
-      name: 'Assesories',
-      href: '/gallery',
-      imageSrc: 'https://images.unsplash.com/photo-1508057198894-247b23fe5ade?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8d2F0Y2hlc3xlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=600&q=60',
-      imageAlt: "Assesories"
+      name: 'Canvas',
+      href: '/items',
+      imageSrc: 'https://plus.unsplash.com/premium_photo-1675195129732-4b74822023ef?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8Y2FudmFzfGVufDB8fDB8fHww&auto=format&fit=crop&w=600&q=60',
+      imageAlt: "Canvas"
     },
     {
       id: 4,
-      name: 'Sneakers',
-      href: '/gallery',
-      imageSrc: 'https://images.unsplash.com/photo-1600269452121-4f2416e55c28?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8c25lYWtlcnN8ZW58MHx8MHx8&auto=format&fit=crop&w=600&q=60',
-      imageAlt: "Front of men's Basic Tee in black."
+      name: 'Assesories',
+      href: '/items',
+      imageSrc: 'https://images.unsplash.com/photo-1508057198894-247b23fe5ade?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8d2F0Y2hlc3xlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=600&q=60',
+      imageAlt: "Assesories"
     }
   ]
 

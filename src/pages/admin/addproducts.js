@@ -1,4 +1,4 @@
-import {React, useState} from 'react'
+import {React, useEffect, useState} from 'react'
 
 
 // React tostify
@@ -13,6 +13,7 @@ import { ThemeProvider } from "@mui/material/styles";
 import theme from "../../panel/theme/theme";
 import { Grid, Stack, TextField, Button, FormControl, InputLabel, Select, MenuItem,} from "@mui/material";
 import BaseCard from "../../panel/components/baseCard/BaseCard";
+import { useRouter } from 'next/router';
 
 
 function Addproducts() {
@@ -25,8 +26,22 @@ function Addproducts() {
   const [img1, setImg1] = useState('')
   const [img2, setImg2] = useState('')
   const [img3, setImg3] = useState('')
+  const [id, setId] = useState('')
 
   const categoryArray = ['tshirts', 'canvas', 'poster']
+
+  const router = useRouter();
+
+  useEffect(() => {
+    // /admin/addproducts?id=${product.id}&editProduct=true
+    if(router.query.editProduct == 1){
+      getProduct();
+    }
+
+  }, []);
+  
+  
+
 
   const handleChange = (e)=>{
     if ( e.target.name === 'title') {
@@ -55,14 +70,40 @@ function Addproducts() {
     }
   }
 
+  const getProduct = async()=>{
+    const data = { id: router.query.id, path: 'getProductData' };
+
+    let res = await fetch(`/api/getProductData`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    })
+      let response = await res.json()
+      if (response.success === true){
+        setId(response.data._id)
+        setTitle(response.data.title)
+        setCategory(response.data.category)
+        setPrice(response.data.price)
+        setDesc(response.data.desc)
+        setSlug(response.data.slug)
+        setImg1(response.data.img1)
+        setImg2(response.data.img2)
+        setImg3(response.data.img3)
+      }
+      else {
+      toast.error(response.message , { position: "bottom-center", autoClose: 1000, hideProgressBar: false, closeOnClick: true, pauseOnHover: true, draggable: true, progress: undefined, theme: "light", });
+    }
+
+  }
+
   const submit = async (e)=>{
     e.preventDefault()  
-
-
+    
     // fetch the data from form to makes a file in local system
-    const data = { title, price, img1, img2, img3, category, slug, desc };
-
-      let res = await fetch(`/api/addproducts`, {
+    const data = { id, title, price, img1, img2, img3, category, slug, desc };
+      let res = await fetch(`${id ? '/api/updateproducts' : '/api/addproducts' }`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -71,20 +112,14 @@ function Addproducts() {
     })
       let response = await res.json()
       
-        if (response.success === true) {
-            toast.success(response.message , { position: "bottom-center", autoClose: 1000, hideProgressBar: false, closeOnClick: true, pauseOnHover: true, draggable: true, progress: undefined, theme: "light", });
-        }
-        else{
-            toast.error(response.message , { position: "bottom-center", autoClose: 1000, hideProgressBar: false, closeOnClick: true, pauseOnHover: true, draggable: true, progress: undefined, theme: "light", });
-        }
-        setTitle('')
-        setCategory('')
-        setPrice('')
-        setDesc('')
-        setSlug('')
-        setImg1('')
-        setImg2('')
-        setImg3('')
+      if (response.success === true) {
+        window.location.reload();
+        toast.success(response.message , { position: "bottom-center", autoClose: 1000, hideProgressBar: false, closeOnClick: true, pauseOnHover: true, draggable: true, progress: undefined, theme: "light", });
+      }
+      else{
+        toast.error(response.message , { position: "bottom-center", autoClose: 1000, hideProgressBar: false, closeOnClick: true, pauseOnHover: true, draggable: true, progress: undefined, theme: "light", });
+      }
+        
   }
 
     return (

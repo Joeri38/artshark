@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/router'
-import Product from '../../models/Product';
+import Product from '../../../models/Product';
 import mongoose from "mongoose";
+
 
 // React Toastify
 import { ToastContainer, toast } from 'react-toastify';
@@ -10,23 +11,16 @@ import 'react-toastify/dist/ReactToastify.css';
 
 
 
-
 const Slug = ({addToCart , product , variants}) => {
   const router = useRouter()
   const { slug } = router.query
 
-  const [color, setColor] = useState(product.color)
-  const [size, setSize] = useState(product.size)
-
 
     useEffect(() => {
-      setColor(product.color)
-      setSize(product.size)
+
     }, [router.query])
 
   
-  
-
 
   // React tostify
   const addcart = () => toast.success("Item is added in your Cart.!");
@@ -40,34 +34,81 @@ const Slug = ({addToCart , product , variants}) => {
 
   return <>
     <Head>
-      <title>ProductDetails_Hunting_Store</title>
+      <title>ProductDetails_Art Shark</title>
       <meta name="description" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0" />
    </Head>
 
-
-
-  <section className="text-gray-600 body-font overflow-hidden">
-      <div className="container min-h-screen px-5 py-10 mx-auto">
+  <section className="text-gray-600 bg-white min-h-screen body-font overflow-hidden">
+      <div className="container px-5 py-10 mx-auto">
         <div className="lg:w-4/5 mx-auto justify-center flex flex-wrap">
-          <img alt="ecommerce" className="lg:w-2/5 h-450 object-cover object-top rounded" src={product.img}/>
+
+          <div className='lg:w-2/5 mr-auto'>
+
+
+            <div className='flex'>
+              <img alt="ecommerce" className=" h-[450px] object-cover object-top rounded" src={product.img1}/>
+            </div>
+
+
+            {/* <div id="controls-carousel" className="relative w-full" data-carousel="static">
+              <div className="relative h-56 overflow-hidden rounded-lg md:h-96">
+
+                  <div className="duration-700 ease-in-out" data-carousel-item>
+                      <img src={product.img1} className="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="..."/>
+                  </div>
+
+                  <div className="hidden duration-700 ease-in-out" data-carousel-item="active">
+                      <img src={product.img2} className="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="..."/>
+                  </div>
+
+                  <div className="hidden duration-700 ease-in-out" data-carousel-item>
+                      <img src={product.img3} className="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="..."/>
+                  </div>
+
+              </div>
+
+              <button type="button" className="absolute top-0 left-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-prev>
+                  <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+                      <svg aria-hidden="true" className="w-6 h-6 text-white dark:text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                      <span className="sr-only">Previous</span>
+                  </span>
+              </button>
+              <button type="button" className="absolute top-0 right-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-next>
+                  <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+                      <svg aria-hidden="true" className="w-6 h-6 text-white dark:text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                      <span className="sr-only">Next</span>
+                  </span>
+              </button>
+            </div> */}
+
+
+
+
+
+
+
+
+
+
+          </div>
           <div className="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
-            <h2 className="text-sm title-font text-gray-500 tracking-widest">Hunting_Store</h2>
-            <h1 className="text-gray-900 text-3xl title-font font-medium mb-1">{product.title} ({product.size}/{product.color})</h1>
+            <h2 className="text-sm title-font text-gray-500 tracking-widest">Art Shark</h2>
+            <h1 className="text-gray-900 text-3xl title-font font-medium mb-1">{product.title}</h1>
             <div className="flex mb-4">
               <span className="flex items-center">
-                <svg fill="currentColor" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="w-4 h-4 text-indigo-500" viewBox="0 0 24 24">
+                <svg fill="currentColor" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="w-4 h-4 text-yellow-500" viewBox="0 0 24 24">
                   <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
                 </svg>
-                <svg fill="currentColor" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="w-4 h-4 text-indigo-500" viewBox="0 0 24 24">
+                <svg fill="currentColor" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="w-4 h-4 text-yellow-500" viewBox="0 0 24 24">
                   <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
                 </svg>
-                <svg fill="currentColor" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="w-4 h-4 text-indigo-500" viewBox="0 0 24 24">
+                <svg fill="currentColor" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="w-4 h-4 text-yellow-500" viewBox="0 0 24 24">
                   <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
                 </svg>
-                <svg fill="currentColor" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="w-4 h-4 text-indigo-500" viewBox="0 0 24 24">
+                <svg fill="currentColor" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="w-4 h-4 text-yellow-500" viewBox="0 0 24 24">
                   <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
                 </svg>
-                <svg fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="w-4 h-4 text-indigo-500" viewBox="0 0 24 24">
+                <svg fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="w-4 h-4 text-gray-500" viewBox="0 0 24 24">
                   <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
                 </svg>
                 <span className="text-gray-600 ml-3">4 Reviews</span>
@@ -91,36 +132,10 @@ const Slug = ({addToCart , product , variants}) => {
               </span>
             </div>
             <p className="leading-relaxed">{product.desc}</p>
-            <div className="flex mt-6 items-center pb-5 border-b-2 border-gray-100 mb-5">
-              <div className="flex">
-                <span className="mr-3">Color</span>
-                {Object.keys(variants).includes('black') && Object.keys(variants['black']).includes(size) && <button onClick={()=>{refresh(size , 'black')}} className={`border-2 ml-1 bg-black rounded-full w-6 h-6 focus:outline-none ${ color === 'black' ? 'border-black' : 'border-gray-300' }`}></button>}
-                {Object.keys(variants).includes('blue') && Object.keys(variants['blue']).includes(size) && <button onClick={()=>{refresh(size , 'blue')}} className={`border-2 ml-1 bg-blue-700 rounded-full w-6 h-6 focus:outline-none ${ color === 'blue' ? 'border-black' :'border-gray-300' }`}></button>}
-                {Object.keys(variants).includes('white') && Object.keys(variants['white']).includes(size) && <button onClick={()=>{refresh(size , 'white')}} className={`border-2 ml-1 bg-blue-700 rounded-full w-6 h-6 focus:outline-none ${ color === 'white' ? 'border-black' :'border-gray-300' }`}></button>}
-                {Object.keys(variants).includes('yellow') && Object.keys(variants['yellow']).includes(size) && <button onClick={()=>{refresh(size , 'yellow')}} className={`border-2 bg-yellow-600 rounded-full w-6 h-6 focus:outline-none ${ color === 'yellow' ? 'border-black' : 'border-gray-300' }`}></button>}
-                {Object.keys(variants).includes('green') && Object.keys(variants['green']).includes(size) && <button onClick={()=>{refresh(size , 'green')}} className={`border-2 ml-1 bg-green-700 rounded-full w-6 h-6 focus:outline-none ${ color === 'green' ? 'border-black' : 'border-gray-300' }`}></button>}
-              </div>
-              <div className="flex ml-6 items-center">
-                <span className="mr-3">Size</span>
-                <div className="relative">
-                  <select value={size} onChange={(e)=>{refresh(e.target.value , color)}} className="rounded-md border pl-2 appearance-none py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200 focus:border-indigo-500 text-base l-3 pr-10">
-                    {Object.keys(variants[color]).includes('s') && <option value={'s'}>S</option>}
-                    {Object.keys(variants[color]).includes('m') && <option value={'m'}>M</option>}
-                    {Object.keys(variants[color]).includes('l') && <option value={'l'}>L</option>}
-                    {Object.keys(variants[color]).includes('xl') && <option value={'xl'}>XL</option>}
-                    {Object.keys(variants[color]).includes('xxl') && <option value={'xxl'}>XXL</option>}
-                  </select>
-                  <span className="absolute right-0 top-0 h-full w-10 text-center text-gray-600 pointer-events-none flex items-center justify-center">
-                    <svg fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="w-4 h-4" viewBox="0 0 24 24">
-                      <path d="M6 9l6 6 6-6"></path>
-                    </svg>
-                  </span>
-                </div>
-              </div>
-            </div>
-            <div className="flex">
-              <span className="title-font font-medium text-2xl text-gray-900">${product.price}</span>
-              <button onClick={()=>{ addcart() , addToCart(slug, product.title, 1 , product.price, product.img, size, color )}} className="flex -mt-1 ml-auto bg-indigo-600 text-white rounded-xl font-semibold border-0 py-3 px-6 focus:outline-none hover:bg-indigo-700 text-sm md:text-base">Add to Cart</button>
+            
+            <div className="flex mt-5">
+              <span className="title-font font-medium text-2xl text-gray-900">€{product.price}</span>
+              <button onClick={()=>{ addcart() , addToCart(slug, product.title, 1 , product.price, product.img1 )}} className="flex -mt-1 ml-auto bg-[#29D0d1] hover:bg-[#44B0B7] text-white rounded-xl font-semibold border-0 py-3 px-6 focus:outline-none text-sm md:text-base">Add to Cart</button>
               <ToastContainer position="bottom-center" autoClose={2000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover theme="light"/>
 
             
@@ -134,10 +149,6 @@ const Slug = ({addToCart , product , variants}) => {
         </div>
       </div>
     </section>
-
-
-
-
   </>
 }
 
