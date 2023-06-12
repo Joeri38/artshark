@@ -9,7 +9,7 @@ const Orders = ({ orders }) => {
 
 
   return (
-    <BaseCard title="orders">
+    <BaseCard title="All Orders">
       <Table
         aria-label="simple table"
         sx={{
@@ -19,6 +19,11 @@ const Orders = ({ orders }) => {
       >
         <TableHead>
           <TableRow>
+            <TableCell>
+              <Typography color="textSecondary" variant="h6">
+                Sr.
+              </Typography>
+            </TableCell>
             <TableCell>
               <Typography color="textSecondary" variant="h6">
                 Order Id
@@ -37,7 +42,7 @@ const Orders = ({ orders }) => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {orders.map((order) => (
+          {orders.map((order, index) => (
             <TableRow key={order._id}>
               <TableCell>
                 <Typography
@@ -45,10 +50,19 @@ const Orders = ({ orders }) => {
                     fontSize: "15px",
                     fontWeight: "500",
                   }}
-                >#{order.orderId} 
+                >{index + 1} 
                 </Typography>
               </TableCell>
 
+              <TableCell>
+                <Typography
+                  sx={{
+                    fontSize: "15px",
+                    fontWeight: "500",
+                  }}
+                >#{order.orderId}
+                </Typography>
+              </TableCell>
 
               <TableCell>
                 <Box

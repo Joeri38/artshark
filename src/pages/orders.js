@@ -7,6 +7,7 @@ function MyOrders () {
 
   const [orders, setOrders] = useState([])
   const router = useRouter();
+  console.log(orders)
 
   useEffect(() => {
 
@@ -41,12 +42,13 @@ function MyOrders () {
     <section className="bg-[#f7f7f7] text-gray-600 body-font">
     <div className="container min-h-screen px-5 py-16 mx-auto">
       <div className="flex flex-col text-center w-full mb-20">
-        <h1 className="sm:text-4xl text-3xl font-medium title-font mb-2 text-gray-900">My Orders:</h1>
+        <h1 className="sm:text-4xl text-3xl font-medium title-font mb-2 text-gray-900">My Orders</h1>
       </div>
       <div className="lg:w-2/3 w-full mx-auto overflow-auto">
         <table className="table-auto w-full text-left whitespace-no-wrap">
           <thead>
             <tr className='bg-gray-300'>
+              <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm rounded-tl rounded-bl">Sr.</th>
               <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm rounded-tl rounded-bl">Order Id:</th>
               <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm">Name</th>
               <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm">Price</th>
@@ -59,10 +61,11 @@ function MyOrders () {
 
           <tbody>
 
-            {orders.map((item)=>{
-              return <tr key={item._id}>
+            {orders.map((item, index)=>{
+              return <tr key={index}>
+              <td className="px-4 py-3">{index + 1}</td>
               <td className="px-4 py-3">#{item.orderId}</td>
-              <td className="px-4 py-3">{item.cardHolder}</td>
+              <td className="px-4 py-3">{item.name}</td>
               <td className="px-4 py-3">€{item.amount}</td>
               <td className="px-4 py-3">
                 <Link href={`/order?id=${item._id}`} className='text-[#44B0B7] hover:underline cursor-pointer'>Details</Link>

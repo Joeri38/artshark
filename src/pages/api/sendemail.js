@@ -6,7 +6,7 @@ const nodemailer = require('nodemailer')
 
 
 const handler = async (req,res)=>{
-    let company = 'localhost:3000'
+    let company = process.env.NEXT_PUBLIC_HOST;
     const email = req.body.email;
 
 
@@ -19,7 +19,6 @@ const handler = async (req,res)=>{
     await forgot.save();
 
 
-
     // To delete token data from database
     // this function executes after 10 min and delete the token from database
     setTimeout(async() => {
@@ -29,7 +28,7 @@ const handler = async (req,res)=>{
 
     let message = `Hello ${email},
 
-Somebody requested a new password for the ${company} account associated with [email].
+Somebody requested a new password for the ${company} account associated with ${email}.
     
 No changes have been made to your account yet.
     
@@ -42,7 +41,6 @@ If you did not request a new password, please let us know immediately by replyin
 Yours,
 The ${company} team`
     
-
 
   if (req.method == 'POST'){
         
@@ -64,7 +62,7 @@ The ${company} team`
         };
         transporter.sendMail(mailData, function (err,info){
           if (!err) {
-              return res.status(200).json({ success: true, token: token, message: `details has been sent to ${req.body.email}`})
+              return res.status(200).json({ success: true, token: token, message: `Email Sent!`})
             }
             if (err) {
                 return res.status(400).json({ success: false, message: "Some Error Occured!"})

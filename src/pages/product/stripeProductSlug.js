@@ -12,10 +12,12 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { FormControl, InputLabel, MenuItem, Select, TextField } from '@mui/material';
+import Stripe from 'stripe';
 
 
 
-const Slug = ({addToCart , product}) => {
+const Slug = ({addToCart , data , variants}) => {
+
   const router = useRouter()
   const { slug } = router.query
 
@@ -39,7 +41,8 @@ const Slug = ({addToCart , product}) => {
 
     <section className="text-gray-600 bg-white min-h-screen body-font overflow-hidden">
       <div className="container px-5 py-10 mx-auto">
-        <div className="lg:w-4/5 mx-auto justify-center flex flex-wrap">
+        {data && data.map((item, index)=>{
+          return  <div key={index} className="lg:w-4/5 mx-auto justify-center flex flex-wrap">
 
           <div className='lg:w-2/5 mr-auto'>
             <Carousel
@@ -49,15 +52,16 @@ const Slug = ({addToCart , product}) => {
                 thumbWidth={60}
                 className="productCarousel"
             >
-              {product.img1 && <img src={product.img1} className='h-[400px]' />}
-              {product.img2 && <img src={product.img2} className='h-[400px]' />}
-              {product.img3 && <img src={product.img3} className='h-[400px]' />}
+              {item.product.images.length == 0 ? ''
+              :item.product.images.length == 1 ? <img src={item.product.images[0]} className='h-[400px]'/>
+              :item.product.images.length == 2 ? <img src={item.product.images[1]} className='h-[400px]'/>
+              :item.product.images.length == 3 ? <img src={item.product.images[2]} className='h-[400px]'/>: ''}
             </Carousel>
           </div>
 
           <div className="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
             <h2 className="text-sm title-font text-gray-500 tracking-widest">Art Shark</h2>
-            <h1 className="text-gray-900 text-3xl title-font font-medium mb-1">{product.title}</h1>
+            <h1 className="text-gray-900 text-3xl title-font font-medium mb-1">{item.product.name}</h1>
             <div className="flex">
               <span className="flex items-center">
                 <svg fill="currentColor" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="w-4 h-4 text-yellow-500" viewBox="0 0 24 24">
@@ -113,7 +117,7 @@ const Slug = ({addToCart , product}) => {
                 </Select>
               </FormControl>
               
-              <FormControl className='mb-4' variant="standard" sx={{ mx: 1, minWidth: 120 }}>
+              <FormControl variant="standard" sx={{ mx: 1, minWidth: 120 }}>
                 <InputLabel id="demo-simple-select-label">Size</InputLabel>
                 <Select
                   labelId="demo-simple-select-label"
@@ -129,15 +133,15 @@ const Slug = ({addToCart , product}) => {
                 </Select>
               </FormControl>
 
-              <TextField value={whatDoYouWant} onChange={(e)=> setWhatDoYouWant(e.target.value)} className='' multiline fullWidth id="standard-basic" label="What do you want!" variant="standard" />
+              <TextField value={whatDoYouWant} onChange={(e)=> setWhatDoYouWant(e.target.value)} className='mt-5' multiline fullWidth id="standard-basic" label="What do you want!" variant="standard" />
             </div>
 
 
-            <p className="leading-relaxed mt-3">{product.desc}</p>
+            <p className="leading-relaxed mt-3">{item.product.description}</p>
             
             <div className="flex mt-5">
-              <span className="title-font font-medium text-2xl text-gray-900">€{product.price}</span>
-              <button onClick={()=>{ addcart() , addToCart(slug, product.title, 1 , product.price, product.img1, size, color, whatDoYouWant )}} className="flex -mt-1 ml-auto bg-[#29D0d1] hover:bg-[#44B0B7] text-white rounded-xl font-semibold border-0 py-3 px-6 focus:outline-none text-sm md:text-base">Add to Cart</button>
+              <span className="title-font font-medium text-2xl text-gray-900">€{item.unit_amount / 100}</span>
+              <button onClick={()=>{ addcart() , addToCart(slug, item.product.name, 1 , item.unit_amount/100, item.product.images[0], size, color, whatDoYouWant )}} className="flex -mt-1 ml-auto bg-[#29D0d1] hover:bg-[#44B0B7] text-white rounded-xl font-semibold border-0 py-3 px-6 focus:outline-none text-sm md:text-base">Add to Cart</button>
               <ToastContainer position="bottom-center" autoClose={2000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover theme="light"/>
             
               <button className="rounded-full w-10 h-10 bg-gray-200 p-0 border-0 inline-flex items-center justify-center text-gray-500 ml-4">
@@ -148,6 +152,7 @@ const Slug = ({addToCart , product}) => {
             </div>
           </div>
         </div>
+        })}
       </div>
     </section>
   </>
@@ -158,17 +163,23 @@ const Slug = ({addToCart , product}) => {
 
 
 export async function getServerSideProps(context) {
-  if (!mongoose.connections[0].readyState){
-    mongoose.set("strictQuery", false);
-    await mongoose.connect(process.env.MONGO_URI)
-  }
+  
 
-    let product = await Product.findOne({stripePriceId: context.query.slug})
-    
+  const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
+  const response = await stripe.prices.list({
+    limit: 10,
+    expand: ['data.product']
+  })
+
+  const data = response.data.filter(item => {
+    if(item.id === context.query.slug){
+      return item;
+    }
+  })
 
   // Pass data to the page via props
   return {
-      props: { product: JSON.parse(JSON.stringify(product)) } 
+      props: { data: JSON.parse(JSON.stringify(data)) } 
     }
 
   }

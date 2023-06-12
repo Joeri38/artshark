@@ -30,6 +30,20 @@ function Checkout({ cart , subTotal, removeFromCart, addToCart }) {
   const [zip, setZip] = useState('')
 
 
+  let shippingMethod = [
+    { 
+      name: 'Fedex Delivery',
+      logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTRN420PXvQjOtSkJalqXFZ-FXrjBZH3eRvCsS1H80K&s',
+      deliveryTime: '2-4 Days'
+    },
+    { 
+      name: 'Express Service',
+      logo: 'https://scontent.flhe6-1.fna.fbcdn.net/v/t39.30808-6/299863911_365122729155280_6314892470531296423_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=e3f864&_nc_eui2=AeESItwg9uix8sf5DaKEJR5OE-pf6xb_dysT6l_rFv93KzwJ__jvgdtXTjPUAl7miL2otuTdydmYYs2UatDJLdJI&_nc_ohc=bR6Pa75uJmkAX9djZWI&_nc_ht=scontent.flhe6-1.fna&oh=00_AfC7tER4lHPLkNp9nHIngytC-g6WPGYcRZT0dqvfKSYE5g&oe=648838A7',
+      deliveryTime: '3-5 Days'
+    },
+  ]
+
+
 
   useEffect(() => {
     const myUser = JSON.parse(localStorage.getItem('myUser'))
@@ -106,10 +120,11 @@ function Checkout({ cart , subTotal, removeFromCart, addToCart }) {
     })
       let response = await res.json()
 
-      setTimeout(() => {
-        router.push(`/order?id=${response.id}&clearCart=1`)
-      }, 1000);
-
+      if(response.success === true){
+        toast.success(response.message , { position: "bottom-center", autoClose: 1000, hideProgressBar: false, closeOnClick: true, pauseOnHover: true, draggable: true, progress: undefined, theme: "light", });
+        setTimeout(() => {
+          router.push(`/order?id=${response.id}&clearCart=1&newOrder=1`)
+        }, 1000);
         setEmail('')
         setCardHolder('')
         setCardNumber('')
@@ -119,18 +134,11 @@ function Checkout({ cart , subTotal, removeFromCart, addToCart }) {
         setState('')
         setStreetAddress('')
         setZip('')
-
-        if (response.success === true) {
-            toast.success(response.message , { position: "bottom-center", autoClose: 1000, hideProgressBar: false, closeOnClick: true, pauseOnHover: true, draggable: true, progress: undefined, theme: "light", });
-        }
-
-        else {
-            toast.error(response.message , { position: "bottom-center", autoClose: 1000, hideProgressBar: false, closeOnClick: true, pauseOnHover: true, draggable: true, progress: undefined, theme: "light", });
-        }
-
+      }
+      else {
+        toast.error(response.message , { position: "bottom-center", autoClose: 1000, hideProgressBar: false, closeOnClick: true, pauseOnHover: true, draggable: true, progress: undefined, theme: "light", });
+      }
   }
-
-
 
   return (
     <>
@@ -180,6 +188,7 @@ function Checkout({ cart , subTotal, removeFromCart, addToCart }) {
           <img className="m-2 h-24 w-28 rounded-md border object-cover object-center" src={cart[item].img} alt="" />
           <div className="flex w-full flex-col px-4 py-4">
             <span className="font-semibold">{cart[item].name}</span>
+            {cart[item].size || cart[item].color && <span className="float-right text-gray-400">( {cart[item].size}/{cart[item].color} )</span>}
             <div className='flex mt-2'>
               <p className="text-lg font-bold">€{cart[item].price}</p>
               <p className="flex text-md ml-auto">Qty: <AiFillMinusCircle onClick={()=>{removeFromCart(item,cart[item].name,1,cart[item].price,cart[item].size,cart[item].variant)}} className='my-auto ml-2 text-lg cursor-pointer'/> <span className='mx-2'>{cart[item].qty}</span> <AiFillPlusCircle onClick={()=>{addToCart(item,cart[item].name,1,cart[item].price,cart[item].size,cart[item].variant)}} className='my-auto text-lg cursor-pointer'/></p>
@@ -192,32 +201,27 @@ function Checkout({ cart , subTotal, removeFromCart, addToCart }) {
 
       <p className="mt-8 text-lg font-medium">Shipping Methods</p>
       <form className="mt-5 grid gap-6">
-        <div className="relative">
-          <input className="peer hidden" id="radio_1" type="radio" name="radio" checked onChange={e => {}} />
-          <span className="peer-checked:border-gray-700 absolute right-4 top-1/2 box-content block h-3 w-3 -translate-y-1/2 rounded-full border-8 border-gray-300 bg-white"></span>
-          <label className="peer-checked:border-2 peer-checked:border-gray-700 peer-checked:bg-gray-50 flex cursor-pointer select-none rounded-lg border border-gray-300 p-4" htmlFor="radio_1">
-            <img className="w-14 object-contain" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTRN420PXvQjOtSkJalqXFZ-FXrjBZH3eRvCsS1H80K&s\" alt="" />
-            <div className="ml-5">
-              <span className="mt-2 font-semibold">Fedex Delivery</span>
-              <p className="text-slate-500 text-sm leading-6">Delivery: 2-4 Days</p>
-            </div>
-          </label>
-        </div>
-        <div className="relative">
-          <input onChange={e => {}} className="peer hidden" id="radio_2" type="radio" name="radio" checked />
-          <span className="peer-checked:border-gray-700 absolute right-4 top-1/2 box-content block h-3 w-3 -translate-y-1/2 rounded-full border-8 border-gray-300 bg-white"></span>
-          <label className="peer-checked:border-2 peer-checked:border-gray-700 peer-checked:bg-gray-50 flex cursor-pointer select-none rounded-lg border border-gray-300 p-4" htmlFor="radio_2">
-            <img className="w-14 object-contain" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTRN420PXvQjOtSkJalqXFZ-FXrjBZH3eRvCsS1H80K&s" alt="" />
-            <div className="ml-5">
-              <span className="mt-2 font-semibold">Fedex Delivery</span>
-              <p className="text-slate-500 text-sm leading-6">Delivery: 2-4 Days</p>
-            </div>
-          </label>
-        </div>
+
+
+        {shippingMethod.map((item,index)=>{
+          return <div key={index} className="relative">
+            <input className="peer hidden" id="radio_1" type="radio" name="radio" checked onChange={e => {}} />
+            <span className="peer-checked:border-gray-700 absolute right-4 top-1/2 box-content block h-3 w-3 -translate-y-1/2 rounded-full border-8 border-gray-300 bg-white"></span>
+            <label className="peer-checked:border-2 peer-checked:border-gray-700 peer-checked:bg-gray-50 flex cursor-pointer select-none rounded-lg border border-gray-300 p-4" htmlFor="radio_1">
+              <img className="w-[4rem] object-contain" src={item.logo} alt="logo" />
+              <div className="ml-5">
+                <span className="mt-2 font-semibold">{item.name}</span>
+                <p className="text-slate-500 text-sm leading-6">Delivery: {item.deliveryTime}</p>
+              </div>
+            </label>
+        </div>})}
+
+
+
       </form>
     </div>
 
-    <div className="mt-10 bg-gray-50 px-4 pt-8 lg:mt-0">
+    <div className="mt-10 bg-[#f7f7f7] px-4 pt-8 lg:mt-0">
       <p className="text-xl font-medium">Payment Details</p>
       <p className="text-sm text-gray-400">Complete your order by providing your payment details.</p>
 

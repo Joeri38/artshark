@@ -3,7 +3,7 @@ import Head from 'next/head'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import mongoose from 'mongoose'
-import Forgot from '../models/Forgot'
+import Forgot from '../../models/Forgot'
 
 
 import { toast, ToastContainer } from "react-toastify";
@@ -12,83 +12,81 @@ import 'react-toastify/dist/ReactToastify.css';
 
 
 function ForgotPage({dbuser}) {
-    const router = useRouter()
-    const { token } = router.query
-    const [email, setEmail] = useState('')
-    const [npassword, setNpassword] = useState('')
-    const [cnpassword, setCnpassword] = useState('')
+
+  const router = useRouter()
+  const { token } = router.query
+  const [email, setEmail] = useState('')
+  const [npassword, setNpassword] = useState('')
+  const [cnpassword, setCnpassword] = useState('')
 
 
 
-    const handleChange = (e) => {
-        if ( e.target.name === 'email') {
-          setEmail(e.target.value)
-        }
-        else if ( e.target.name === 'npassword') {
-          setNpassword(e.target.value)
-        }
-        else if ( e.target.name === 'cnpassword') {
-          setCnpassword(e.target.value)
-        }
+  const handleChange = (e) => {
+    if ( e.target.name === 'email') {
+      setEmail(e.target.value)
+    }
+    else if ( e.target.name === 'npassword') {
+      setNpassword(e.target.value)
+    }
+    else if ( e.target.name === 'cnpassword') {
+      setCnpassword(e.target.value)
+    }
+  }
+    
+    
+    
+  const sendEmailDetails = async (e) => {
+    e.preventDefault()
+  
+    // fetch the data from form to makes a file in local system
+    const data = { email };
+      let res = await fetch(`/api/sendemail`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    })
+    let response = await res.json()
+      setEmail('')
+  
+    if (response.success === true) {
+      toast.success(response.message , { position: "bottom-center", autoClose: 1000, hideProgressBar: false, closeOnClick: true, pauseOnHover: true, draggable: true, progress: undefined, theme: "light", });
+    }
+    else {
+      toast.error(response.message , { position: "bottom-center", autoClose: 1000, hideProgressBar: false, closeOnClick: true, pauseOnHover: true, draggable: true, progress: undefined, theme: "light", });
+    }
+  }
+
+
+  const setPassword = async (e) => {
+    e.preventDefault()
+
+    if( npassword !== cnpassword ){
+      document.getElementById('checkPassword').innerHTML = "Your Password is not Match!"
+    }
+    else{
+      document.getElementById('checkPassword').innerHTML = ""
+      // fetch the data from form to makes a file in local system
+      const data = { npassword, cnpassword , token };
+        let res = await fetch(`/api/setpassword`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      })
+      let response = await res.json()    
+
+      if (response.success === true) {
+        toast.success("Your Password has been changes successfully" , { position: "bottom-center", autoClose: 1000, hideProgressBar: false, closeOnClick: true, pauseOnHover: true, draggable: true, progress: undefined, theme: "light", });
       }
-    
-    
-    
-    const sendEmailDetails = async (e) => {
-        e.preventDefault()
-    
-        
-        // fetch the data from form to makes a file in local system
-        const data = { email };
-          let res = await fetch(`/api/sendemail`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(data),
-        })
-          let response = await res.json()
-            setEmail('')
-    
-            if (response.success === true) {
-                toast.success(response.message , { position: "bottom-center", autoClose: 1000, hideProgressBar: false, closeOnClick: true, pauseOnHover: true, draggable: true, progress: undefined, theme: "light", });
-            }
-    
-            else {
-                toast.error(response.message , { position: "bottom-center", autoClose: 1000, hideProgressBar: false, closeOnClick: true, pauseOnHover: true, draggable: true, progress: undefined, theme: "light", });
-            }
-    
+
+      else {
+        toast.error("Internal Server Error" , { position: "bottom-center", autoClose: 1000, hideProgressBar: false, closeOnClick: true, pauseOnHover: true, draggable: true, progress: undefined, theme: "light", });
+      }
     }
-
-
-    const setPassword = async (e) => {
-        e.preventDefault()
-
-        if( npassword !== cnpassword ){
-            document.getElementById('checkPassword').innerHTML = "Your Password is not Match!"
-          }
-        else{
-            document.getElementById('checkPassword').innerHTML = ""
-            // fetch the data from form to makes a file in local system
-            const data = { npassword, cnpassword , token };
-              let res = await fetch(`/api/setpassword`, {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-              },
-              body: JSON.stringify(data),
-            })
-          let response = await res.json()    
-    
-            if (response.success === true) {
-                toast.success("Your Password has been changes successfully" , { position: "bottom-center", autoClose: 1000, hideProgressBar: false, closeOnClick: true, pauseOnHover: true, draggable: true, progress: undefined, theme: "light", });
-            }
-    
-            else {
-                toast.error("Internal Server Error" , { position: "bottom-center", autoClose: 1000, hideProgressBar: false, closeOnClick: true, pauseOnHover: true, draggable: true, progress: undefined, theme: "light", });
-            }
-        }
-    }
+  }
     
     
   return (
@@ -99,77 +97,70 @@ function ForgotPage({dbuser}) {
    </Head>
    {/* React tostify */}
    <ToastContainer position="bottom-center" autoClose={1000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover theme="light"/>
-    <div className="min-h-screen bg-gray-100 flex flex-col justify-center sm:py-12">
-        <div className="p-10 xs:p-0 mx-auto md:w-full md:max-w-md">
-            <h1 className="text-center text-2xl font-bold text-indigo-700 mb-5">Hunting_Store</h1>  
-            <div className="bg-white shadow w-full rounded-lg divide-y divide-gray-200">
-            <div className="px-5 py-7">
 
-            { dbuser && <div>
-                <form method='POST' onSubmit={setPassword}>
-                <label className="font-semibold text-sm text-gray-600 pb-1 block">New Password</label>
-                <input id='npassword' name='npassword' onChange={handleChange} value={npassword} type="password" className="bg-gray-100 bg-opacity-50 resize-none text-gray-700 outline-none border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full transition-colors duration-200 ease-in-out" />
+    <section className="bg-[#f7f7f7]">
+    <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+      <img className="w-40 h-16 mr-2" src="./logo.png" alt="logo"/>
+      <div className="w-full bg-white rounded-lg shadow md:mt-5 sm:max-w-md xl:p-0">
+          <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
+            <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
+              Forgot Password
+            </h1>
 
-                <label className="font-semibold text-sm text-gray-600 pb-1 block">Confirm New Password</label>
-                <input id='cnpassword' name='cnpassword' onChange={handleChange} value={cnpassword} type="password" className="bg-gray-100 bg-opacity-50 resize-none text-gray-700 outline-none border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 rounded-lg px-3 py-2 mt-1 mb-1 text-sm w-full transition-colors duration-200 ease-in-out" />
-                <h1 id="checkPassword" className= 'text-sm text-red-600 mb-5'></h1>
-        
-                <button type="submit" className="w-full text-center py-2 bg-indigo-700 text-white rounded-xl font-semibold hover:bg-blue-800 focus:outline-none my-1">
-                    <span className="inline-block mr-2">Submit</span>
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-4 h-4 inline-block"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
-                </button>
-            </form>
-            </div>}
+              {dbuser === null  &&  <div>
+              <form className="space-y-4 md:space-y-6" method='POST' onSubmit={sendEmailDetails}>
+                <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900">Your email</label>
+                <input onChange={handleChange} value={email} type="email" name="email" id="email" className="bg-[#f7f7f7] border border-[#245c70] focus:ring-[#245c70] focus:border-[#245c70] text-gray-900 sm:text-sm rounded-lg block w-full p-2.5" placeholder="name@company.com" required=""/>
 
+                <div className="flex my-4 items-center justify-between">
+                  <div className="flex items-start">
+                      <div className="flex items-center h-5">
+                        <input id="remember" aria-describedby="remember" type="checkbox" className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300" required=""/>
+                      </div>
+                      <div className="ml-3 text-sm">
+                        <label htmlFor="remember" className="text-gray-500">Remember me</label>
+                      </div>
+                  </div>
+              </div>
 
+                <button type="submit" className="w-full text-white bg-[#29D0d1] hover:bg-[#44B0B7] focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Submit</button>
+              </form>
 
-            { dbuser === null  && <form method='POST' onSubmit={sendEmailDetails}>
-                <label className="font-semibold text-sm text-gray-600 pb-1 block">E-mail</label>
-                <input onChange={handleChange} value={email} id='email' name='email' type="text" className="bg-gray-100 bg-opacity-50 resize-none text-gray-700 outline-none border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full transition-colors duration-200 ease-in-out" required />
-                
-        
-                <button type="submit" className="w-full text-center py-2 bg-indigo-700 text-white rounded-xl font-semibold hover:bg-blue-800 focus:outline-none my-1">
-                    <span className="inline-block mr-2">Submit</span>
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-4 h-4 inline-block"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
-                </button>
-            </form>}
+              </div>}
 
+              {dbuser && <div>
+                <form  className="space-y-4 md:space-y-6" method='POST' onSubmit={setPassword}>
+                  <div>
+                    <label htmlFor="npassword" className="block mb-2 text-sm font-medium text-gray-900">Password</label>
+                    <input onChange={handleChange} value={npassword} type="password" name="npassword" id="npassword" placeholder="••••••••" className="bg-[#f7f7f7] border border-[#245c70] focus:ring-[#245c70] focus:border-[#245c70] text-gray-900 sm:text-sm rounded-lg block w-full p-2.5 " required=""/>
+                  </div>
+                  <div>
+                    <label htmlFor="confirm-password" className="block mb-2 text-sm font-medium text-gray-900">Confirm password</label>
+                    <input onChange={handleChange} value={cnpassword} type="password" name="cnpassword" id="cnpassword" placeholder="••••••••" className="bg-[#f7f7f7] border border-[#245c70] focus:ring-[#245c70] focus:border-[#245c70] text-gray-900 sm:text-sm rounded-lg block w-full p-2.5" required=""/>
+                  </div>
+                  <h1 id="checkPassword" className= 'text-sm text-red-600 mb-5'></h1>
 
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-start">
+                      <div className="flex items-center h-5">
+                        <input id="remember" aria-describedby="remember" type="checkbox" className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300" required=""/>
+                      </div>
+                      <div className="ml-3 text-sm">
+                        <label htmlFor="remember" className="text-gray-500">Remember me</label>
+                      </div>
+                    </div>
+                  </div>
+                  <button type="submit" className="w-full text-white bg-[#29D0d1] hover:bg-[#44B0B7] focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Submit</button>
+                </form>
+              </div>}
 
-            </div>
-           
-            <div className="p-5">
-                <div className="grid grid-cols-3 gap-1">
-                    <button type="button" className="transition duration-200 border border-gray-200 text-gray-500 w-full py-2.5 rounded-lg text-sm shadow-sm hover:shadow-md font-normal text-center inline-block">MailUp</button>
-                    <button type="button" className="transition duration-200 border border-gray-200 text-gray-500 w-full py-2.5 rounded-lg text-sm shadow-sm hover:shadow-md font-normal text-center inline-block">Google</button>
-                    <button type="button" className="transition duration-200 border border-gray-200 text-gray-500 w-full py-2.5 rounded-lg text-sm shadow-sm hover:shadow-md font-normal text-center inline-block">Github</button>
-                </div>
-            </div>
-                <div className="py-5">
-                <div className="text-center sm:text-right whitespace-nowrap">
-                    <button className="transition duration-200 mx-5 px-5 py-4 cursor-pointer font-normal text-sm rounded-lg text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-200 focus:ring-2 focus:ring-gray-400 focus:ring-opacity-50 ring-inset">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-4 h-4 inline-block align-text-bottom	">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z" />
-                        </svg>
-                        <span className="inline-block ml-1">Help</span>
-                    </button>
-                </div>
-                </div>
-            </div>
-            <div className="py-5">
-                <div className="grid grid-cols-2 gap-1">
-                <div className="text-center sm:text-left whitespace-nowrap">
-                    <button className="transition duration-200 mx-5 px-5 py-4 cursor-pointer font-normal text-sm rounded-lg text-gray-500 hover:bg-gray-200 focus:outline-none focus:bg-gray-300 focus:ring-2 focus:ring-gray-400 focus:ring-opacity-50 ring-inset">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-4 h-4 inline-block align-text-top">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-                        </svg>
-                        <span className="inline-block ml-1"><Link href={"/"}>Back to Hunting_Store.com</Link></span>
-                    </button>
-                </div>
-                </div>
-            </div>
-        </div>
+              <p className="text-sm font-light text-gray-500 ">
+                Don’t have an account yet? <Link href={'signup'} className="font-medium text-[#44B0B7] hover:underline">Sign up</Link>
+              </p>
+          </div>
+      </div>
     </div>
+  </section>
     </>
   )
 }

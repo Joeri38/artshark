@@ -14,7 +14,7 @@ const handler = async (req,res)=>{
         
         
         let forgotUser = await Forgot.findOne({token})
-        let forgotUserEmail = await forgotUser.email
+        let forgotUserEmail = forgotUser.email
 
         await User.findOneAndUpdate({email: forgotUserEmail}, {password: CryptoJS.AES.encrypt(npassword, process.env.CRYPTOJS_SECRET).toString()} )
             res.status(200).json({ success: true , message: "New Password Set!" })

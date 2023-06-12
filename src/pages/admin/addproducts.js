@@ -21,7 +21,7 @@ function Addproducts() {
   const [title, setTitle] = useState('')
   const [category, setCategory] = useState('')
   const [price, setPrice] = useState('')
-  const [slug, setSlug] = useState('')
+  const [stripePriceId, setStripePriceId] = useState('')
   const [desc, setDesc] = useState('')
   const [img1, setImg1] = useState('')
   const [img2, setImg2] = useState('')
@@ -33,7 +33,6 @@ function Addproducts() {
   const router = useRouter();
 
   useEffect(() => {
-    // /admin/addproducts?id=${product.id}&editProduct=true
     if(router.query.editProduct == 1){
       getProduct();
     }
@@ -49,13 +48,13 @@ function Addproducts() {
     }
     else if (e.target.name === 'category') {
       setCategory(e.target.value)
-    }  
+    }
     else if (e.target.name === 'price') {
       setPrice(e.target.value)
     }   
-    else if (e.target.name === 'slug') {
-      setSlug(e.target.value)
-    }   
+    else if (e.target.name === 'stripePriceId') {
+      setStripePriceId(e.target.value)
+    }
     else if (e.target.name === 'desc') {
       setDesc(e.target.value)
     }   
@@ -87,7 +86,7 @@ function Addproducts() {
         setCategory(response.data.category)
         setPrice(response.data.price)
         setDesc(response.data.desc)
-        setSlug(response.data.slug)
+        setStripePriceId(response.data.stripePriceId)
         setImg1(response.data.img1)
         setImg2(response.data.img2)
         setImg3(response.data.img3)
@@ -102,7 +101,7 @@ function Addproducts() {
     e.preventDefault()  
     
     // fetch the data from form to makes a file in local system
-    const data = { id, title, price, img1, img2, img3, category, slug, desc };
+    const data = { id, title, price, img1, img2, img3, category, stripePriceId, desc };
       let res = await fetch(`${id ? '/api/updateproducts' : '/api/addproducts' }`, {
       method: 'POST',
       headers: {
@@ -161,7 +160,7 @@ function Addproducts() {
               </FormControl>
 
               <TextField onChange={handleChange} value={price} name="price" label="Price" variant="standard"  required/>
-              <TextField onChange={handleChange} value={slug} name="slug" label="Slug" variant="standard"  required/>
+              <TextField onChange={handleChange} value={stripePriceId} name="stripePriceId" label="Stripe Price Id" variant="standard"  required/>
               <TextField onChange={handleChange} value={desc} name="desc" label="Description" variant="standard" multiline required/>
               <TextField onChange={handleChange} value={img1} name="img1" label="Image Url #1" variant="standard"  required/>
               <TextField onChange={handleChange} value={img2} name="img2" label="Image Url #2" variant="standard"/>

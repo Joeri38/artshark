@@ -1,8 +1,12 @@
-import { Fragment, useState } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 import Link from 'next/link'
 import { Dialog, Popover, Tab, Transition, Menu } from '@headlessui/react'
 import { Bars3Icon, ShoppingBagIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { BiUserCircle } from 'react-icons/bi';
+
+import { loadStripe } from '@stripe/stripe-js';
+import { useRouter } from 'next/router';
+import { AiFillMinusCircle, AiFillPlusCircle } from 'react-icons/ai';
 
 
 const products = {
@@ -20,17 +24,63 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
+const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
 
-export default function Example({logout , user, cart, subTotal, deleteItemFromCart }) {
+export default function Example({logout , removeFromCart, addToCart, user, cart, subTotal, deleteItemFromCart}) {
+
+  const router = useRouter()
+  const [isLoading, setIsLoading] = useState(false)
 
   const [open, setOpen] = useState(false)
   const [OpenCart, setOpenCart] = useState(false)
 
 
+  const submit = async(e)=>{
+    e.preventDefault();
+    setIsLoading(true)
+    const stripe = await stripePromise;
+    const lineItems = Object.keys(cart).map((item)=>{
+      return {
+        price: item,
+        quantity: cart[item].qty,
+      }
+    })
+
+    const newCartItems = Object.keys(cart).map((item)=>{
+      return {
+        [cart[item].name]: {
+          size: cart[item].size,
+          color: cart[item].color,
+          whatDoHeWant: cart[item].whatDoYouWant,
+        },
+      }
+    })
+
+    try {
+
+      const res = await fetch(`/api/checkout_sessions`, {
+        method: "POST",
+        headers: {
+            Authorization: "Bearer " + process.env.STRIPE_SECRET_KEY,
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({lineItems, newCartItems}),
+      });
+      const response = await res.json();
+      console.log(response)
+      router.push(response.url);
+      setIsLoading(false)
+
+    } catch (error) {
+      setIsLoading(false)
+      console.error(error)
+    }
+  }
+  
+
   return (
     <div className="bg-[#f7f7f7]">
 
-      
       {/* Mobile menu */}
       <Transition.Root show={open} as={Fragment}>
         <Dialog as="div" className="relative z-40 lg:hidden" onClose={setOpen}>
@@ -77,10 +127,6 @@ export default function Example({logout , user, cart, subTotal, deleteItemFromCa
         </Dialog>
       </Transition.Root>
 
-
-
-
-
       <header className="relative bg-[#f7f7f7]">
 
         {/* Laptop View */}
@@ -94,7 +140,6 @@ export default function Example({logout , user, cart, subTotal, deleteItemFromCa
 
               {/* Logo */}
               <div className="ml-4 flex lg:ml-0">
-                {/* <span className="text-black font-bold">Art Shark</span> */}
                 <img className='h-10' src="/logo.png" alt="" />
               </div>
 
@@ -131,9 +176,9 @@ export default function Example({logout , user, cart, subTotal, deleteItemFromCa
                   <Transition as={Fragment} enter="transition ease-out duration-100" enterFrom="transform opacity-0 scale-95" enterTo="transform opacity-100 scale-100" leave="transition ease-in duration-75" leaveFrom="transform opacity-100 scale-100" leaveTo="transform opacity-0 scale-95">
                     <Menu.Items className="absolute right-0 z-10 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                       <div className="py-1">
-                        <Menu.Item>
+                        {user.email === process.env.NEXT_PUBLIC_WEBSITE_EMAIL && <Menu.Item>
                           {({ active }) => ( <Link href={'/admin/allproducts'} className={classNames( active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'block px-4 py-2 text-sm' )}>Admin Account</Link>)}
-                        </Menu.Item>
+                        </Menu.Item>}
                         <Menu.Item>
                           {({ active }) => ( <Link href={'/myaccount'} className={classNames( active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'block px-4 py-2 text-sm' )}>Account settings</Link>)}
                         </Menu.Item>
@@ -188,8 +233,8 @@ export default function Example({logout , user, cart, subTotal, deleteItemFromCa
                                     <div className="flow-root">
                                       <ul role="list" className="-my-6 divide-y divide-gray-200">
                                       {cart && Object.keys(cart).length == 0 && <div className='text-center text-gray-600 mt-10 text-md'>Your Cart is Empty!</div> }
-                                      {cart && Object.keys(cart).map((item)=>{
-                                          return <li key={item} className="flex py-6">
+                                      {cart && Object.keys(cart).map((item, index)=>{
+                                          return <li key={index} className="flex py-6">
                                             <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
                                               <img src={cart[item].img} alt="cart-image" className="h-full w-full object-cover object-center"/>
                                             </div>
@@ -197,17 +242,29 @@ export default function Example({logout , user, cart, subTotal, deleteItemFromCa
                                               <div>
                                                 <div className="flex justify-between text-base font-medium text-gray-900">
                                                   <h3 className="w-10/12">
-                                                    <Link href={`/product/${cart[item].slug}`}>{cart[item].name}</Link>
+                                                    <Link href={`/product/${item}`}>{cart[item].name}</Link>
                                                   </h3>
                                                   <p className="ml-4">€{cart[item].price}</p>
                                                 </div>
                                                 <p className="mt-1 text-sm text-gray-500">{cart[item].color}</p>
                                               </div>
                                               <div className="flex flex-1 items-end justify-between text-sm">
-                                                <p className="text-gray-500">Qty: {cart[item].qty}</p>
+                                                {/* <p className="text-gray-500">Qty: {cart[item].qty}</p> */}
+
+
+                                                <p className="flex text-black text-sm ">Qty: 
+                                                  <AiFillMinusCircle onClick={()=>{removeFromCart(item,cart[item].name,1,cart[item].price,cart[item].size,cart[item].color)}} className='my-auto ml-2 text-lg cursor-pointer'/> 
+                                                  <span className='mx-[9px]'>{cart[item].qty}</span> 
+                                                  <AiFillPlusCircle onClick={()=>{addToCart(item,cart[item].name,1,cart[item].price,cart[item].size,cart[item].color)}} className='my-auto text-lg cursor-pointer'/>
+                                                </p>
+
+
+
                                                 <div className="flex">
-                                                  <button onClick={()=>{deleteItemFromCart(item,cart[item].name,1,cart[item].price,cart[item].size,cart[item].variant)}} type="button" className="font-medium text-red-600 hover:text-red-500">Remove</button>
+                                                  <button onClick={()=>{deleteItemFromCart(item,cart[item].name,1,cart[item].price,cart[item].size,cart[item].color)}} type="button" className="font-medium text-red-600 hover:text-red-500">Remove</button>
                                                 </div>
+
+
                                               </div>
                                             </div>
                                           </li>
@@ -225,7 +282,18 @@ export default function Example({logout , user, cart, subTotal, deleteItemFromCa
                                     Shipping and taxes calculated at checkout.
                                   </p>
                                   <div className="mt-6">
-                                    <Link href="/checkout" className="flex items-center justify-center rounded-md border border-transparent bg-[#29D0d1] px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-[#44B0B7]">Checkout</Link>
+                                    <form method="POST">
+                                      <div className='flex'>
+                                        <button onClick={submit} type='submit' className="flex items-center  mx-auto justify-center rounded-md border border-transparent bg-[#29D0d1] w-[20rem] sm:w-[25rem] py-3 text-base font-medium text-white shadow-sm hover:bg-[#44B0B7]"> 
+                                        {/* Spinner */}
+                                        {isLoading && <div
+                                          className="inline-block mr-3 h-5 w-5 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
+                                          role="status">
+                                        </div>}
+                                          Checkout
+                                        </button>
+                                      </div>
+                                    </form>
                                   </div>
                                   <div className="mt-6 flex justify-center text-center text-sm text-gray-500">
                                     <p>or
@@ -244,9 +312,6 @@ export default function Example({logout , user, cart, subTotal, deleteItemFromCa
                     </Dialog>
                   </Transition.Root>
                 </div>
-
-
-
 
               </div>
             </div>

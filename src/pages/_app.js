@@ -84,13 +84,13 @@ export default function App({ Component, pageProps }) {
 
 
   // Add to Cart function like increase quantity of items in cart
-  const addToCart = (itemCode, name, qty, price, img) =>{
+  const addToCart = (stripePriceId, name, qty, price, img, size, color, whatDoYouWant) =>{
     let newCart = cart;
-    if(itemCode in cart){
-      newCart[itemCode].qty= cart[itemCode].qty + qty;
+    if(stripePriceId in cart){
+      newCart[stripePriceId].qty= cart[stripePriceId].qty + qty;
     }
     else{
-      newCart[itemCode]= { qty:1, name, price, img }   
+      newCart[stripePriceId]= { qty:1, name, price, img, size, color, whatDoYouWant }   
     }
     setCart(newCart);
     saveCart(newCart);
@@ -99,13 +99,13 @@ export default function App({ Component, pageProps }) {
 
 
   // Remove From Cart function like decrease quantity of items in cart
-  const removeFromCart = (itemCode, name, qty , price, size, variant) =>{
+  const removeFromCart = (stripePriceId, name, qty , price, size, color) =>{
     let newCart = cart;
-    if(itemCode in cart){
-      newCart[itemCode].qty= cart[itemCode].qty - qty;
+    if(stripePriceId in cart){
+      newCart[stripePriceId].qty= cart[stripePriceId].qty - qty;
     }
-     if (newCart[itemCode].qty <=0){
-      delete newCart[itemCode];
+     if (newCart[stripePriceId].qty <=0){
+      delete newCart[stripePriceId];
      }
     setCart(newCart);
     saveCart(newCart);
@@ -114,10 +114,10 @@ export default function App({ Component, pageProps }) {
 
 
   // Delet Item From Cart function like delete one item in cart
-  const deleteItemFromCart = (itemCode, name , qty, price, size, variant) =>{
+  const deleteItemFromCart = (stripePriceId, name , qty, price, size, color) =>{
     let newCart = cart;
-    if(itemCode in cart){
-      delete newCart[itemCode];
+    if(stripePriceId in cart){
+      delete newCart[stripePriceId];
     }
     setCart(newCart);
     saveCart(newCart);
@@ -127,10 +127,8 @@ export default function App({ Component, pageProps }) {
 
   // clear cart is used to clear all items in cart
   const clearCart = () => {
-    toast.error("Your Cart is Empty.!")
     setCart({});
     saveCart({});
-    
   }
 
 
