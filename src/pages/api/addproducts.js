@@ -13,6 +13,7 @@ const handler = async (req,res)=>{
             img3: req.body.img3,
             category: req.body.category,
             price: req.body.price,
+            stripePriceId: req.body.stripePriceId,
         })
         await addProduct.save();
         res.status(200).json({ success: true,  message: "Item added succesfully!" })
