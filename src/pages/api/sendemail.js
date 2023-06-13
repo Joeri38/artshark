@@ -6,7 +6,7 @@ const nodemailer = require('nodemailer')
 
 
 const handler = async (req,res)=>{
-    let company = process.env.NEXT_PUBLIC_HOST;
+    let company = process.env.HOST;
     const email = req.body.email;
 
 
