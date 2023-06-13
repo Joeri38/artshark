@@ -23,8 +23,8 @@ export default async function handler(req, res) {
         },
         payment_method_types: [ "card", "bancontact", "eps", "giropay", "ideal", "link" ],
         
-        success_url: `${process.env.NEXT_PUBLIC_HOST}/success?id={CHECKOUT_SESSION_ID}`,
-        cancel_url: `${process.env.NEXT_PUBLIC_HOST}/failed`,
+        success_url: `/success?id={CHECKOUT_SESSION_ID}`,
+        cancel_url: `/failed`,
       });
 
       res.status(200).json({ success: true, message: "Succesfully Log In!", url:session.url, id:session.id })
