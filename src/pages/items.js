@@ -17,6 +17,8 @@ function Items({ product, user }) {
         <h2 className="sr-only">Products</h2>
 
         {Object.keys(product).length === 0 && <div className="font-semibold text-center">Sorry! Currently Stock Unavailble right now. Please wait for the new Stock...!</div>}  
+        {console.log(`mail: ${user.email}`)}
+        {console.log(`env: ${process.env.NEXT_PUBLIC_WEBSITE_EMAIL}`)}
         {user.email === process.env.NEXT_PUBLIC_WEBSITE_EMAIL &&  <div className="text-sm text-right mt-5">Do you want to add Products? <span className='font-semibold text-[#44B0B7]'><Link href={'/admin/addproducts'}>Click here!</Link></span></div>}  
 
         <div className="grid pt-10 grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
