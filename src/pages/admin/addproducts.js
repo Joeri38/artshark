@@ -7,7 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 
 
-// Admin pannel
+// Admin panel
 import FullLayout from "../../panel/layouts/FullLayout";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "../../panel/theme/theme";

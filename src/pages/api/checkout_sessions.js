@@ -25,6 +25,17 @@ export default async function handler(req, res) {
         
         success_url: `${process.env.HOST}/success?id={CHECKOUT_SESSION_ID}`,
         cancel_url: `${process.env.HOST}/failed`,
+
+        custom_fields: [
+          {
+            key: 'size',
+            label: {
+              type: 'custom',
+              custom: 'T-shirt size',
+            },
+            type: 'text',
+          },
+        ],
       });
 
       res.status(200).json({ success: true, message: "Succesfully Log In!", url:session.url, id:session.id })
