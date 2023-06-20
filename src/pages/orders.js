@@ -36,7 +36,7 @@ function MyOrders () {
   return (
     <>
     <Head>
-      <title>Orders_Art Shark</title>
+      <title>My Orders</title>
       <meta name="description" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0" />
    </Head>
     <section className="bg-[#f7f7f7] text-gray-600 body-font">
@@ -55,9 +55,6 @@ function MyOrders () {
               <th className="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm">Details</th>
             </tr>
           </thead>
-
-
-
 
           <tbody>
 

@@ -21,12 +21,12 @@ export default async function handler(req, res) {
         phone_number_collection: {
           enabled: true,
         },
-        payment_method_types: [ "card", "bancontact", "eps", "giropay", "ideal", "link" ],
+        payment_method_types: ["bancontact", "card", "paypal", "link"], // "eps", "giropay", "ideal",
         
         success_url: `${process.env.HOST}/success?id={CHECKOUT_SESSION_ID}`,
         cancel_url: `${process.env.HOST}/failed`,
 
-        custom_fields: [
+        /*custom_fields: [
           {
             key: 'size',
             label: {
@@ -35,7 +35,7 @@ export default async function handler(req, res) {
             },
             type: 'text',
           },
-        ],
+        ],*/
       });
 
       res.status(200).json({ success: true, message: "Succesfully Log In!", url:session.url, id:session.id })

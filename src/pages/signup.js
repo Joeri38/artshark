@@ -74,12 +74,12 @@ function Signup() {
 
     <>
     <Head>
-        <title>SignUp_Art Shark</title>
+        <title>Sign Up</title>
         <meta name="description" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0" />
     </Head>
+
     {/* React tostify */}
     <ToastContainer position="bottom-center" autoClose={1000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover theme="light"/>
-
 
     <section className="bg-[#f7f7f7] py-[47px]">
   <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
@@ -110,7 +110,7 @@ function Signup() {
                         <input id="terms" aria-describedby="terms" type="checkbox" className="w-4 h-4 border border-gray-300 rounded bg-[#f7f7f7] focus:ring-3 focus:ring-primary-300" required=""/>
                       </div>
                       <div className="ml-3 text-sm">
-                        <label htmlFor="terms" className="font-light text-gray-500 ">I accept the <Link className="font-medium text-primary-600 hover:underline" href="#">Terms and Conditions</Link></label>
+                        <label htmlFor="terms" className="font-light text-gray-500 ">I accept the <Link className="font-medium text-primary-600 hover:underline" href="/termsandconditions">Terms and Conditions</Link></label>
                       </div>
                   </div>
                   <button type="submit" className="w-full text-white bg-[#29D0d1] hover:bg-[#44B0B7] focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Create an account</button>

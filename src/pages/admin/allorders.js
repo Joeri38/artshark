@@ -5,7 +5,7 @@ import Orders from '../../panel/components/dashboard/Orders';
 import FullLayout from "../../panel/layouts/FullLayout";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "../../panel/theme/theme";
-import { Grid,} from "@mui/material";
+import { Grid } from "@mui/material";
 
 function AllOrders() {
 
@@ -35,25 +35,23 @@ function AllOrders() {
       
   }, [])
 
-
-
   return (
     <ThemeProvider theme={theme}>
-    <FullLayout>
+      <FullLayout>
 
-    <style jsx global>{`
-        footer {
-          display: none;
-        }
-      `}</style>
+        {/* Hide footer */}
+        <style jsx global>{`
+            footer {
+              display: none;
+            }
+          `}
+        </style>
 
-
-    <Grid container spacing={0}>
-      <Grid item xs={12} lg={12}>
-        <Orders orders={orders} />
-      </Grid>
-    </Grid>
-
+        <Grid container spacing={0}>
+          <Grid item xs={12} lg={12}>
+            <Orders orders={orders} />
+          </Grid>
+        </Grid>
 
       </FullLayout>
     </ThemeProvider>

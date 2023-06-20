@@ -40,7 +40,7 @@ const Item = ({addToCart , product}) => {
       <div className="container px-5 py-10 mx-auto">
         <div className="lg:w-4/5 mx-auto justify-center flex flex-wrap">
 
-          <div className='lg:w-1/2'>
+          <div className='lg:w-9/20'>
             <Carousel
                 infiniteLoop={true}
                 showIndicators={false}

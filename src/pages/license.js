@@ -1,11 +1,11 @@
 import React from "react";
 import Head from "next/head";
 
-function Lincense() {
+function License() {
   return (
     <>
       <Head>
-        <title>License_Art Shark</title>
+        <title>License</title>
         <meta
           name="description"
           content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0"
@@ -117,4 +117,4 @@ function Lincense() {
   );
 }
 
-export default Lincense;
+export default License;

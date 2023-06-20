@@ -7,7 +7,6 @@ import {
 } from "@mui/material";
 import Header from "./header/Header";
 import Sidebar from "./sidebar/Sidebar";
-import Footer from "./footer/Footer";
 
 const MainWrapper = experimentalStyled("div")(() => ({
   display: "flex",
@@ -23,7 +22,7 @@ const PageWrapper = experimentalStyled("div")(({ theme }) => ({
 
   backgroundColor: theme.palette.background.default,
   [theme.breakpoints.up("lg")]: {
-    paddingTop: "64px",
+    paddingTop: "12px",
   },
   [theme.breakpoints.down("lg")]: {
     paddingTop: "64px",
@@ -52,12 +51,11 @@ const FullLayout = ({ children }) => {
         <Container
           maxWidth={false}
           sx={{
-            paddingTop: "20px",
+            paddingTop: "0px",
             paddingLeft: isSidebarOpen && lgUp ? "280px!important" : "",
           }}
         >
           <Box sx={{ minHeight: "calc(100vh - 170px)" }}>{children}</Box>
-          <Footer />
         </Container>
       </PageWrapper>
     </MainWrapper>

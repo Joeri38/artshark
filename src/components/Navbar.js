@@ -139,7 +139,9 @@ export default function Example({logout , removeFromCart, addToCart, user, cart,
 
               {/* Logo */}
               <div className="ml-4 flex lg:ml-0">
-                <img className='h-10' src="/logo.png" alt="" />
+                <Link href="/">
+                  <img className="h-10" src="/logo.png" alt="" />
+                </Link>
               </div>
 
               {/* Flyout menus */}

@@ -10,7 +10,7 @@ const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY)
 
 const Success = ({id}) => {
 
-    const router = useRouter();
+    /* const router = useRouter();
     
     useEffect(() => {
         submit();
@@ -29,10 +29,7 @@ const Success = ({id}) => {
         if(response.id){
             router.push(`/order?id=${response.id}&clearCart=1`)
         }
-    }
-    
-    
-    
+    }*/
 
     return (
         <div className="min-h-[650px] bg-[#f7f7f7] text-black flex items-center">
@@ -53,9 +50,9 @@ const Success = ({id}) => {
                         Continue Shopping
                     </Link>
 
-                    <form method="post">
+                    {/*<form method="post">
                         <button type="submit">Go To the Order Page</button>
-                    </form>
+                    </form>*/}
 
                 </div>
             </Wrapper>

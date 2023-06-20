@@ -1,5 +1,6 @@
 import {React } from "react";
 import Link from "next/link";
+import moment from 'moment/moment';
 
 import { Typography, Box, Table, TableBody, TableCell, TableHead, TableRow,} from "@mui/material";
 import BaseCard from "../baseCard/BaseCard";
@@ -7,6 +8,13 @@ import BaseCard from "../baseCard/BaseCard";
 
 const Orders = ({ orders }) => {
 
+  function Cell({ value }) {
+    return <TableCell>
+      <Typography color="textSecondary" variant="h6">
+        {value}
+      </Typography>
+    </TableCell>
+  }
 
   return (
     <BaseCard title="All Orders">
@@ -19,40 +27,19 @@ const Orders = ({ orders }) => {
       >
         <TableHead>
           <TableRow>
-            <TableCell>
-              <Typography color="textSecondary" variant="h6">
-                Sr.
-              </Typography>
-            </TableCell>
-            <TableCell>
-              <Typography color="textSecondary" variant="h6">
-                Order Id
-              </Typography>
-            </TableCell>
-            <TableCell>
-              <Typography color="textSecondary" variant="h6">
-                Amount
-              </Typography>
-            </TableCell>
-            <TableCell>
-              <Typography color="textSecondary" variant="h6">
-                Details
-              </Typography>
-            </TableCell>
+
+             <Cell value="Order Id" />
+             <Cell value="Name" />
+             <Cell value="Placed on" />
+             <Cell value="Amount" /> 
+             <Cell value="Details" />
+
           </TableRow>
         </TableHead>
+
         <TableBody>
           {orders.map((order, index) => (
             <TableRow key={order._id}>
-              <TableCell>
-                <Typography
-                  sx={{
-                    fontSize: "15px",
-                    fontWeight: "500",
-                  }}
-                >{index + 1} 
-                </Typography>
-              </TableCell>
 
               <TableCell>
                 <Typography
@@ -63,6 +50,26 @@ const Orders = ({ orders }) => {
                 >#{order.orderId}
                 </Typography>
               </TableCell>
+
+              <TableCell>
+                <Typography
+                  sx={{
+                    fontSize: "15px",
+                    fontWeight: "500",
+                  }}
+                >{order.name} 
+                </Typography>
+              </TableCell> 
+
+              <TableCell>
+                <Typography
+                  sx={{
+                    fontSize: "15px",
+                    fontWeight: "500",
+                  }}
+                >{moment(order.createdAt).utc().format("DD-MM-YYYY")} 
+                </Typography>
+              </TableCell> 
 
               <TableCell>
                 <Box
@@ -94,6 +101,7 @@ const Orders = ({ orders }) => {
             </TableRow>
           ))}
         </TableBody>
+
       </Table>
     </BaseCard>
   );
