@@ -13,41 +13,37 @@ const handler = async (req,res)=>{
 
   let message = `Dear ${firstName},
 
-      Thank you for choosing ${company}. We are pleased to confirm your recent order with us. Below are the details of your purchase:
+Thank you for choosing ${company}. We are pleased to confirm your recent order with us. Below are the details of your purchase:
 
-      Order Number: #${orderId}
-      Order Date: ${date}
-      Shipping Address: ${streetAddress}
-      Amount: €${amount}
+    Order Number: #${orderId}
+    Order Date: ${date}
+    Shipping Address: ${streetAddress}
+    Amount: €${amount}
 
-      Please note that the shipping and delivery times may vary depending on your location and the availability of the product(s). You will receive a separate email with the tracking information once your order has been dispatched.
+Please note that the shipping and delivery times may vary depending on your location and the availability of the product(s). You will receive a separate email with the tracking information once your order has been dispatched.
 
-      If you have any questions or concerns regarding your order, please don't hesitate to reach out to our customer support team at ${customerSupportEmail}. Our dedicated team is ready to assist you with any queries you may have.
+If you have any questions or concerns regarding your order, please don't hesitate to reach out to our customer support team at ${customerSupportEmail}. Our dedicated team is ready to assist you with any queries you may have.
 
-      Thank you once again for choosing ${company}. We appreciate your business and look forward to serving you in the future.
+Thank you once again for choosing ${company}. We appreciate your business and look forward to serving you in the future.
 
-      Best regards,
+Best regards,
 
-      ${company}
-      ${websiteUrl}`
+${company}
+${websiteUrl}`
 
   console.log(message);
 
   if (req.method == 'POST'){
-        
+
     const transporter = nodemailer.createTransport({
-      host:'smtp.gmail.com',
+      host: "smtp.gmail.com",
       port: 465,
-      secure: true,
-      service: 'gmail',
+      secure: true, // true for 465, false for other ports
       auth: {
-        user: process.env.EMAIL,
-        pass: process.env.PASSWORD,
+        user: 'joeri.lenaerts36@gmail.com', // generated ethereal user
+        pass: 'wrhqsyfffaxclauw', // generated ethereal password
       },
     });
-
-    console.log(process.env.EMAIL);
-    console.log(process.env.PASSWORD);
 
     let mailData = {
       from: `${process.env.EMAIL}`,
@@ -56,17 +52,14 @@ const handler = async (req,res)=>{
       text: `${message}`,
     };
 
-    transporter.sendMail(mailData);
-
-    /*transporter.sendMail(mailData, function (err,info){
+    transporter.sendMail(mailData, function (err,info){
       if (!err) {
           return res.status(200).json({ success: true, message: `details has been sent to ${email}`})
       }
       if (err) {
           return res.status(400).json({ success: false, message: "Some Error Occured!"})
-          console.log(err);
       }
-    })*/
+    })
   }
 
   else{
