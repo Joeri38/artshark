@@ -7,9 +7,6 @@ import { ThemeProvider } from "@mui/material/styles";
 import theme from "../../panel/theme/theme";
 import { Grid,} from "@mui/material";
 
-
-
-
 function AllOrders() {
 
   const [orders, setOrders] = useState([])

@@ -15,9 +15,9 @@ import { FormControl, InputLabel, MenuItem, Select, TextField } from '@mui/mater
 
 
 
-const Slug = ({addToCart , product}) => {
+const Item = ({addToCart , product}) => {
   const router = useRouter()
-  const { slug } = router.query
+  //const { slug } = router.query
 
   const [color, setColor] = useState('')
   const [size, setSize] = useState('')
@@ -26,14 +26,13 @@ const Slug = ({addToCart , product}) => {
   let colorArray = ["White", "Black", "Blue", "Red", "Green", "Yellow", "Orange"];
   let sizeArray = ["XS", "S", "M", "L", "XL", "XXL"];
 
-
   // React tostify
   const addcart = () => toast.success("Item is added in your Cart.!");
 
 
   return <>
     <Head>
-      <title>ProductDetails_Art Shark</title>
+      <title>Art Shark</title>
       <meta name="description" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0" />
    </Head>
 
@@ -41,24 +40,26 @@ const Slug = ({addToCart , product}) => {
       <div className="container px-5 py-10 mx-auto">
         <div className="lg:w-4/5 mx-auto justify-center flex flex-wrap">
 
-          <div className='lg:w-2/5 mr-auto'>
+          <div className='lg:w-1/2'>
             <Carousel
                 infiniteLoop={true}
                 showIndicators={false}
                 showStatus={false}
                 thumbWidth={60}
+                dynamicHeight={true}
+                height={200}
                 className="productCarousel"
             >
               {product.img1 && <img src={product.img1} className='h-[400px]' />}
-              {product.img2 && <img src={product.img2} className='h-[400px]' />}
-              {product.img3 && <img src={product.img3} className='h-[400px]' />}
+              <img src='/images/pigeon_rock_band.png' className='h-[400px]' />
+              <img src='/images/pigeon_rock_band.png' className='h-[400px]' />
             </Carousel>
           </div>
 
           <div className="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
             <h2 className="text-sm title-font text-gray-500 tracking-widest">Art Shark</h2>
             <h1 className="text-gray-900 text-3xl title-font font-medium mb-1">{product.title}</h1>
-            <div className="flex">
+            {/* <div className="flex">
               <span className="flex items-center">
                 <svg fill="currentColor" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="w-4 h-4 text-yellow-500" viewBox="0 0 24 24">
                   <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
@@ -94,7 +95,7 @@ const Slug = ({addToCart , product}) => {
                   </svg>
                 </a>
               </span>
-            </div>
+            </div> */}
 
             <div className='py-3'>
               <FormControl variant="standard" sx={{ minWidth: 120 }}>
@@ -156,16 +157,14 @@ const Slug = ({addToCart , product}) => {
 
 
 
-
 export async function getServerSideProps(context) {
   if (!mongoose.connections[0].readyState){
     mongoose.set("strictQuery", false);
     await mongoose.connect(process.env.MONGO_URI)
   }
 
-    let product = await Product.findOne({_id: context.query.id})
+  let product = await Product.findOne({_id: context.query.id})
     
-
   // Pass data to the page via props
   return {
       props: { product: JSON.parse(JSON.stringify(product)) } 
@@ -173,4 +172,4 @@ export async function getServerSideProps(context) {
 
   }
 
-export default Slug
+export default Item
