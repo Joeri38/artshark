@@ -7,11 +7,11 @@ const handler = async (req,res)=>{
         let addProduct = new Product({
             title: req.body.title,
             desc: req.body.desc,
-            slug: req.body.slug ,
+            random: req.body.random,
             img1: req.body.img1,
-            img2: req.body.img2,
-            img3: req.body.img3,
-            category: req.body.category,
+            //img2: req.body.img2,
+            //img3: req.body.img3,
+            //category: req.body.category,
             price: req.body.price,
             stripePriceId: req.body.stripePriceId,
         })

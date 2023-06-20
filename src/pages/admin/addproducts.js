@@ -1,11 +1,8 @@
 import {React, useEffect, useState} from 'react'
 
-
 // React tostify
 import { toast, ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
-
-
 
 // Admin panel
 import FullLayout from "../../panel/layouts/FullLayout";
@@ -19,16 +16,16 @@ import { useRouter } from 'next/router';
 function Addproducts() {
 
   const [title, setTitle] = useState('')
-  const [category, setCategory] = useState('')
+  //const [category, setCategory] = useState('')
   const [price, setPrice] = useState('')
   const [stripePriceId, setStripePriceId] = useState('')
   const [desc, setDesc] = useState('')
   const [img1, setImg1] = useState('')
-  const [img2, setImg2] = useState('')
-  const [img3, setImg3] = useState('')
+  //const [img2, setImg2] = useState('')
+  //const [img3, setImg3] = useState('')
   const [id, setId] = useState('')
 
-  const categoryArray = ['tshirts', 'canvas', 'poster']
+  //const categoryArray = ['tshirts', 'canvas', 'poster']
 
   const router = useRouter();
 
@@ -39,16 +36,13 @@ function Addproducts() {
 
   }, []);
   
-  
-
-
   const handleChange = (e)=>{
     if ( e.target.name === 'title') {
       setTitle(e.target.value)
     }
-    else if (e.target.name === 'category') {
+    /*else if (e.target.name === 'category') {
       setCategory(e.target.value)
-    }
+    }*/
     else if (e.target.name === 'price') {
       setPrice(e.target.value)
     }   
@@ -61,12 +55,12 @@ function Addproducts() {
     else if (e.target.name === 'img1') {
       setImg1(e.target.value)
     }   
-    else if (e.target.name === 'img2') {
+    /* else if (e.target.name === 'img2') {
       setImg2(e.target.value)
     }   
     else if (e.target.name === 'img3') {
       setImg3(e.target.value)
-    }
+    } */
   }
 
   const getProduct = async()=>{
@@ -83,13 +77,13 @@ function Addproducts() {
       if (response.success === true){
         setId(response.data._id)
         setTitle(response.data.title)
-        setCategory(response.data.category)
+        //setCategory(response.data.category)
         setPrice(response.data.price)
         setDesc(response.data.desc)
         setStripePriceId(response.data.stripePriceId)
         setImg1(response.data.img1)
-        setImg2(response.data.img2)
-        setImg3(response.data.img3)
+        //setImg2(response.data.img2)
+        //setImg3(response.data.img3)
       }
       else {
       toast.error(response.message , { position: "bottom-center", autoClose: 1000, hideProgressBar: false, closeOnClick: true, pauseOnHover: true, draggable: true, progress: undefined, theme: "light", });
@@ -101,7 +95,8 @@ function Addproducts() {
     e.preventDefault()  
     
     // fetch the data from form to makes a file in local system
-    const data = { id, title, price, img1, img2, img3, category, stripePriceId, desc };
+    //const data = { id, title, price, img1, img2, img3, category, stripePriceId, desc };
+    const data = { id, title, price, img1, stripePriceId, desc };
       let res = await fetch(`${id ? '/api/updateproducts' : '/api/addproducts' }`, {
       method: 'POST',
       headers: {
@@ -142,7 +137,7 @@ function Addproducts() {
             <Stack spacing={3}>
               <TextField onChange={handleChange} value={title} name="title" label="Title" variant="standard"  required/>
               
-              <FormControl fullWidth variant='standard'>
+              {/* <FormControl fullWidth variant='standard'>
                 <InputLabel id="demo-simple-select-label">Category</InputLabel>
                 <Select
                   labelId="demo-simple-select-standard-label"
@@ -157,14 +152,14 @@ function Addproducts() {
                     return <MenuItem key={index} value={item}>{item}</MenuItem>
                   })}
                 </Select>
-              </FormControl>
+                </FormControl> */}
 
               <TextField onChange={handleChange} value={price} name="price" label="Price" variant="standard"  required/>
               <TextField onChange={handleChange} value={stripePriceId} name="stripePriceId" label="Stripe Price Id" variant="standard"  required/>
               <TextField onChange={handleChange} value={desc} name="desc" label="Description" variant="standard" multiline required/>
               <TextField onChange={handleChange} value={img1} name="img1" label="Image Url #1" variant="standard"  required/>
-              <TextField onChange={handleChange} value={img2} name="img2" label="Image Url #2" variant="standard"/>
-              <TextField onChange={handleChange} value={img3} name="img3" label="Image Url #3" variant="standard"/>
+              {/*<TextField onChange={handleChange} value={img2} name="img2" label="Image Url #2" variant="standard"/>
+              <TextField onChange={handleChange} value={img3} name="img3" label="Image Url #3" variant="standard"/> */}
 
 
             </Stack>

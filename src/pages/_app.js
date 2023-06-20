@@ -84,13 +84,13 @@ export default function App({ Component, pageProps }) {
 
 
   // Add to Cart function like increase quantity of items in cart
-  const addToCart = (stripePriceId, name, qty, price, img, size, color, whatDoYouWant) =>{
+  const addToCart = (id, name, qty, price, img, stripePriceId, size, color, whatDoYouWant) =>{
     let newCart = cart;
-    if(stripePriceId in cart){
-      newCart[stripePriceId].qty= cart[stripePriceId].qty + qty;
+    if(id in cart){
+      newCart[id].qty= cart[id].qty + qty;
     }
     else{
-      newCart[stripePriceId]= { qty:1, name, price, img, size, color, whatDoYouWant }   
+      newCart[id]= { qty:1, name, price, img, stripePriceId, size, color, whatDoYouWant }   
     }
     setCart(newCart);
     saveCart(newCart);
@@ -99,13 +99,13 @@ export default function App({ Component, pageProps }) {
 
 
   // Remove From Cart function like decrease quantity of items in cart
-  const removeFromCart = (stripePriceId, name, qty , price, size, color) =>{
+  const removeFromCart = (id, name, qty , price, stripePriceId, size, color) =>{
     let newCart = cart;
-    if(stripePriceId in cart){
-      newCart[stripePriceId].qty= cart[stripePriceId].qty - qty;
+    if(id in cart){
+      newCart[id].qty= cart[id].qty - qty;
     }
-     if (newCart[stripePriceId].qty <=0){
-      delete newCart[stripePriceId];
+     if (newCart[id].qty <=0){
+      delete newCart[id];
      }
     setCart(newCart);
     saveCart(newCart);
@@ -114,10 +114,10 @@ export default function App({ Component, pageProps }) {
 
 
   // Delet Item From Cart function like delete one item in cart
-  const deleteItemFromCart = (stripePriceId, name , qty, price, size, color) =>{
+  const deleteItemFromCart = (id, name , qty, price, stripePriceId, size, color) =>{
     let newCart = cart;
-    if(stripePriceId in cart){
-      delete newCart[stripePriceId];
+    if(id in cart){
+      delete newCart[id];
     }
     setCart(newCart);
     saveCart(newCart);

@@ -137,7 +137,7 @@ const Slug = ({addToCart , product}) => {
             
             <div className="flex mt-5">
               <span className="title-font font-medium text-2xl text-gray-900">€{product.price}</span>
-              <button onClick={()=>{ addcart() , addToCart(slug, product.title, 1 , product.price, product.img1, size, color, whatDoYouWant )}} className="flex -mt-1 ml-auto bg-[#29D0d1] hover:bg-[#44B0B7] text-white rounded-xl font-semibold border-0 py-3 px-6 focus:outline-none text-sm md:text-base">Add to Cart</button>
+              <button onClick={()=>{ addcart() , addToCart(product._id, product.title, 1 , product.price, product.img1, product.stripePriceId, size, color, whatDoYouWant )}} className="flex -mt-1 ml-auto bg-[#29D0d1] hover:bg-[#44B0B7] text-white rounded-xl font-semibold border-0 py-3 px-6 focus:outline-none text-sm md:text-base">Add to Cart</button>
               <ToastContainer position="bottom-center" autoClose={2000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover theme="light"/>
             
               <button className="rounded-full w-10 h-10 bg-gray-200 p-0 border-0 inline-flex items-center justify-center text-gray-500 ml-4">
@@ -163,7 +163,7 @@ export async function getServerSideProps(context) {
     await mongoose.connect(process.env.MONGO_URI)
   }
 
-    let product = await Product.findOne({stripePriceId: context.query.slug})
+    let product = await Product.findOne({_id: context.query.id})
     
 
   // Pass data to the page via props

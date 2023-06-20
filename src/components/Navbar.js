@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState } from 'react'
+import { Fragment, useState } from 'react'
 import Link from 'next/link'
 import { Dialog, Popover, Tab, Transition, Menu } from '@headlessui/react'
 import { Bars3Icon, ShoppingBagIcon, XMarkIcon } from '@heroicons/react/24/outline'
@@ -8,17 +8,14 @@ import { loadStripe } from '@stripe/stripe-js';
 import { useRouter } from 'next/router';
 import { AiFillMinusCircle, AiFillPlusCircle } from 'react-icons/ai';
 
-
-const products = {
-  pages: [
-    { name: 'Home', href: '/' },
-    { name: 'Create', href: '/create' },
-    { name: 'Products', href: '/items' },
-    { name: 'Gallery', href: '/gallery' },
-    { name: 'Prompt Guide', href: '/promptGuide' },
-    { name: 'About', href: '/about' },
-  ],
-}
+const pages = [
+  { name: 'Home', href: '/' },
+  //{ name: 'Create', href: '/create' },
+  { name: 'Products', href: '/products' },
+  { name: 'Gallery', href: '/gallery' },
+  { name: 'Prompt Guide', href: '/promptGuide' },
+  { name: 'About', href: '/about' },
+]
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
@@ -39,9 +36,11 @@ export default function Example({logout , removeFromCart, addToCart, user, cart,
     e.preventDefault();
     setIsLoading(true)
     const stripe = await stripePromise;
+    console.log('working here');
+    console.log(cart);
     const lineItems = Object.keys(cart).map((item)=>{
       return {
-        price: item,
+        price: cart[item].stripePriceId,
         quantity: cart[item].qty,
       }
     })
@@ -99,7 +98,7 @@ export default function Example({logout , removeFromCart, addToCart, user, cart,
                 </div>
 
                 <div className="space-y-6 border-t border-gray-200 py-6 px-4">
-                  {products.pages.map((page) => (
+                  {pages.map((page) => (
                     <div key={page.name} className="flow-root">
                       <Link href={page.href} className="-m-2 block p-2 font-medium text-gray-900">
                         {page.name}
@@ -147,7 +146,7 @@ export default function Example({logout , removeFromCart, addToCart, user, cart,
               <Popover.Group className="hidden lg:ml-8 lg:block lg:self-stretch">
                 <div className="flex h-full space-x-8">
 
-                  {products.pages.map((page) => (
+                  {pages.map((page) => (
                     <Link key={page.name} href={page.href} className="flex items-center text-sm font-medium text-gray-700 hover:text-gray-800">{page.name}</Link>
                   ))}
 
