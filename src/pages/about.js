@@ -11,7 +11,7 @@ function About() {
   return (
     <>
     <Head>
-      <title>About_Art Shark</title>
+      <title>About</title>
       <meta name="description" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0" />
    </Head>
     <div>
