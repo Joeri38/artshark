@@ -2,6 +2,9 @@ import connectDb from '../../../middleware/mongoose'
 
 const nodemailer = require('nodemailer')
 
+// function sentToCustomer
+// function sendToArtshark
+
 const handler = async (req,res)=>{
 
   let company = 'Art Shark'
