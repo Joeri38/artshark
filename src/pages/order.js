@@ -14,9 +14,8 @@ function MyOrder ({ order, clearCart, user }) {
   const router = useRouter();
 
   useEffect(() => {
-    if(router.query.newOrder == 1){
-      sendEmailDetails();
-    }
+
+    sendEmailDetails();
 
    if(router.query.clearCart == 1){
      clearCart();
@@ -26,23 +25,25 @@ function MyOrder ({ order, clearCart, user }) {
 
   const sendEmailDetails = async () => {
 
-    // fetch the data from form to makes a file in local system
-    // const data = { email:order.email, orderId:order.orderId, streetAddress:order.streetAddress, date:order.createdAt, products:order.products, amount:order.amount };
-    //   let res = await fetch(`/api/sendemail`, {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   },
-    //   body: JSON.stringify(data),
-    // })
-    // let response = await res.json()
+    // Use API to send mail
+    const data = {email: order.email, orderId: order.orderId, 
+                  streetAddress: order.streetAddress, date: order.createdAt, 
+                  products: order.products, amount: order.amount };
+    let res = await fetch(`/api/send-order-email`, {
+      method: 'POST',
+      headers: {
+      'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    })
+    let response = await res.json()
 
-    // if (response.success === true) {
-    //   toast.success(response.message , { position: "bottom-center", autoClose: 1000, hideProgressBar: false, closeOnClick: true, pauseOnHover: true, draggable: true, progress: undefined, theme: "light", });
-    // }
-    // else {
-    //   toast.error(response.message , { position: "bottom-center", autoClose: 1000, hideProgressBar: false, closeOnClick: true, pauseOnHover: true, draggable: true, progress: undefined, theme: "light", });
-    // }
+    if (response.success === true) {
+      toast.success(response.message , { position: "bottom-center", autoClose: 1000, hideProgressBar: false, closeOnClick: true, pauseOnHover: true, draggable: true, progress: undefined, theme: "light", });
+    }
+    else {
+      toast.error(response.message , { position: "bottom-center", autoClose: 1000, hideProgressBar: false, closeOnClick: true, pauseOnHover: true, draggable: true, progress: undefined, theme: "light", });
+    }
   }
 
 

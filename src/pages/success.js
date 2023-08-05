@@ -10,15 +10,15 @@ const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY)
 
 const Success = ({id}) => {
 
-    /* const router = useRouter();
+    const router = useRouter();
     
     useEffect(() => {
         submit();
     }, [])
 
-    const submit = async()=>{
+    const submit = async () => {
         const data = { sessionId:id  }
-        let res = await fetch(`/api/retrieve-payment`, {
+        let res = await fetch(`/api/place-order`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -29,7 +29,7 @@ const Success = ({id}) => {
         if(response.id){
             router.push(`/order?id=${response.id}&clearCart=1`)
         }
-    }*/
+    }
 
     return (
         <div className="min-h-[650px] bg-[#f7f7f7] text-black flex items-center">

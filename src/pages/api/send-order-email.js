@@ -2,21 +2,18 @@ import connectDb from '../../../middleware/mongoose'
 
 const nodemailer = require('nodemailer')
 
-// function sentToCustomer
-// function sendToArtshark
-
 const handler = async (req,res)=>{
 
-  let company = 'Art Shark'
+  console.log('Sending order email...')
+
   let websiteUrl = 'http://artshark.vercel.app'
   let customerSupportEmail = 'artsharkbe@gmail.com'
-  //let customerSupportPhoneNo = '971238834941'
 
   const {email, firstName, orderId, streetAddress, date, products, amount} = req.body;
 
   let message = `Dear ${firstName},
 
-Thank you for choosing ${company}. We are pleased to confirm your recent order with us. Below are the details of your purchase:
+Thank you for choosing Art Shark. We are pleased to confirm your recent order with us. Below are the details of your purchase:
 
     Order Number: #${orderId}
     Order Date: ${date}
@@ -27,12 +24,11 @@ Please note that the shipping and delivery times may vary depending on your loca
 
 If you have any questions or concerns regarding your order, please don't hesitate to reach out to our customer support team at ${customerSupportEmail}. Our dedicated team is ready to assist you with any queries you may have.
 
-Thank you once again for choosing ${company}. We appreciate your business and look forward to serving you in the future.
+Thank you once again for choosing Art Shark. We appreciate your business and look forward to serving you in the future.
 
 Best regards,
 
-${company}
-${websiteUrl}`
+Art Shark team`
 
   console.log(message);
 
@@ -43,21 +39,23 @@ ${websiteUrl}`
       port: 465,
       secure: true, // true for 465, false for other ports
       auth: {
-        user: 'joeri.lenaerts36@gmail.com', // generated ethereal user
-        pass: 'wrhqsyfffaxclauw', // generated ethereal password
+        user: `${process.env.EMAIL}`, // generated ethereal user
+        pass: `${process.env.PASSWORD}`, // generated ethereal password
       },
     });
 
     let mailData = {
-      from: `${process.env.EMAIL}`,
+      //from: `${process.env.EMAIL}`,
+      from: `"Art Shark" <${process.env.EMAIL}>`,
       to: `${email}`,
-      subject: `Order Confirmation by ${company}`,
+      bcc: `${process.env.EMAIL}`,
+      subject: `Order Confirmation`,
       text: `${message}`,
     };
 
     transporter.sendMail(mailData, function (err,info){
       if (!err) {
-          return res.status(200).json({ success: true, message: `details has been sent to ${email}`})
+          return res.status(200).json({ success: true, message: `Order confirmation has been sent to ${email}`})
       }
       if (err) {
           return res.status(400).json({ success: false, message: "Some Error Occured!"})

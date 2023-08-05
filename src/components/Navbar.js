@@ -10,11 +10,11 @@ import { AiFillMinusCircle, AiFillPlusCircle } from 'react-icons/ai';
 
 const pages = [
   { name: 'Home', href: '/' },
-  //{ name: 'Create', href: '/create' },
   { name: 'Products', href: '/products' },
   { name: 'Gallery', href: '/gallery' },
   { name: 'Prompt Guide', href: '/promptGuide' },
   { name: 'About', href: '/about' },
+  //{ name: 'Create', href: '/create' },
 ]
 
 function classNames(...classes) {
