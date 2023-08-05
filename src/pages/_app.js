@@ -66,8 +66,6 @@ export default function App({ Component, pageProps }) {
     router.push(`/login`);
   }
 
-
-
   //  saveCart is used to store cart items in local storage of user
   const saveCart = (myCart) => {
     localStorage.setItem("cart", JSON.stringify(myCart))
@@ -80,8 +78,6 @@ export default function App({ Component, pageProps }) {
     }
     setSubTotal(subt)
   }
-
-
 
   // Add to Cart function like increase quantity of items in cart
   const addToCart = (id, name, qty, price, img, stripePriceId, size, color, whatDoYouWant) =>{
