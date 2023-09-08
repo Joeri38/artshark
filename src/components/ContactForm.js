@@ -3,16 +3,11 @@ import {React, useState } from 'react'
 import { toast, ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
-function Feedback() {
-
-    
+function ContactForm() {
 
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [message, setMessage] = useState('')
-
-
-
 
     const handleChange = (e) => {
         if (e.target.name === 'name') {
@@ -28,12 +23,8 @@ function Feedback() {
       }
     
     
-    
-    
       const submit = async (e) => {
-        e.preventDefault();
-        
-        
+        e.preventDefault(); 
     
         // fetch the data from form to makes a file in local system
         const data = { name, email, message };
@@ -83,9 +74,9 @@ function Feedback() {
         <div className="lg:w-1/2 px-6 mt-4 lg:mt-0">
             <div>
                 <h2 className="title-font font-semibold text-gray-900 tracking-widest text-xs">EMAIL</h2>
-                <a className="text-[#29D0d1] text-sm leading-relaxed">artshark@company.com</a>
+                <a className="text-[#29D0d1] text-sm leading-relaxed">artsharkbe@gmail.com</a>
                 <h2 className="title-font font-semibold text-gray-900 tracking-widest text-xs mt-4">PHONE</h2>
-                <p className="leading-relaxed text-sm">925-791-6582</p>
+                <p className="leading-relaxed text-sm">0477 16 30 45</p>
             </div>  
         </div>
       </div>
@@ -94,8 +85,8 @@ function Feedback() {
     
     <div className="lg:w-1/3 md:w-1/2 bg-white flex flex-col md:ml-auto w-full md:p-8 mt-8 md:mt-0">
       <h2 className="text-gray-900 text-lg mb-1 font-medium title-font">Feedback</h2>
-      <p className="leading-relaxed text-sm text-gray-600">Please Give your Feedback!</p>
-      <p className="leading-relaxed text-sm mb-5 text-gray-600">Our Team will assit you as soon as possible.</p>
+      <p className="leading-relaxed text-sm text-gray-600">Please reach out to us!</p>
+      <p className="leading-relaxed text-sm mb-5 text-gray-600">Our team will assist you as soon as possible.</p>
 
 
       <form method='POST' onSubmit={submit}>
@@ -125,4 +116,4 @@ function Feedback() {
   )
 }
 
-export default Feedback
+export default ContactForm

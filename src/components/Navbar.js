@@ -12,9 +12,8 @@ const pages = [
   { name: 'Home', href: '/' },
   { name: 'Products', href: '/products' },
   { name: 'Gallery', href: '/gallery' },
-  { name: 'Prompt Guide', href: '/promptGuide' },
-  { name: 'About', href: '/about' },
-  //{ name: 'Create', href: '/create' },
+  { name: 'Our Story', href: '/our-story' },
+  { name: 'Contact Us', href: '/contact-us' },
 ]
 
 function classNames(...classes) {
@@ -35,7 +34,7 @@ export default function Example({logout , removeFromCart, addToCart, user, cart,
   const submit = async(e)=>{
     e.preventDefault();
     setIsLoading(true)
-    const stripe = await stripePromise;
+    //const stripe = await stripePromise;
     console.log('working here');
     console.log(cart);
     const lineItems = Object.keys(cart).map((item)=>{
@@ -159,7 +158,7 @@ export default function Example({logout , removeFromCart, addToCart, user, cart,
 
                 {!user.value && <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
                   <Link href={'/login'} className="text-sm font-medium text-gray-700 hover:text-gray-800">
-                    Sign in
+                    Log in
                   </Link>
                   <span className="h-6 w-px bg-gray-200" aria-hidden="true" />
                   <Link href={'/signup'} className="text-sm font-medium text-gray-700 hover:text-gray-800">
@@ -184,7 +183,7 @@ export default function Example({logout , removeFromCart, addToCart, user, cart,
                           {({ active }) => ( <Link href={'/myaccount'} className={classNames( active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'block px-4 py-2 text-sm' )}>Account settings</Link>)}
                         </Menu.Item>
                         <Menu.Item>
-                          {({ active }) => (<Link href={'/orders'} className={classNames( active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'block px-4 py-2 text-sm')}>My Orders</Link>)}
+                          {({ active }) => (<Link href={'/orders'} className={classNames( active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'block px-4 py-2 text-sm')}>My orders</Link>)}
                         </Menu.Item>
                         <Menu.Item>
                           {({ active }) => (<Link href={'/license'} className={classNames( active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'block px-4 py-2 text-sm')}>License</Link>)}

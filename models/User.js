@@ -3,12 +3,12 @@ const mongoose = require('mongoose');
 const UserSchema = new mongoose.Schema({
     firstname:{type: String},
     lastname:{type: String},
-    phoneno:{type: Number},
+    phone:{type: String},
     email: {type: String, required: true, unique: true},
     password: {type: String, required: true},
-    streetAddress: {type: String, default: ''},
-    state: { type: String, default: ''},
-    zip: { type: Number, default: 0 },
+    streetAddress: {type: String},
+    city: {type: String},
+    zip: {type: String},
   },{timestamps:true});
    
 

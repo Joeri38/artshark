@@ -12,8 +12,8 @@ const handler = async (req,res)=>{
         let dbuser = await User.findOne({"email": user.email})
         
         // working
-        const {firstname, lastname, email, phoneno ,streetAddress, state, zip} = dbuser
-        res.status(200).json({ success: true , firstname, lastname, email, phoneno, streetAddress, state, zip })
+        const {firstname, lastname, email, phone, streetAddress, city, zip} = dbuser
+        res.status(200).json({ success: true , firstname, lastname, email, phone, streetAddress, city, zip })
         
     }
     else{

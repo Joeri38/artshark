@@ -21,10 +21,12 @@ function Myaccount() {
   const [firstname, setFirstname] = useState('')
   const [lastname, setLastname] = useState('')
   const [email, setEmail] = useState('')
-  const [phoneno, setphoneNo] = useState('')
-  const [streetAddress, setstreetAddress] = useState('')
-  const [state, setState] = useState('')
+
+  const [phone, setPhone] = useState('')
+  const [streetAddress, setStreetAddress] = useState('')
+  const [city, setCity] = useState('')
   const [zip, setZip] = useState('')
+
   const [cpassword, setCpassword] = useState('')
   const [npassword, setNpassword] = useState('')
   const [cnpassword, setCnpassword] = useState('')
@@ -45,9 +47,9 @@ function Myaccount() {
       setFirstname(response.firstname)
       setLastname(response.lastname)
       setEmail(response.email)
-      setphoneNo(response.phoneno)
-      setState(response.state)
-      setstreetAddress(response.streetAddress)
+      setPhone(response.phone)
+      setCity(response.city)
+      setStreetAddress(response.streetAddress)
       setZip(response.zip)
   }
 
@@ -84,33 +86,35 @@ function Myaccount() {
     }
   }
 
-
   const submit = async (e) => {
     e.preventDefault()
 
-    
     // fetch the data from form to makes a file in local system
-    const data = { token: user.token, firstname, lastname, phoneno, streetAddress, state, zip  };
+    const data = { token: user.token, firstname, lastname, phone, streetAddress, city, zip  };
    
-      let res = await fetch(`/api/updateuser`, {
+    let res = await fetch(`/api/updateuser`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(data),
     })
-      let response = await res.json()  
+    let response = await res.json()  
       
-      if (response.success === true) {
-        toast.success(response.message , { position: "bottom-center", autoClose: 1000, hideProgressBar: false, closeOnClick: true, pauseOnHover: true, draggable: true, progress: undefined, theme: "light", });
-      }
-      else {
-        toast.error(response.message , { position: "bottom-center", autoClose: 1000, hideProgressBar: false, closeOnClick: true, pauseOnHover: true, draggable: true, progress: undefined, theme: "light", });
-      }
+    if (response.success === true) {
+      toast.success(response.message , 
+                    { position: "bottom-center", autoClose: 1000, hideProgressBar: false, 
+                      closeOnClick: true, pauseOnHover: true, draggable: true, progress: undefined, 
+                      theme: "light", });
+    }
+    else {
+      toast.error(response.message , 
+                  { position: "bottom-center", autoClose: 1000, hideProgressBar: false, 
+                    closeOnClick: true, pauseOnHover: true, draggable: true, progress: undefined, 
+                    theme: "light", });
+    }
 
   }
-
-
 
   const handleChange = (e) => {
     if ( e.target.name === 'firstname') {
@@ -122,14 +126,14 @@ function Myaccount() {
     else if ( e.target.name === 'email') {
       setEmail(e.target.value)
     }
-    else if ( e.target.name === 'phoneno') {
-      setphoneNo(e.target.value)
+    else if ( e.target.name === 'phone') {
+      setPhone(e.target.value)
     }
     else if ( e.target.name === 'streetAddress') {
-      setstreetAddress(e.target.value)
+      setStreetAddress(e.target.value)
     }
-    else if (e.target.name === 'state') {
-      setState(e.target.value)
+    else if (e.target.name === 'city') {
+      setCity(e.target.value)
     }
     else if (e.target.name === 'zip') {
       setZip(e.target.value)
@@ -149,7 +153,7 @@ function Myaccount() {
   return (
     <>
     <Head>
-      <title>MyAccount_Art Shark</title>
+      <title>My Account</title>
       <meta name="description" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0" />
    </Head>
      {/* React tostify */}
@@ -189,8 +193,8 @@ function Myaccount() {
           </div>
           <div className="p-2 w-full">
             <div className="relative">
-              <label htmlFor="phoneno" className="leading-7 text-sm text-gray-600">Phone No</label>
-              <input onChange={handleChange} value={phoneno === 0 ? '' : phoneno } type="Number" id="phoneno" name="phoneno" className="w-full bg-[#f7f7f7] bg-opacity-50 rounded-md border border-gray-200 px-4 py-3 text-sm shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500" placeholder="+92300-1234567"  />
+              <label htmlFor="phone" className="leading-7 text-sm text-gray-600">Phone</label>
+              <input onChange={handleChange} value={phone === 0 ? '' : phone } type="Number" id="phone" name="phone" className="w-full bg-[#f7f7f7] bg-opacity-50 rounded-md border border-gray-200 px-4 py-3 text-sm shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500"/>
             </div>
           </div>
           
@@ -198,19 +202,19 @@ function Myaccount() {
             <div className="p-2 w-full sm:w-1/2">
               <div className="relative">
                 <label htmlFor="streetAddress" className="leading-7 text-sm text-gray-600">Street Address</label>
-                <input onChange={handleChange} value={streetAddress} type="text" id="streetAddress" name="streetAddress" placeholder='house no: xx California, United States' className="w-full bg-[#f7f7f7] bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
+                <input onChange={handleChange} value={streetAddress} type="text" id="streetAddress" name="streetAddress" className="w-full bg-[#f7f7f7] bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
               </div>
             </div>
             <div className="p-2 w-full sm:w-1/2">
               <div className="relative">
-                <label htmlFor="state" className="leading-7 text-sm text-gray-600">State</label>
-                <input onChange={handleChange} value={state} type="text" id="state" name="state" placeholder='lahore' className="w-full bg-[#f7f7f7] bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
+                <label htmlFor="state" className="leading-7 text-sm text-gray-600">City</label>
+                <input onChange={handleChange} value={city} type="text" id="city" name="city" className="w-full bg-[#f7f7f7] bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
               </div>
             </div>
             <div className="p-2 w-full sm:w-1/2">
               <div className="relative">
-                <label htmlFor="zip" className="leading-7 text-sm text-gray-600">Zip</label>
-                <input onChange={handleChange} value={zip === 0 ? '' : zip } type="text" id="zip" name="zip" placeholder='1122' className="w-full bg-[#f7f7f7] bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
+                <label htmlFor="zip" className="leading-7 text-sm text-gray-600">Zip code</label>
+                <input onChange={handleChange} value={zip === 0 ? '' : zip } type="text" id="zip" name="zip" className="w-full bg-[#f7f7f7] bg-opacity-50 rounded border border-gray-300 focus:border-indigo-500 focus:bg-white focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
               </div>
             </div>
 

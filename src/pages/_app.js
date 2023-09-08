@@ -2,13 +2,11 @@ import '@/styles/globals.css'
 import { useState , useEffect } from 'react'
 import Footer from '../components/Footer'
 import Navbar from '../components/Navbar'
-
-// React top loading bar
 import LoadingBar from 'react-top-loading-bar'
 
 // React Toastify
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+//import { ToastContainer, toast } from 'react-toastify';
+//import 'react-toastify/dist/ReactToastify.css';
 import { useRouter } from 'next/router';
 
 export default function App({ Component, pageProps }) {
@@ -20,17 +18,18 @@ export default function App({ Component, pageProps }) {
   const [user, setUser] = useState({value: null})
   const [key, setKey] = useState(0)
 
-  const [message, setMessage] = useState('')
-  const [generatedImages, setGeneratedImages] = useState([])
-  const [allGeneratedImages, setAllGeneratedImages] = useState([])
-
-
-  //  react top loading bar
+  //  Loading bar
   const [progress, setProgress] = useState(0)
 
-  //  Use Effect for retain same items in shopping Cart
+  // I don't think we need these
+  const [message, setMessage] = useState('')
+  // const [generatedImages, setGeneratedImages] = useState([])
+  // const [allGeneratedImages, setAllGeneratedImages] = useState([])
+
+  //  Use Effect to retain same items in shopping Cart
   useEffect(() => {
     
+    // Loading bar
     router.events.on('routeChangeStart', ()=>{
       setProgress(75);
     });
@@ -66,11 +65,11 @@ export default function App({ Component, pageProps }) {
     router.push(`/login`);
   }
 
-  //  saveCart is used to store cart items in local storage of user
+  // Store cart items in local storage of user
   const saveCart = (myCart) => {
     localStorage.setItem("cart", JSON.stringify(myCart))
 
-  //   // function uses to subtotal
+    // Calculate subtotal
     let subt = 0;
     let keys = Object.keys(myCart);
     for (let i = 0; i < keys.length; i++) {
@@ -79,23 +78,21 @@ export default function App({ Component, pageProps }) {
     setSubTotal(subt)
   }
 
-  // Add to Cart function like increase quantity of items in cart
-  const addToCart = (id, name, qty, price, img, stripePriceId, size, color, whatDoYouWant) =>{
+  // Add item to cart 
+  const addToCart = (id, name, stripePriceId, price, img, size, color, qty) =>{
     let newCart = cart;
     if(id in cart){
       newCart[id].qty= cart[id].qty + qty;
     }
     else{
-      newCart[id]= { qty:1, name, price, img, stripePriceId, size, color, whatDoYouWant }   
+      newCart[id]= { name, price, img, stripePriceId, size, color, qty: 1}   
     }
     setCart(newCart);
     saveCart(newCart);
   }
 
-
-
-  // Remove From Cart function like decrease quantity of items in cart
-  const removeFromCart = (id, name, qty , price, stripePriceId, size, color) =>{
+  // Remove item from cart 
+  const removeFromCart = (id, qty) =>{
     let newCart = cart;
     if(id in cart){
       newCart[id].qty= cart[id].qty - qty;
@@ -107,10 +104,8 @@ export default function App({ Component, pageProps }) {
     saveCart(newCart);
   } 
 
-
-
-  // Delet Item From Cart function like delete one item in cart
-  const deleteItemFromCart = (id, name , qty, price, stripePriceId, size, color) =>{
+  // Delete item from cart 
+  const deleteItemFromCart = (id) =>{
     let newCart = cart;
     if(id in cart){
       delete newCart[id];
@@ -119,17 +114,13 @@ export default function App({ Component, pageProps }) {
     saveCart(newCart);
   } 
 
-
-
-  // clear cart is used to clear all items in cart
+  // Clear cart
   const clearCart = () => {
     setCart({});
     saveCart({});
   }
 
-
-
-  const getImages = async(e)=>{
+  /* const getImages = async(e)=>{
     e.preventDefault();
 
     const data = { message }; 
@@ -143,13 +134,16 @@ export default function App({ Component, pageProps }) {
     let GeneratedImages= response.data;
     setGeneratedImages(GeneratedImages)
     setAllGeneratedImages(...GeneratedImages, GeneratedImages)
-  }
+  } */
 
   return <>
     <LoadingBar color='#29D0d1' height={3} progress={progress} waitingTime={300} onLoaderFinished={() => setProgress(0)}/>
     
-    <Navbar key={key} user={user} logout={logout} cart={cart} deleteItemFromCart={deleteItemFromCart} addToCart={addToCart} removeFromCart={removeFromCart} clearCart={clearCart} subTotal={subTotal} />
-    <Component allGeneratedImages={allGeneratedImages} generatedImages={generatedImages} getImages={getImages} setMessage={setMessage} user={user} cart={cart} addToCart={addToCart} removeFromCart={removeFromCart} deleteItemFromCart={deleteItemFromCart} clearCart={clearCart} subTotal={subTotal}  {...pageProps} />
+    <Navbar key={key} user={user} cart={cart} subTotal={subTotal} logout={logout} addToCart={addToCart}
+            removeFromCart={removeFromCart} clearCart={clearCart} deleteItemFromCart={deleteItemFromCart}  />
+    <Component user={user} cart={cart} subTotal={subTotal} setMessage={setMessage} addToCart={addToCart} 
+               removeFromCart={removeFromCart} deleteItemFromCart={deleteItemFromCart} clearCart={clearCart}   
+               {...pageProps} />
     <Footer/>
   </>
-}
+} 

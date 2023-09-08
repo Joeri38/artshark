@@ -1,26 +1,22 @@
-import React from 'react'
-import Link from 'next/link'
 import Head from 'next/head'
-import Carosel from '../components/Carosel'
-import Testimonials from '../components/Testimonials'
-import Feedback from '@/components/Feedback'
+import React from 'react'
 
+const OurStory = () => {
 
-
-function About() {
   return (
     <>
     <Head>
-      <title>About</title>
-      <meta name="description" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0" />
-   </Head>
-    <div>
+        <title>Our Story</title>
+        <meta name="description" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0" />
+    </Head>
 
+    <div className='min-h-screen text-black bg-[#f7f7f7] p-10 py-10 pb-20'>
+      
       {/* About Us */}
       <section className="text-gray-600 bg-[#f7f7f7] body-font">
         <div className="container mx-auto flex px-5 md:px-10 py-24 md:flex-row flex-col items-center">
           <div className="lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center">
-            <h1 className="text-lg sm:text-2xl tracking-wider mb-3 md:text-4xl font-bold text-gray-900">About Us</h1>
+            <h1 className="text-lg sm:text-2xl tracking-wider mb-3 md:text-4xl font-bold text-gray-900">Our Story</h1>
             <p className="mb-2 w-full leading-relaxed">Welcome to Artshark, where AI meets creativity to redefine the world of art. We are a team of four young and ambitious individuals with a shared passion for pushing the boundaries of innovation in the art industry.</p>
             <p className="w-full leading-relaxed">At Artshark, we believe that artificial intelligence has the power to unlock new realms of artistic expression. We harness cutting-edge AI algorithms and techniques to create breathtaking art that challenges conventions and captivates audiences.</p>
           </div>
@@ -29,7 +25,6 @@ function About() {
           </div>
         </div>
       </section>
-
 
       {/* Our Vision */}
       <section className="text-gray-600 bg-[#f7f7f7] body-font">
@@ -46,8 +41,6 @@ function About() {
         </div>
       </section>
 
-
-
       {/* Our Mission */}
       <section className="text-gray-600 bg-[#f7f7f7] body-font">
         <div className="container mx-auto flex px-5 md:px-10 py-24 md:flex-row flex-col items-center">
@@ -60,7 +53,6 @@ function About() {
           </div>
         </div>
       </section>
-
 
       {/* What sets us apart: */}
       <section className="text-gray-600 bg-[#f7f7f7] body-font">
@@ -88,8 +80,6 @@ function About() {
         </div>
       </section>
 
-
-
       {/* Join Us in the AI Art Revolution: */}
       <section className="text-gray-600 bg-[#f7f7f7] body-font">
         <div className="container mx-auto flex px-5 md:px-10 py-24 md:flex-row flex-col items-center">
@@ -103,15 +93,10 @@ function About() {
         </div>
       </section>
 
-
-      <Testimonials/>
-
-
-      <Feedback/>
-      
     </div>
+
     </>
   )
 }
 
-export default About
+export default OurStory

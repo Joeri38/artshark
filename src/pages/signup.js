@@ -34,19 +34,36 @@ function Signup() {
     }
   }
 
-
-
-
   const submit = async (e) => {
     e.preventDefault()
     
-
     // fetch the data from form to makes a file in local system
     const data = { email, password, confirmpassword };
-    if( password !== confirmpassword ){
-      document.getElementById('checkPassword').innerHTML = "Your Password is not Match!"
+
+    // Check if email is inputted
+    if( !email ){
+      document.getElementById('checkInputEmail').innerHTML = "Email required!"
+      document.getElementById('checkInputPassword').innerHTML = ""
+      document.getElementById('checkPassword').innerHTML = ""
     }
+
+    // Check if password is inputted
+    else if( !password ){
+      document.getElementById('checkInputEmail').innerHTML = ""
+      document.getElementById('checkInputPassword').innerHTML = "Password required!"
+      document.getElementById('checkPassword').innerHTML = ""
+    }
+
+    // Check if passwords are the same
+    else if( password !== confirmpassword ){
+      document.getElementById('checkInputEmail').innerHTML = ""
+      document.getElementById('checkInputPassword').innerHTML = ""
+      document.getElementById('checkPassword').innerHTML = "Passwords don't match!"
+    }
+
     else{
+      document.getElementById('checkInputEmail').innerHTML = ""
+      document.getElementById('checkInputPassword').innerHTML = ""
       document.getElementById('checkPassword').innerHTML = ""
       let res = await fetch(`/api/signup`, {
         method: 'POST',
@@ -57,10 +74,20 @@ function Signup() {
       })
       let response = await res.json();
         if (response.success === true) {
-          toast.success(response.message , { position: "bottom-center", autoClose: 1000, hideProgressBar: false, closeOnClick: true, pauseOnHover: true, draggable: true, progress: undefined, theme: "light", });
+          toast.success(response.message , 
+                        { position: "bottom-center", autoClose: 1000, hideProgressBar: false, 
+                          closeOnClick: true, pauseOnHover: true, draggable: true, progress: undefined, 
+                          theme: "light", }); 
+          localStorage.setItem('myUser', JSON.stringify({token: response.token, email: response.email}))
+          setTimeout(() => {
+            router.push(`/`);
+          }, 1500);
         }
         else{
-          toast.error(response.message , { position: "bottom-center", autoClose: 1000, hideProgressBar: false, closeOnClick: true, pauseOnHover: true, draggable: true, progress: undefined, theme: "light", });
+          toast.error(response.message , 
+                      { position: "bottom-center", autoClose: 1000, hideProgressBar: false, 
+                        closeOnClick: true, pauseOnHover: true, draggable: true, progress: undefined, 
+                        theme: "light", });
         }
         setEmail('')
         setPassword('')
@@ -95,10 +122,12 @@ function Signup() {
                   <div>
                       <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900">Your email</label>
                       <input onChange={handleChange} value={email} type="email" name="email" id="email" className="bg-[#f7f7f7] border border-[#245c70] focus:ring-[#245c70] focus:border-[#245c70] text-gray-900 sm:text-sm rounded-lg block w-full p-2.5" placeholder="name@company.com" required=""/>
+                      <h1 id="checkInputEmail" className= 'text-sm text-red-600 '></h1>
                   </div>
                   <div>
                       <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900">Password</label>
                       <input onChange={handleChange} value={password} type="password" name="password" id="password" placeholder="••••••••" className="bg-[#f7f7f7] border border-[#245c70] focus:ring-[#245c70] focus:border-[#245c70] text-gray-900 sm:text-sm rounded-lg block w-full p-2.5 " required=""/>
+                      <h1 id="checkInputPassword" className= 'text-sm text-red-600 '></h1>
                   </div>
                   <div>
                       <label htmlFor="confirm-password" className="block mb-2 text-sm font-medium text-gray-900">Confirm password</label>
@@ -107,7 +136,7 @@ function Signup() {
                   </div>
                   <div className="flex items-start">
                       <div className="flex items-center h-5">
-                        <input id="terms" aria-describedby="terms" type="checkbox" className="w-4 h-4 border border-gray-300 rounded bg-[#f7f7f7] focus:ring-3 focus:ring-primary-300" required=""/>
+                        <input id="terms" required type="checkbox" aria-describedby="terms" className="w-4 h-4 border border-gray-300 rounded bg-[#f7f7f7] focus:ring-3 focus:ring-primary-300"/>
                       </div>
                       <div className="ml-3 text-sm">
                         <label htmlFor="terms" className="font-light text-gray-500 ">I accept the <Link className="font-medium text-primary-600 hover:underline" href="/termsandconditions">Terms and Conditions</Link></label>
