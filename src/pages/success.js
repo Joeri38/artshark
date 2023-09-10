@@ -5,10 +5,9 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 
 import { loadStripe } from '@stripe/stripe-js';
-const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
+//const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
 
-
-const Success = ({id}) => {
+const Success = ({id, clearCart }) => {
 
     const router = useRouter();
     
@@ -26,12 +25,19 @@ const Success = ({id}) => {
         body: JSON.stringify(data),
         })
         let response = await res.json();
-        if(response.id){
+
+        clearCart();
+        /*if(response.id){
             router.push(`/order?id=${response.id}&clearCart=1`)
-        }
+        }*/
     }
 
     return (
+    <>
+        <Head>
+            <title>Order placed</title>
+        </Head>
+
         <div className="min-h-[650px] bg-[#f7f7f7] text-black flex items-center">
             <Wrapper>
                 <div className="max-w-[600px] rounded-lg p-5 border border-black mx-auto flex flex-col">
@@ -57,6 +63,7 @@ const Success = ({id}) => {
                 </div>
             </Wrapper>
         </div>
+    </>
     );
 };
 

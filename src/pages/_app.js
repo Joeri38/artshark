@@ -13,7 +13,7 @@ export default function App({ Component, pageProps }) {
 
   const router = useRouter();
 
-  const [cart, setCart] = useState({})
+  const [cart, setCart] = useState([])
   const [subTotal, setSubTotal] = useState(0)
   const [user, setUser] = useState({value: null})
   const [key, setKey] = useState(0)
@@ -22,9 +22,7 @@ export default function App({ Component, pageProps }) {
   const [progress, setProgress] = useState(0)
 
   // I don't think we need these
-  const [message, setMessage] = useState('')
-  // const [generatedImages, setGeneratedImages] = useState([])
-  // const [allGeneratedImages, setAllGeneratedImages] = useState([])
+  //const [message, setMessage] = useState('')
 
   //  Use Effect to retain same items in shopping Cart
   useEffect(() => {
@@ -71,79 +69,83 @@ export default function App({ Component, pageProps }) {
 
     // Calculate subtotal
     let subt = 0;
-    let keys = Object.keys(myCart);
-    for (let i = 0; i < keys.length; i++) {
-      subt +=  myCart[keys[i]].price * myCart[keys[i]].qty;
+    for (let i = 0; i < myCart.length; i++) {
+      subt +=  myCart[i].price * myCart[i].qty;
     }
     setSubTotal(subt)
   }
 
   // Add item to cart 
-  const addToCart = (id, name, stripePriceId, price, img, size, color, qty) =>{
+  const addToCart = (id, size, color, name, stripePriceId, img,  qty) =>{
     let newCart = cart;
-    if(id in cart){
-      newCart[id].qty= cart[id].qty + qty;
+
+    // Check if item with this id, size and color is already in the cart array
+    console.log(cart);
+    const itemIdx = cart.findIndex((item) => {
+      return item.id === id && item.size === size && item.color === color;
+    })
+    console.log(itemIdx);
+      
+    if (itemIdx != -1) {
+      newCart[itemIdx].qty= cart[itemIdx].qty + qty;
+      console.log('Item already exists in the cart.');
+    } else {
+      newCart.push({ id, size, color, name, stripePriceId, img, price: 40, qty: 1});
+      console.log('Item does not exist in the cart.');
     }
-    else{
-      newCart[id]= { name, price, img, stripePriceId, size, color, qty: 1}   
-    }
+
     setCart(newCart);
     saveCart(newCart);
   }
 
   // Remove item from cart 
-  const removeFromCart = (id, qty) =>{
-    let newCart = cart;
-    if(id in cart){
-      newCart[id].qty= cart[id].qty - qty;
+  const removeFromCart = (id, size, color) =>{
+    
+    const itemIdx = cart.findIndex((item) => {
+      return item.id === id && item.size === size && item.color === color;
+    })
+    
+    if (cart[itemIdx].qty == 1){
+      var newCart = cart.filter((element, index) => index !== itemIdx);
     }
-     if (newCart[id].qty <=0){
-      delete newCart[id];
-     }
+    else {
+      var newCart = cart;
+      newCart[itemIdx].qty= cart[itemIdx].qty - 1;
+    }
+
     setCart(newCart);
     saveCart(newCart);
   } 
 
   // Delete item from cart 
-  const deleteItemFromCart = (id) =>{
-    let newCart = cart;
-    if(id in cart){
-      delete newCart[id];
-    }
+  const deleteItemFromCart = (id, size, color) =>{
+
+    const itemIdx = cart.findIndex((item) => {
+      return item.id === id && item.size === size && item.color === color;
+    })
+    let newCart = cart.filter((element, index) => index !== itemIdx);
+    
     setCart(newCart);
     saveCart(newCart);
   } 
 
   // Clear cart
   const clearCart = () => {
-    setCart({});
-    saveCart({});
+    setCart([]);
+    saveCart([]);
   }
-
-  /* const getImages = async(e)=>{
-    e.preventDefault();
-
-    const data = { message }; 
-    const response = await fetch('/api/generateImage', {
-      method: 'POST',
-      body: JSON.stringify(data),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-    let GeneratedImages= response.data;
-    setGeneratedImages(GeneratedImages)
-    setAllGeneratedImages(...GeneratedImages, GeneratedImages)
-  } */
 
   return <>
     <LoadingBar color='#29D0d1' height={3} progress={progress} waitingTime={300} onLoaderFinished={() => setProgress(0)}/>
     
     <Navbar key={key} user={user} cart={cart} subTotal={subTotal} logout={logout} addToCart={addToCart}
             removeFromCart={removeFromCart} clearCart={clearCart} deleteItemFromCart={deleteItemFromCart}  />
-    <Component user={user} cart={cart} subTotal={subTotal} setMessage={setMessage} addToCart={addToCart} 
+    {/* <Component user={user} cart={cart} subTotal={subTotal} setMessage={setMessage} addToCart={addToCart} 
                removeFromCart={removeFromCart} deleteItemFromCart={deleteItemFromCart} clearCart={clearCart}   
-               {...pageProps} />
+{...pageProps} /> */}
+    <Component user={user} cart={cart} subTotal={subTotal} addToCart={addToCart} 
+               removeFromCart={removeFromCart} deleteItemFromCart={deleteItemFromCart} 
+               clearCart={clearCart}  {...pageProps} />
     <Footer/>
   </>
 } 

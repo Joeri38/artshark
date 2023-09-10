@@ -50,7 +50,7 @@ function MyOrder ({ order, clearCart, user }) {
   return (
     <>
     <Head>
-      <title>Order_Art Shark</title>
+      <title>Order</title>
       <meta name="description" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0" />
    </Head>
    {/* React tostify */}
@@ -66,15 +66,15 @@ function MyOrder ({ order, clearCart, user }) {
       <div className="lg:w-1/2 w-full lg:pr-10 lg:py-6 mb-6 lg:mb-0">
         <h2 className="text-sm title-font text-gray-500 tracking-widest">Art Shark</h2>
       
-        {order.orderId && <h1 className="text-gray-900 text-3xl title-font font-medium">Order Id: #{order.orderId}</h1>}
-        {order.paymentId && <h1 className="text-gray-900 text-sm title-font my-1">Payment Id: 
+        {order.orderId && <h1 className="text-gray-900 text-3xl title-font font-medium mb-8">Order Id: #{order.orderId}</h1>}
+        {/*order.paymentId && <h1 className="text-gray-900 text-sm title-font my-1">Payment Id: 
           <span className='ml-1 font-semibold'>#{order.paymentId}</span> 
         </h1>}
         {order.paymentStatus && <h1 className="text-gray-900 text-sm title-font my-1">Payment Status: 
           <span className='ml-1 font-semibold text-[#44B0B7]'>{order.paymentStatus}</span> 
-        </h1>}
+        </h1>*/}
         {order.createdAt && <p className="text-sm leading-relaxed mb-4">
-          Your Order has been placed! at
+          Your order has been placed on
           <span className='ml-1 font-semibold text-[#44B0B7]'>{moment(order.createdAt).utc().format("dddd, MMMM Do YYYY, h:mm:ss a")}</span> 
         </p>}
         <div className="flex mb-4">
@@ -95,6 +95,15 @@ function MyOrder ({ order, clearCart, user }) {
             <div className="w-1/3 text-center font-medium text-gray-900">€{item.amount_subtotal / 100}</div>
           </div>})} 
           
+        </div>
+
+        {/* Address */}
+        <div className='mt-6 mb-6 '>
+              <h1 className='title-font font-medium text-lg  mb-2'>Shipping address:</h1>
+
+              <p className='ml-8'>{order.streetAddress}</p>
+              <p className='ml-8'>{order.zip} {order.city}</p>
+
         </div>
         
         <div className="flex">
