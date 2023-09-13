@@ -27,11 +27,12 @@ const Orders = ({ orders }) => {
       >
         <TableHead>
           <TableRow>
-
-             <Cell value="Order Id" />
-             <Cell value="Name" />
+            
+             <Cell value="Status" />
              <Cell value="Placed on" />
-             <Cell value="Amount" /> 
+             <Cell value="Name" />
+             <Cell value="Amount" />
+             <Cell value="Order id" /> 
              <Cell value="Details" />
 
           </TableRow>
@@ -47,17 +48,7 @@ const Orders = ({ orders }) => {
                     fontSize: "15px",
                     fontWeight: "500",
                   }}
-                >#{order.orderId}
-                </Typography>
-              </TableCell>
-
-              <TableCell>
-                <Typography
-                  sx={{
-                    fontSize: "15px",
-                    fontWeight: "500",
-                  }}
-                >{order.name} 
+                >{order.deliveryStatus} 
                 </Typography>
               </TableCell> 
 
@@ -68,6 +59,16 @@ const Orders = ({ orders }) => {
                     fontWeight: "500",
                   }}
                 >{moment(order.createdAt).utc().format("DD-MM-YYYY")} 
+                </Typography>
+              </TableCell> 
+
+              <TableCell>
+                <Typography
+                  sx={{
+                    fontSize: "15px",
+                    fontWeight: "500",
+                  }}
+                >{order.name} 
                 </Typography>
               </TableCell> 
 
@@ -93,8 +94,18 @@ const Orders = ({ orders }) => {
               </TableCell>
 
               <TableCell>
+                <Typography
+                  sx={{
+                    fontSize: "15px",
+                    fontWeight: "500",
+                  }}
+                >#{order.orderId}
+                </Typography>
+              </TableCell>
+
+              <TableCell>
                 <Typography color="textSecondary" variant="h6">
-                <Link href={`/alluserorders?id=${order._id}`} className='text-[#44B0B7] hover:underline cursor-pointer'>Details</Link>
+                <Link href={`/adminorder?id=${order._id}`} className='text-[#44B0B7] hover:underline cursor-pointer'>Details</Link>
                 </Typography>
               </TableCell>
              

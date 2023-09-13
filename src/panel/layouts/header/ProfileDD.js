@@ -53,13 +53,6 @@ const ProfileDD = () => {
 
   return (
     <>
-      <Button
-        aria-label="menu"
-        color="inherit"
-        aria-controls="profile-menu"
-        aria-haspopup="true"
-        onClick={handleClick4}
-      >
         <Box display="flex" alignItems="center">
           
           <Box
@@ -88,10 +81,8 @@ const ProfileDD = () => {
             >
               {name}
             </Typography>
-            <FeatherIcon icon="chevron-down" width="20" height="20" />
           </Box>
         </Box>
-      </Button>
     </>
   );
 };

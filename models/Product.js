@@ -1,11 +1,11 @@
 const mongoose = require('mongoose');
 
 const ProductSchema = new mongoose.Schema({
-    title:{type: String, required: true},
+    title:{type: String, default: 'no title'},
     desc: {type: String, required: true},
-    img1: {type: String, required: true},
-    price: {type: Number, required: true},
-    stripePriceId: {type: String, required: true},
+    img: {type: String, required: true},
+    price: {type: Number, default: 40},
+    stripePriceId: {type: String, default: 'price_1NL5edBIDAiFaigFzqaKakWB'},
   },{timestamps:true});
 
 mongoose.models = {};

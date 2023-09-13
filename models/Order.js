@@ -8,17 +8,17 @@ const OrderSchema = new mongoose.Schema({
   email:{type: String, required: true},
   phone:{type: Number, required: true},
 
-  amount:{type: Number, required: true},
   products:{type: Array, required: true},
-  
+  amount:{type: Number, required: true},
   
   streetAddress: {type: String, required: true},
   zip: {type: Number},
   city: {type: String, required: true},
   country: {type: String, required: true},
 
-  paymentStatus:{type: String, required: true},
   paymentId:{type: String, unique:true},
+  paymentStatus:{type: String, required: true},
+  deliveryStatus: {type: String, default: 'order received 📦'},
   
 },{timestamps:true});
 

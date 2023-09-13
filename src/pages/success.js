@@ -1,28 +1,30 @@
 import React, { useEffect, useState } from "react";
 import Head from "next/head";
+import Order from '../../models/Order';
 import Wrapper from "../components/wrapper";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import mongoose from 'mongoose';
 
-import { loadStripe } from '@stripe/stripe-js';
-//const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
-
-const Success = ({id, clearCart }) => {
+const Success = ({ id, clearCart }) => {
 
     const router = useRouter();
     
     useEffect(() => {
-        submit();
-    }, [])
+        placeOrder();
+    }, [router.query])
 
-    const submit = async () => {
+    const placeOrder = async () => {
+        
+        const cart = localStorage.getItem('cart');
+
         const data = { sessionId:id  }
         let res = await fetch(`/api/place-order`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify({ sessionId: id, cart }),
         })
         let response = await res.json();
 
@@ -30,6 +32,7 @@ const Success = ({id, clearCart }) => {
         /*if(response.id){
             router.push(`/order?id=${response.id}&clearCart=1`)
         }*/
+        return response.id;
     }
 
     return (
@@ -68,6 +71,7 @@ const Success = ({id, clearCart }) => {
 };
 
 export async function getServerSideProps(context) {
+
     let id = context.query.id;
 
     // Pass data to the page via props
@@ -75,6 +79,5 @@ export async function getServerSideProps(context) {
         props: { id } 
     }
 }
-
 
 export default Success;

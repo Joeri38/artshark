@@ -16,13 +16,10 @@ import { useRouter } from 'next/router';
 function Addproducts() {
 
   const [title, setTitle] = useState('')
-  //const [category, setCategory] = useState('')
   const [price, setPrice] = useState('')
   const [stripePriceId, setStripePriceId] = useState('')
   const [desc, setDesc] = useState('')
-  const [img1, setImg1] = useState('')
-  //const [img2, setImg2] = useState('')
-  //const [img3, setImg3] = useState('')
+  const [img, setImg] = useState('')
   const [id, setId] = useState('')
 
   //const categoryArray = ['tshirts', 'canvas', 'poster']
@@ -40,9 +37,6 @@ function Addproducts() {
     if ( e.target.name === 'title') {
       setTitle(e.target.value)
     }
-    /*else if (e.target.name === 'category') {
-      setCategory(e.target.value)
-    }*/
     else if (e.target.name === 'price') {
       setPrice(e.target.value)
     }   
@@ -52,15 +46,9 @@ function Addproducts() {
     else if (e.target.name === 'desc') {
       setDesc(e.target.value)
     }   
-    else if (e.target.name === 'img1') {
-      setImg1(e.target.value)
+    else if (e.target.name === 'img') {
+      setImg(e.target.value)
     }   
-    /* else if (e.target.name === 'img2') {
-      setImg2(e.target.value)
-    }   
-    else if (e.target.name === 'img3') {
-      setImg3(e.target.value)
-    } */
   }
 
   const getProduct = async()=>{
@@ -77,13 +65,10 @@ function Addproducts() {
       if (response.success === true){
         setId(response.data._id)
         setTitle(response.data.title)
-        //setCategory(response.data.category)
         setPrice(response.data.price)
         setDesc(response.data.desc)
         setStripePriceId(response.data.stripePriceId)
-        setImg1(response.data.img1)
-        //setImg2(response.data.img2)
-        //setImg3(response.data.img3)
+        setImg(response.data.img)
       }
       else {
       toast.error(response.message , { position: "bottom-center", autoClose: 1000, hideProgressBar: false, closeOnClick: true, pauseOnHover: true, draggable: true, progress: undefined, theme: "light", });
@@ -95,24 +80,24 @@ function Addproducts() {
     e.preventDefault()  
     
     // fetch the data from form to makes a file in local system
-    //const data = { id, title, price, img1, img2, img3, category, stripePriceId, desc };
-    const data = { id, title, price, img1, stripePriceId, desc };
-      let res = await fetch(`${id ? '/api/updateproducts' : '/api/addproducts' }`, {
+    const data = { id, title, price, img, stripePriceId, desc };
+    console.log(data);
+    let res = await fetch(`${id ? '/api/updateproducts' : '/api/addproducts' }`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(data),
     })
-      let response = await res.json()
+    let response = await res.json()
       
-      if (response.success === true) {
-        window.location.reload();
-        toast.success(response.message , { position: "bottom-center", autoClose: 1000, hideProgressBar: false, closeOnClick: true, pauseOnHover: true, draggable: true, progress: undefined, theme: "light", });
-      }
-      else{
-        toast.error(response.message , { position: "bottom-center", autoClose: 1000, hideProgressBar: false, closeOnClick: true, pauseOnHover: true, draggable: true, progress: undefined, theme: "light", });
-      }
+    if (response.success === true) {
+      window.location.reload();
+      toast.success(response.message , { position: "bottom-center", autoClose: 1000, hideProgressBar: false, closeOnClick: true, pauseOnHover: true, draggable: true, progress: undefined, theme: "light", });
+    }
+    else{
+      toast.error(response.message , { position: "bottom-center", autoClose: 1000, hideProgressBar: false, closeOnClick: true, pauseOnHover: true, draggable: true, progress: undefined, theme: "light", });
+    }
         
   }
 
@@ -135,33 +120,12 @@ function Addproducts() {
         <BaseCard title="Add Product">
           <form method='POST' onSubmit={submit}>
             <Stack spacing={3}>
-              <TextField onChange={handleChange} value={title} name="title" label="Title" variant="standard"  required/>
-              
-              {/* <FormControl fullWidth variant='standard'>
-                <InputLabel id="demo-simple-select-label">Category</InputLabel>
-                <Select
-                  labelId="demo-simple-select-standard-label"
-                  id="demo-simple-select-standard"
-                  name='category'
-                  value={category}
-                  onChange={handleChange}
-                  label="Age"
-                >
-                  <MenuItem>Select Category</MenuItem>
-                  {categoryArray.map((item, index)=>{
-                    return <MenuItem key={index} value={item}>{item}</MenuItem>
-                  })}
-                </Select>
-                </FormControl> */}
-
-              <TextField onChange={handleChange} value={price} name="price" label="Price" variant="standard"  required/>
-              <TextField onChange={handleChange} value={stripePriceId} name="stripePriceId" label="Stripe Price Id" variant="standard"  required/>
+              <TextField onChange={handleChange} value={title} name="title" label="Title" variant="standard"  />
+              <TextField onChange={handleChange} value={price} name="price" label="Price" variant="standard"  />
+              <TextField onChange={handleChange} value={stripePriceId} name="stripePriceId" label="Stripe Price Id" variant="standard" />
               <TextField onChange={handleChange} value={desc} name="desc" label="Description" variant="standard" multiline required/>
-              <TextField onChange={handleChange} value={img1} name="img1" label="Image Url #1" variant="standard"  required/>
-              {/*<TextField onChange={handleChange} value={img2} name="img2" label="Image Url #2" variant="standard"/>
-              <TextField onChange={handleChange} value={img3} name="img3" label="Image Url #3" variant="standard"/> */}
-
-
+              <TextField onChange={handleChange} value={img} name="img" label="Image Url" variant="standard"  required/>
+              
             </Stack>
             <br />
             <button className="inline-flex items-center bg-[#29D0d1] hover:bg-[#44B0B7] text-white rounded-xl font-semibold border-0 py-[6px] px-8 focus:outline-none text-base mt-4 md:mt-0 ">Submit</button>

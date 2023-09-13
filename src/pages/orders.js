@@ -9,7 +9,6 @@ function MyOrders () {
 
   const [orders, setOrders] = useState([])
   const router = useRouter();
-  console.log(orders)
 
   useEffect(() => {
 
@@ -60,15 +59,15 @@ function MyOrders () {
 
           <tbody>
 
-            {orders.map((item, index)=>{
+            {orders.reverse().map((item, index)=>{
               
               let totalQuantity = 0;
               for(let i = 0; i < item.products.length; i++){
-                totalQuantity += item.products[i].quantity;
+                totalQuantity += item.products[i].qty;
               }
 
               return <tr key={index}>
-              <td className="px-4 py-3">{index + 1}</td>
+              <td className="px-4 py-3">{item.deliveryStatus}</td>
               <td className="px-4 py-3">{moment(item.createdAt).utc().format("MMMM Do YYYY")}</td>
               <td className="px-4 py-3">{totalQuantity == 1 ? '1 x T-shirt' : totalQuantity + ' x T-shirts'}</td>
               <td className="px-4 py-3">€{item.amount}</td>

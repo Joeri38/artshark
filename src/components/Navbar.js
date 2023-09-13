@@ -237,11 +237,12 @@ export default function Example({logout , removeFromCart, addToCart, user, cart,
                                               <div>
                                                 <div className="flex justify-between text-base font-medium text-gray-900">
                                                   <h3 className="w-10/12">
-                                                    <Link href={`/product/${item.id}`}>{item.name} </Link>
+                                                    <Link href={`/product/${item.id}`}>T-shirt {item.size} {item.color} </Link>
+                                                    {/*<Link href={`/product/${item.id}`}>{item.name} </Link>*/}
                                                   </h3>
                                                   <p className="ml-4">€{40*item.qty}</p>
                                                 </div>
-                                                <p className="mt-1 text-sm text-gray-500">T-shirt {item.size} {item.color}  </p>
+                                                {/*<p className="mt-1 text-sm text-gray-500">T-shirt {item.size} {item.color}  </p>*/}
                                               </div>
                                               <div className="flex flex-1 items-end justify-between text-sm">
                                                 

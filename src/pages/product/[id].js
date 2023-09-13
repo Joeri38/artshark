@@ -32,7 +32,7 @@ const Item = ({addToCart , product}) => {
       toast.error('Choose size!')
     }
     else  {
-      addToCart(product._id, size, color, product.title, product.stripePriceId, product.img1, 1);
+      addToCart(product._id, size, color, product.title, product.stripePriceId, product.img, 1);
       toast.success("Item is added in your Cart!");
     }
     
@@ -58,7 +58,7 @@ const Item = ({addToCart , product}) => {
                 height={200}
                 className="productCarousel"
             >
-              {product.img1 && <img src={product.img1} className='h-[400px]' />}
+              <img src={product.img} className='h-[400px]' />
               <img src='/images/pigeon_rock_band.png' className='h-[400px]' />
               <img src='/images/pigeon_rock_band.png' className='h-[400px]' />
             </Carousel>
@@ -66,7 +66,7 @@ const Item = ({addToCart , product}) => {
 
           <div className="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
             <h2 className="text-sm title-font text-gray-500 tracking-widest">Art Shark</h2>
-            <h1 className="text-gray-900 text-3xl title-font font-medium mb-1">{product.title}</h1>
+            <h1 className="text-gray-900 text-3xl title-font font-medium mb-1">{product.desc}</h1>
 
             <div className='py-3'>
               <FormControl variant="standard" sx={{ minWidth: 120 }}>
@@ -85,7 +85,7 @@ const Item = ({addToCart , product}) => {
                 </Select>
               </FormControl>
               
-              <FormControl className='mb-4' variant="standard" sx={{ mx: 1, minWidth: 120 }}>
+              <FormControl className='mb-4 ml-8' variant="standard" sx={{ mx: 1, minWidth: 120 }}>
                 <InputLabel id="demo-simple-select-label">Size</InputLabel>
                 <Select
                   labelId="demo-simple-select-label"
@@ -104,18 +104,18 @@ const Item = ({addToCart , product}) => {
             </div>
 
 
-            <p className="leading-relaxed mt-3">{product.desc}</p>
+            {/*<p className="leading-relaxed mt-3">{product.desc}</p>*/}
             
             <div className="flex mt-5">
               <span className="title-font font-medium text-2xl text-gray-900">€40</span>
               <button onClick={buttonClicked} className="flex -mt-1 ml-auto bg-[#29D0d1] hover:bg-[#44B0B7] text-white rounded-xl font-semibold border-0 py-3 px-6 focus:outline-none text-sm md:text-base">Add to Cart</button>
               <ToastContainer position="bottom-center" autoClose={2000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover theme="light"/>
             
-              <button className="rounded-full w-10 h-10 bg-gray-200 p-0 border-0 inline-flex items-center justify-center text-gray-500 ml-4">
+              {/*<button className="rounded-full w-10 h-10 bg-gray-200 p-0 border-0 inline-flex items-center justify-center text-gray-500 ml-4">
                 <svg fill="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="w-5 h-5" viewBox="0 0 24 24">
                   <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"></path>
                 </svg>
-              </button>
+                </button>*/}
             </div>
           </div>
         </div>
