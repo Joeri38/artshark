@@ -14,7 +14,7 @@ function Gallery({ product }) {
    </Head>
 
     <div className="bg-white text-black">
-      <div className="mx-auto min-h-screen max-w-2xl py-16 px-4 sm:py-10 sm:px-6 lg:max-w-7xl lg:px-8">
+      <div className="mx-auto min-h-screen max-w-2xl py-16 px-4 sm:py-16 sm:px-6 lg:max-w-7xl lg:px-8">
         <h2 className="sr-only">Products</h2>
         
         <h1 className ="text-2xl md:text-2xl font-bold">Gallery</h1>
@@ -22,18 +22,38 @@ function Gallery({ product }) {
         {/* No available stock */}
         {product.length === 0 && <div className="font-semibold text-center">Sorry! Currently Stock Unavailble right now. Please wait for the new Stock...!</div>}  
 
-        <div className="grid pt-10 grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
+        <h1 className ="pt-6 text-lg md:text-2xl font-bold">Red Japan</h1>
+        <div className="grid pt-10 grid-cols-3 gap-y-6 gap-x-3 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
 
-          {product.map((item)=>{
+          {product.slice(0, 11).map((item)=>{
 
               return <Link key={item._id} href={`/product/${item._id}`} className="group"> 
-                <div className="aspect-w-1 aspect-h-1 h-96 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-w-7 xl:aspect-h-8">
+                <div className="aspect-w-1 aspect-h-1 h-full w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-w-7 xl:aspect-h-8">
                   <img
                     src={item.img}
                     className="h-full w-full object-cover object-center group-hover:opacity-75"
                   />
                 </div>
-                  <h3 className="mt-4 text-base text-gray-800">{item.desc}</h3>
+                  {/*<h3 className="mt-4 text-base text-gray-800">{item.desc}</h3>*/}
+              </Link>
+
+            })}
+
+        </div>
+        
+        <h1 className ="pt-12 text-lg md:text-2xl font-bold">Celebrities in different times</h1>
+        <div className="grid pt-10 grid-cols-3 gap-y-6 gap-x-3 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
+
+          {product.slice(11, 21).map((item)=>{
+
+              return <Link key={item._id} href={`/product/${item._id}`} className="group"> 
+                <div className="aspect-w-1 aspect-h-1 h-full w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-w-7 xl:aspect-h-8">
+                  <img
+                    src={item.img}
+                    className="h-full w-full object-cover object-center group-hover:opacity-75"
+                  />
+                </div>
+                  {/*<h3 className="mt-4 text-base text-gray-800">{item.desc}</h3>*/}
               </Link>
 
             })}

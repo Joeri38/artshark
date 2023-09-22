@@ -10,14 +10,6 @@ export default async function handler(req, res) {
       // Create Checkout Sessions from body params.
       const session = await stripe.checkout.sessions.create({
         line_items: lineItems,
-        /*metadata:{
-          cart: JSON.stringify(cartItems)
-        },
-        payment_intent_data:{
-          "metadata": {
-            cart: JSON.stringify(cartItems)
-          }
-        },*/
         mode: 'payment',
         billing_address_collection: "required",
         /*automatic_tax: {
