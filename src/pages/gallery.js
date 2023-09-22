@@ -41,7 +41,7 @@ function Gallery({ product }) {
 
         </div>
         
-        <h1 className ="pt-12 text-lg md:text-2xl font-bold">Celebrities in different times</h1>
+        <h1 className ="pt-12 text-lg md:text-2xl font-bold">Celebrities in different times </h1>
         <div className="grid pt-10 grid-cols-3 gap-y-6 gap-x-3 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
 
           {product.slice(11, 21).map((item)=>{
