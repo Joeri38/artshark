@@ -4,16 +4,16 @@ import connectDb from '../../../middleware/mongoose'
 const handler = async (req,res)=>{
     if (req.method == 'POST'){
 
-        const { id, title, price, img1, stripePriceId, desc } = req.body;
+        const { id, title, price, img, stripePriceId, desc } = req.body;
         let dbProduct = await Product.findById(id);
 
         if(dbProduct){
-            if( title === dbProduct.title && price === dbProduct.price && img1 === dbProduct.img1 
+            if( title === dbProduct.title && price === dbProduct.price && img === dbProduct.img 
                 && stripePriceId === dbProduct.stripePriceId && desc === dbProduct.desc  ){
                 res.status(400).json({ success: false, message: "No Changes found!" }) 
             }
             else{
-                let data =  await Product.findByIdAndUpdate(id, { title:title, price:price, img1:img1, stripePriceId:stripePriceId, desc:desc })
+                let data =  await Product.findByIdAndUpdate(id, { title:title, price:price, img:img, stripePriceId:stripePriceId, desc:desc })
                 res.status(200).json({ success: true, message: "Update Successfully!", data }) 
             }
         }
