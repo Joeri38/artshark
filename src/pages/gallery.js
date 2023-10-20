@@ -36,7 +36,6 @@ function Gallery({ product }) {
                     loading="lazy"
                   />
                 </div>
-                  {/*<h3 className="mt-4 text-base text-gray-800">{item.desc}</h3>*/}
               </Link>
 
             })}
@@ -46,7 +45,7 @@ function Gallery({ product }) {
         <h1 className ="pt-12 text-lg font-bold">Celebrities in different times</h1>
         <div className="grid pt-10 grid-cols-3 gap-y-6 gap-x-3 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
 
-          {product.slice(11, 20).map((item)=>{
+          {product.slice(11, 19).map((item)=>{
 
               return <Link key={item._id} href={`/product/${item._id}`} className="group"> 
                 <div className="aspect-w-1 aspect-h-1 h-full w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-w-7 xl:aspect-h-8">
@@ -56,7 +55,6 @@ function Gallery({ product }) {
                     loading="lazy"
                   />
                 </div>
-                  {/*<h3 className="mt-4 text-base text-gray-800">{item.desc}</h3>*/}
               </Link>
 
             })}
@@ -66,7 +64,7 @@ function Gallery({ product }) {
         <h1 className ="pt-12 text-lg font-bold">Recently added</h1>
         <div className="grid pt-10 grid-cols-3 gap-y-6 gap-x-3 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
 
-          {product.slice(20, 24).map((item)=>{
+          {product.slice(19, 24).map((item)=>{
 
               return <Link key={item._id} href={`/product/${item._id}`} className="group"> 
                 <div className="aspect-w-1 aspect-h-1 h-full w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-w-7 xl:aspect-h-8">
@@ -76,7 +74,6 @@ function Gallery({ product }) {
                     loading="lazy"
                   />
                 </div>
-                  {/*<h3 className="mt-4 text-base text-gray-800">{item.desc}</h3>*/}
               </Link>
 
             })}
@@ -99,26 +96,6 @@ function Gallery({ product }) {
 
     // Retrieve data and put in items
     let products = await Product.find()
-    /*let items= {}
-    for (let item of products){
-      if (item.title in items) {
-        if (!items[item.title].color.includes(item.color)) {
-                  items[item.title].color.push(item.color)
-        }
-        if (!items[item.title].size.includes(item.size)) {
-                  items[item.title].size.push(item.size)
-        }
-      }
-
-      else {
-        
-        items[item.title] = JSON.parse(JSON.stringify(item))
-
-        items[item.title].color = [item.color]
-        items[item.title].size = [item.size]
-              
-      }
-    };*/
   
     // Pass data to the page via props
     return {
