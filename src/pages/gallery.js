@@ -33,6 +33,7 @@ function Gallery({ product }) {
                   <img
                     src={item.img}
                     className="h-full w-full object-cover object-center group-hover:opacity-75"
+                    loading="lazy"
                   />
                 </div>
                   {/*<h3 className="mt-4 text-base text-gray-800">{item.desc}</h3>*/}
@@ -52,6 +53,7 @@ function Gallery({ product }) {
                   <img
                     src={item.img}
                     className="h-full w-full object-cover object-center group-hover:opacity-75"
+                    loading="lazy"
                   />
                 </div>
                   {/*<h3 className="mt-4 text-base text-gray-800">{item.desc}</h3>*/}
@@ -71,6 +73,7 @@ function Gallery({ product }) {
                   <img
                     src={item.img}
                     className="h-full w-full object-cover object-center group-hover:opacity-75"
+                    loading="lazy"
                   />
                 </div>
                   {/*<h3 className="mt-4 text-base text-gray-800">{item.desc}</h3>*/}
