@@ -58,7 +58,7 @@ const Item = ({addToCart , product}) => {
                 height={200}
                 className="productCarousel"
             >
-              <img src={product.img} className='h-[400px]' />
+              <img src={product.img} className='h-[400px]' /> 
               <img src='/images/pigeon_rock_band.png' className='h-[400px]' />
               <img src='/images/pigeon_rock_band.png' className='h-[400px]' />
             </Carousel>

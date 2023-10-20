@@ -61,10 +61,10 @@ function Gallery({ product }) {
 
         </div>
 
-        <h1 className ="pt-12 text-lg font-bold">Fan collection</h1>
+        <h1 className ="pt-12 text-lg font-bold">Recently added</h1>
         <div className="grid pt-10 grid-cols-3 gap-y-6 gap-x-3 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
 
-          {product.slice(20, 23).map((item)=>{
+          {product.slice(20, 24).map((item)=>{
 
               return <Link key={item._id} href={`/product/${item._id}`} className="group"> 
                 <div className="aspect-w-1 aspect-h-1 h-full w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-w-7 xl:aspect-h-8">
