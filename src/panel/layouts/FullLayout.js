@@ -1,10 +1,10 @@
 import React from "react";
 import {
-  experimentalStyled,
   useMediaQuery,
   Container,
   Box,
 } from "@mui/material";
+import { experimentalStyled } from "@mui/material/styles";
 import Header from "./header/Header";
 import Sidebar from "./sidebar/Sidebar";
 
