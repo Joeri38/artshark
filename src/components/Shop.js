@@ -35,7 +35,7 @@ const products = [
 function Shop() {
     return (
       <div className="bg-[#f7f7f7]">
-        <div className="mx-auto max-w-2xl py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
+        <div className="max-w-2xl py-6 px-12 sm:py-6 sm:px-6 md:mx-auto lg:max-w-7xl lg:px-8">
           <div className='flex flex-col md:flex-row items-center justify-between'>
             <h2 className="text-xl md:text-2xl font-sans font-bold tracking-tight text-gray-900">Shop by Category</h2>
           </div>
@@ -51,7 +51,7 @@ function Shop() {
                 <img src={product.imageSrc} alt={product.imageAlt} className="h-full w-full object-cover object-center lg:h-full lg:w-full"/>
                 </div>)}
                 
-                <div className="mt-4 flex justify-between">
+                <div className="mb-4 flex justify-between sm:mb-0 md:mt-4">
                     <h3 className="text-base text-gray-700">
                       <Link href={product.href}>
                         <span aria-hidden="true" className="absolute inset-0" />
