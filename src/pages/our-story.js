@@ -14,11 +14,11 @@ const OurStory = () => {
       
       {/* About Us */}
       <section className="text-gray-600 bg-[#f7f7f7] body-font">
-        <div className="container mx-auto flex px-5 md:px-10 py-24 md:flex-row flex-col items-center">
+        <div className="container mx-auto flex px-5 md:px-10 py-6 md:py-24 md:flex-row flex-col items-center">
           <div className="lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center">
             <h1 className="text-lg sm:text-2xl tracking-wider mb-3 md:text-4xl font-bold text-gray-900">Our Story</h1>
             <p className="mb-2 w-full leading-relaxed">Welcome to Artshark, where AI meets creativity to redefine the world of art. We are a team of four young and ambitious individuals with a shared passion for pushing the boundaries of innovation in the art industry.</p>
-            <p className="w-full leading-relaxed">At Artshark, we believe that artificial intelligence has the power to unlock new realms of artistic expression. We harness cutting-edge AI algorithms and techniques to create breathtaking art that challenges conventions and captivates audiences.</p>
+            <p className="pt-6 md:pt-0 w-full leading-relaxed">At Artshark, we believe that artificial intelligence has the power to unlock new realms of artistic expression. We harness cutting-edge AI algorithms and techniques to create breathtaking art that challenges conventions and captivates audiences.</p>
           </div>
           <div className="lg:max-w-lg lg:w-full md:w-1/2 w-5/6">
             <img className="object-cover object-center rounded-3xl" alt="hero" src="https://media.istockphoto.com/id/1360092910/photo/words-with-about-us-web-concept-idea.webp?b=1&s=170667a&w=0&k=20&c=8ER5GnlVth7iPBW1_5rVcvaXOmpDWdkPfRqcqgnS-mc="/>
@@ -33,7 +33,7 @@ const OurStory = () => {
           <div className="lg:max-w-lg lg:w-full md:w-1/2 w-5/6">
             <img className="object-cover object-center rounded-3xl" alt="hero" src="https://images.unsplash.com/photo-1474631245212-32dc3c8310c6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8dmlzaW9ufGVufDB8fDB8fHww&auto=format&fit=crop&w=600&q=60"/>
           </div>
-          <div className="lg:flex-grow ml-20 md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center">
+          <div className="lg:flex-grow pt-6 m:pt-0 md:ml-20 md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center">
             <h1 className="text-lg sm:text-2xl mb-3 md:text-3xl tracking-widest font-bold text-gray-900">Our Vision</h1>
             <p className="mb-2 w-full leading-relaxed">We envision a future where AI-driven art becomes a prominent force, seamlessly integrating technology and creativity. Through our work, we aim to redefine traditional notions of art, sparking imagination and inspiring conversations.</p>
           </div>
@@ -43,7 +43,7 @@ const OurStory = () => {
 
       {/* Our Mission */}
       <section className="text-gray-600 bg-[#f7f7f7] body-font">
-        <div className="container mx-auto flex px-5 md:px-10 py-24 md:flex-row flex-col items-center">
+        <div className="container mx-auto flex px-5 md:px-10 md:py-24 md:flex-row flex-col items-center">
           <div className="lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center">
             <h1 className="text-lg sm:text-2xl tracking-wider mb-3 md:text-4xl font-bold text-gray-900">Our Mission</h1>
             <p className="w-full leading-relaxed">At Artshark, our mission is to stun the world with our AI art. We strive to create unique and mesmerizing artworks that evoke emotion, spark curiosity, and blur the lines between human ingenuity and machine intelligence. We are committed to pushing the boundaries of what's possible, forging new paths in the intersection of art and technology.</p>
@@ -61,7 +61,7 @@ const OurStory = () => {
           <div className="lg:max-w-lg lg:w-full md:w-1/2 w-5/6">
             <img className="object-cover object-center rounded-3xl" alt="hero" src="https://media.istockphoto.com/id/585488832/photo/typing-on-laptop-closeup-chatting-in-facebook.webp?b=1&s=170667a&w=0&k=20&c=qNHtdVUYqmPwUlAHtbdUUTfEG1uHRONdB2-k8ymfk9o="/>
           </div>
-          <div className="lg:flex-grow ml-20 md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center">
+          <div className="lg:flex-grow md:ml-20 md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center">
             <h1 className="text-lg sm:text-2xl mb-3 md:text-3xl tracking-widest font-bold text-gray-900">What sets us apart</h1>
             <p className="mb-2 w-full leading-relaxed">
               <span className='font-bold mr-1'>Creative Excellence:</span>
