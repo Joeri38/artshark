@@ -12,7 +12,7 @@ function LowerCarousel() {
           <div className="mt-5 md:mt-0 lg:flex-grow md:ml-20 md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center">
             <h1 className="text-lg sm:text-2xl md:text-3xl mb-8 md:mb-14 tracking-widest font-bold text-gray-900">Together, we make art happen</h1>
             {/* <h1 className="text-lg sm:text-2xl mb-3 md:text-3xl tracking-widest font-bold text-gray-900"> </h1> */}
-            <p className="mb-4 w-full leading-relaxed">Can't spot the perfect design? No worries!</p>
+            <p className="mb-4 w-full leading-relaxed">Can't find the perfect design? No worries!</p>
             <p className="md:mb-8 w-full leading-relaxed">Our passionate design team is all about crafting art that resonates with you. Hit us up to turn your wildes ideas into vibrant creations!</p>
             <div className="flex justify-center"> 
               <button className="inline-flex items-center bg-[#29D0d1] text-white rounded-xl font-semibold border-0 py-2 px-8 focus:outline-none hover:bg-[#44B0B7] text-base mt-4 md:mt-0 "><Link href={"/contact-us"}>Contact us</Link></button>

@@ -22,7 +22,7 @@ function Login() {
   const submit = async (e) => {
     e.preventDefault()
 
-    // fetch the data from form to makes a file in local system
+    // fetch the data from form to make a file in local system
     const data = { email, password };
 
     if (!email){
