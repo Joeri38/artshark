@@ -14,7 +14,7 @@ const OurStory = () => {
       
       {/* About Us */}
       <section className="text-gray-600 bg-[#f7f7f7] body-font">
-        <div className="container mx-auto flex px-5 md:px-10 py-6 md:py-24 md:flex-row flex-col items-center">
+        <div className="container mx-auto flex px-12 py-6 sm:px-16 md:py-24 md:flex-row flex-col items-center">
           <div className="lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center">
             <h1 className="text-lg sm:text-2xl tracking-wider mb-3 md:text-4xl font-bold text-gray-900">Our Story</h1>
             <p className="mb-2 w-full leading-relaxed">Welcome to Artshark, where AI meets creativity to redefine the world of art. We are a team of four young and ambitious individuals with a shared passion for pushing the boundaries of innovation in the art industry.</p>
@@ -28,7 +28,7 @@ const OurStory = () => {
 
       {/* Our Vision */}
       <section className="text-gray-600 bg-[#f7f7f7] body-font">
-        <div className="container mx-auto flex px-5 md:px-10 py-24 md:flex-row flex-col items-center">
+        <div className="container mx-auto flex px-12 py-6 sm:px-16 md:py-24 md:flex-row flex-col items-center">
 
           <div className="lg:max-w-lg lg:w-full md:w-1/2 w-5/6">
             <img className="object-cover object-center rounded-3xl" alt="hero" src="https://images.unsplash.com/photo-1474631245212-32dc3c8310c6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8dmlzaW9ufGVufDB8fDB8fHww&auto=format&fit=crop&w=600&q=60"/>

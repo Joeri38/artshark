@@ -19,7 +19,7 @@ function Contact() {
 
       {/* About Us */}
       <section className="text-gray-600 bg-[#f7f7f7] body-font md:mb-44">
-        <div className="container mx-auto flex px-5 md:px-10 py-12 md:py-24 md:flex-row flex-col items-center">
+        <div className="container mx-auto flex px-12 py-16 sm:px-16 md:py-24 md:flex-row flex-col items-center">
           <div className="lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-10 md:mb-0 items-center text-center">
             <h1 className="text-lg sm:text-2xl tracking-wider md:text-4xl font-bold text-gray-900">Contact Us</h1>
             <p className="mt-8 mb-8 w-full leading-relaxed">At Artshark, we believe that artificial intelligence has the power to unlock new realms of artistic expression. We harness cutting-edge AI algorithms and techniques to create breathtaking art that challenges conventions and captivates audiences.</p>
