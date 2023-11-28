@@ -4,7 +4,7 @@ import Link from 'next/link'
 function LowerCarousel() {
   return (
     <section className="text-gray-600 bg-[#f7f7f7] body-font">
-        <div className="container mx-auto flex py-6 px-12 sm:py-6 sm:px-6 md:flex-row flex-col items-center">
+        <div className="container mx-auto flex flex-col md:flex-row py-6 px-12 sm:py-6 sm:px-16 items-center">
 
           <div className="hidden md:block lg:max-w-lg lg:w-full md:w-1/2 w-5/6">
             <img className="object-cover object-center rounded" alt="hero" src="https://media.istockphoto.com/id/585488832/photo/typing-on-laptop-closeup-chatting-in-facebook.webp?b=1&s=170667a&w=0&k=20&c=qNHtdVUYqmPwUlAHtbdUUTfEG1uHRONdB2-k8ymfk9o="/>
