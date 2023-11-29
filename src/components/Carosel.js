@@ -12,7 +12,7 @@ function Carosel() {
               <button className="inline-flex items-center bg-[#29D0d1] hover:bg-[#44B0B7] text-white rounded-xl font-semibold border-0 py-2 px-8 focus:outline-none text-base mt-4 md:mt-0 "><Link href={"/gallery"}>Get Started</Link></button>
             </div>
           </div>
-          <div className="lg:max-w-lg lg:w-full md:w-1/2 w-5/6">
+          <div className="lg:max-w-md w-5/6 md:w-1/2">
             <img className="object-cover object-center rounded" alt="hero" src="images/home_ai.png"/>
           </div>
         </div>
