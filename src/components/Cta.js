@@ -8,8 +8,8 @@ function Cta () {
       
       <div className='absolute z-10 sm:top-44 md:top-36 lg:top-44 md:w-2/3'>
       {/* <div className='absolute z-10 left-0 sm:top-44 md:top-40 md:left-36 xl:left-44 md:w-2/3 md:ml-10'> */}
-        <h1 className='pt-12 mb-14 sm:pt-0 text-2xl sm:text-3xl md:text-4xl font-sans tracking-wide text-white text-center font-semibold'>What technology are we using?</h1>
-        <p className='px-20 md:px-0 mb-20 md:w-10/12 mx-auto text-md tracking-tighter sm:text-base md:text-xl text-center text-white'>In a world buzzing with computing power and cutting-edge AI, we're riding the wave of generative artistry. Imagine AI conjuring up text, spouting speech, and crafting images that are mind-bogglingly lifelike or pure artistic magic. Well, guess what? We're inviting you to hop on this AI rollercoaster and wear the future, one design at a time!</p>
+        <h1 className='pt-12 mb-8 sm:mb-14 sm:pt-0 text-md xs:text-lg sm:text-3xl md:text-4xl font-sans tracking-wide text-white text-center font-semibold'>What technology are we using?</h1>
+        <p className='px-20 md:px-0 mb-20 md:w-10/12 mx-auto text-sm md:text-xl tracking-tighter sm:text-base  text-center text-white'>In a world buzzing with computing power and cutting-edge AI, we're riding the wave of generative artistry. Imagine AI conjuring up text, spouting speech, and crafting images that are mind-bogglingly lifelike or pure artistic magic. Well, guess what? We're inviting you to hop on this AI rollercoaster and wear the future, one design at a time!</p>
       </div>
 
       <div>
