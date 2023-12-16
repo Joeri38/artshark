@@ -4,7 +4,7 @@ import Link from 'next/link'
 
 function Cta () {
   return (
-  <div className='bg-[#f7f7f7'>
+  <div className='bg-[#f7f7f7]'>
     <div className='container mx-auto px-12 py-6 sm:px-16 md:py-16 relative flex justify-center bg-[#f7f7f7]'>
       
       <div className='absolute z-10 sm:top-44 md:top-36 lg:top-44 md:w-2/3'>
