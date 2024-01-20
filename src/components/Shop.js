@@ -7,7 +7,7 @@ const products = [
       id: 1,
       name: 'T-shirts',
       href: '/products',
-      imageSrc: 'https://images.unsplash.com/photo-1609811692040-35b06faddb8d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDF8fGZyYW1lc3xlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=600&q=60',
+      imageSrc: '/images/product-tshirt.png',
       imageAlt: "T-shirts",
       available: true,
     },
@@ -15,7 +15,6 @@ const products = [
       id: 2,
       name: 'Posters',
       href: '/items',
-      //imageSrc: 'https://images.unsplash.com/photo-1619032468883-89a84f565cba?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8dHNoaXJ0JTIwZm9yJTIwc3RvcmV8ZW58MHx8MHx8&auto=format&fit=crop&w=600&q=60',
       imageSrc: '/images/poster_coming_soon.png',
       imageAlt: "Posters",
       available: false,
@@ -24,7 +23,6 @@ const products = [
       id: 3,
       name: 'Merch',
       href: '/items',
-      //imageSrc: 'https://plus.unsplash.com/premium_photo-1675195129732-4b74822023ef?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8Y2FudmFzfGVufDB8fDB8fHww&auto=format&fit=crop&w=600&q=60',
       imageSrc: '/images/mug_coming_soon.png',
       imageAlt: "Merch",
       available: false,
@@ -36,7 +34,7 @@ function Shop() {
     return (
       <div className="bg-[#f7f7f7]">
         <div className="container mx-auto py-6 px-12 sm:py-6 sm:px-16">
-          <div className='flex flex-col md:flex-row items-center justify-between'>
+          <div className='flex flex-col md:flex-row items-center justify-between mt-4'>
             <h2 className="text-xl md:text-2xl font-sans font-bold tracking-tight text-gray-900">Shop by Category</h2>
           </div>
   

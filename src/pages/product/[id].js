@@ -25,13 +25,14 @@ const Item = ({addToCart , product}) => {
   function buttonClicked() {
     
     // Check if color and size are selected
-    if (!color){
-      toast.error('Choose color!')
-    }
-    else if (!size){
+    if (!size){
       toast.error('Choose size!')
     }
+    /*else if (!color){
+      toast.error('Choose color!')
+    }*/
     else  {
+      let color = undefined;
       addToCart(product._id, size, color, product.title, product.stripePriceId, product.img, 1);
       toast.success("Item is added in your Cart!");
     }
@@ -59,7 +60,7 @@ const Item = ({addToCart , product}) => {
                 className="productCarousel"
             >
               <img src={product.img} className='h-[400px]' /> 
-              <img src='/images/pigeon_rock_band.png' className='h-[400px]' />
+              <img src='/images/product-tshirt.png' className='h-[400px]' />
               <img src='/images/pigeon_rock_band.png' className='h-[400px]' />
             </Carousel>
           </div>
@@ -69,7 +70,7 @@ const Item = ({addToCart , product}) => {
             <h1 className="text-gray-900 text-3xl title-font font-medium mb-1">{product.desc}</h1>
 
             <div className='py-3'>
-              <FormControl variant="standard" sx={{ minWidth: 120 }}>
+              {/*<FormControl variant="standard" sx={{ minWidth: 120 }}>
                 <InputLabel id="demo-simple-select-label">Color</InputLabel>
                 <Select
                   labelId="demo-simple-select-label"
@@ -83,7 +84,7 @@ const Item = ({addToCart , product}) => {
                     return <MenuItem key={index} value={item}>{item}</MenuItem>
                   })}
                 </Select>
-              </FormControl>
+                </FormControl>*/}
               
               <FormControl className='mb-4 ml-8' variant="standard" sx={{ mx: 1, minWidth: 120 }}>
                 <InputLabel id="demo-simple-select-label">Size</InputLabel>
