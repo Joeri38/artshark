@@ -5,6 +5,30 @@ import Image from 'next/image'
 import Product from '../../models/Product';
 import mongoose from "mongoose";
 
+function Collection({title, product}) {
+
+  return <>
+        <h1 className ="pt-6 text-lg font-bold">{title}</h1>
+        <div className="grid pt-10 grid-cols-3 gap-y-6 gap-x-3 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
+
+          {product.map((item)=>{
+
+              return <Link key={item._id} href={`/product/${item._id}`} className="group"> 
+                <div className="aspect-w-1 aspect-h-1 h-full w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-w-7 xl:aspect-h-8">
+                  <img
+                    src={item.img}
+                    className="h-full w-full object-cover object-center group-hover:opacity-75"
+                    loading="lazy"
+                  />
+                </div>
+              </Link>
+
+            })}
+
+        </div>
+  </>
+}
+
 function Gallery({ product }) {
 
   return (
@@ -16,69 +40,14 @@ function Gallery({ product }) {
 
     <div className="bg-white text-black">
       <div className="mx-auto min-h-screen max-w-2xl py-16 px-4 sm:py-16 sm:px-6 lg:max-w-7xl lg:px-8">
-        <h2 className="sr-only">Products</h2>
         
         <h1 className ="text-2xl md:text-2xl font-bold">Gallery</h1>
 
-        {/* No available stock */}
-        {product.length === 0 && <div className="font-semibold text-center">Sorry! Currently Stock Unavailble right now. Please wait for the new Stock...!</div>}  
-
-        <h1 className ="pt-6 text-lg font-bold">Red Japan</h1>
-        <div className="grid pt-10 grid-cols-3 gap-y-6 gap-x-3 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
-
-          {product.slice(0, 11).map((item)=>{
-
-              return <Link key={item._id} href={`/product/${item._id}`} className="group"> 
-                <div className="aspect-w-1 aspect-h-1 h-full w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-w-7 xl:aspect-h-8">
-                  <img
-                    src={item.img}
-                    className="h-full w-full object-cover object-center group-hover:opacity-75"
-                    loading="lazy"
-                  />
-                </div>
-              </Link>
-
-            })}
-
-        </div>
-        
-        <h1 className ="pt-12 text-lg font-bold">Celebrities in different times</h1>
-        <div className="grid pt-10 grid-cols-3 gap-y-6 gap-x-3 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
-
-          {product.slice(11, 19).map((item)=>{
-
-              return <Link key={item._id} href={`/product/${item._id}`} className="group"> 
-                <div className="aspect-w-1 aspect-h-1 h-full w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-w-7 xl:aspect-h-8">
-                  <img
-                    src={item.img}
-                    className="h-full w-full object-cover object-center group-hover:opacity-75"
-                    loading="lazy"
-                  />
-                </div>
-              </Link>
-
-            })}
-
-        </div>
-
-        <h1 className ="pt-12 text-lg font-bold">Recently added</h1>
-        <div className="grid pt-10 grid-cols-3 gap-y-6 gap-x-3 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
-
-          {product.slice(19, 24).map((item)=>{
-
-              return <Link key={item._id} href={`/product/${item._id}`} className="group"> 
-                <div className="aspect-w-1 aspect-h-1 h-full w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-w-7 xl:aspect-h-8">
-                  <img
-                    src={item.img}
-                    className="h-full w-full object-cover object-center group-hover:opacity-75"
-                    loading="lazy"
-                  />
-                </div>
-              </Link>
-
-            })}
-
-        </div>
+        <Collection title="Red Japan" product={product[0]} />
+        <Collection title="Celebrities in different times" product={product[1]} />
+        <Collection title="David Hockney style" product={product[2]} />
+        <Collection title="Ukiyo-e style" product={product[3]} />
+        <Collection title="Recently added" product={product[product.length-1]} />
 
       </div>
     </div>
@@ -94,8 +63,18 @@ function Gallery({ product }) {
       await mongoose.connect(process.env.MONGO_URI);
     }
 
-    // Retrieve data and put in items
-    let products = await Product.find()
+    // Retrieve data 
+    let products = []
+
+    // Add collections
+    for (let i = 1; i < 5; i++) {
+      let collection = await Product.find({ collection: i })
+      products.push(collection)
+    }
+
+    // Add fan collection
+    let collection = await Product.find({ collection: 0 })
+    products.push(collection)
   
     // Pass data to the page via props
     return {
