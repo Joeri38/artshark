@@ -54,7 +54,7 @@ const Products = () => {
           <div className="lg:flex-grow md:ml-20 md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-8 md:mb-0 items-center text-center">
             <h1 className="text-lg sm:text-2xl mb-3 md:text-3xl tracking-widest font-bold text-gray-900">Supplier</h1>
             <p className="mb-2 w-full leading-relaxed">
-            Fruit of Loom -  We chose this supplier because sustainability is high on their agenda. Their shirts are the comfortable and surpass the high quality our standards.
+            Fruit of Loom -  We chose this supplier because sustainability is high on their agenda. Their shirts are comfortable and adhere to high quality standards.
             </p>
           </div>
 
