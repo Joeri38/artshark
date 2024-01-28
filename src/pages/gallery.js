@@ -43,10 +43,10 @@ function Gallery({ product }) {
         
         <h1 className ="text-2xl md:text-2xl font-bold">Gallery</h1>
 
-        <Collection title="Red Japan" product={product[0]} />
-        <Collection title="Celebrities in different times" product={product[1]} />
         <Collection title="David Hockney style" product={product[2]} />
         <Collection title="Ukiyo-e style" product={product[3]} />
+        <Collection title="Celebrities in different times" product={product[1]} />
+        <Collection title="Red Japan" product={product[0]} />
         <Collection title="Recently added" product={product[product.length-1]} />
 
       </div>
