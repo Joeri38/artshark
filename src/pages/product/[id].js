@@ -28,7 +28,7 @@ const Item = ({addToCart, product}) => {
   const collection_files = ['recently-added/', 'red-japan/', 'celebrities/', 'hockney/', 'ukiyo-e/'];
   const file = collection_files[idx];
 
-  console.log('/images/' + file + product.img)
+  console.log('/images/collections/' + file + product.img)
 
   function buttonClicked() {
     

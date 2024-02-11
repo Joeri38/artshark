@@ -15,7 +15,7 @@ function Collection({title, file, product}) {
 
               return <Link key={item._id} href={`/product/${item._id}`} className="group"> 
                 <div className="aspect-w-1 aspect-h-1 h-full w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-w-7 xl:aspect-h-8">
-                  <Image src={'/images/' + file + item.img}
+                  <Image src={'/images/collections/' + file + item.img}
                          className="h-full w-full object-cover object-center group-hover:opacity-75"
                          width={500} height={300} />
                 </div>

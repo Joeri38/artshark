@@ -1,11 +1,6 @@
 import React from 'react'
-import Link from 'next/link'
 import Head from 'next/head'
-import Carosel from '../components/Carosel'
-import Testimonials from '../components/Testimonials'
-import Feedback from '@/components/ContactForm'
 import ContactForm from '@/components/ContactForm'
-
 
 
 function Contact() {

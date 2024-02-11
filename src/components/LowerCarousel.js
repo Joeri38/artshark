@@ -9,7 +9,7 @@ function LowerCarousel() {
 
           <div className="hidden md:block lg:max-w-md lg:w-full md:w-1/2 w-5/6">
             <Image className="object-cover object-center rounded" alt="hero" 
-                   src="/images/working_on_beach.png"
+                   src="/images/home_working_on_beach.png"
                    width={500} height={300}/>
           </div>
           <div className="mt-5 md:mt-0 lg:flex-grow md:ml-20 md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center">
