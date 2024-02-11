@@ -13,8 +13,6 @@ function Collection({title, file, product}) {
 
           {product.map((item)=>{
 
-              console.log('/images/' + file + item.img)
-
               return <Link key={item._id} href={`/product/${item._id}`} className="group"> 
                 <div className="aspect-w-1 aspect-h-1 h-full w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-w-7 xl:aspect-h-8">
                   <Image src={'/images/' + file + item.img}
@@ -47,6 +45,7 @@ function Gallery({ product }) {
         <Collection title="Ukiyo-e style" file='ukiyo-e/' product={product[3]} />
         <Collection title="Celebrities in different times" file='celebrities/' product={product[1]} />
         <Collection title="Red Japan" file='red-japan/' product={product[0]} />
+
         <Collection title="Recently added" file='recently-added/' product={product[product.length-1]} />
 
       </div>
@@ -63,10 +62,10 @@ function Gallery({ product }) {
       await mongoose.connect(process.env.MONGO_URI);
     }
 
-    // Retrieve data 
+    // Retrieve data in array products
     let products = []
 
-    // Add collections
+    // Add regular collections
     for (let i = 1; i < 5; i++) {
       let collection = await Product.find({ collection: i })
       products.push(collection)
