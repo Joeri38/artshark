@@ -28,8 +28,6 @@ const Item = ({addToCart, product}) => {
   const collection_files = ['recently-added/', 'red-japan/', 'celebrities/', 'hockney/', 'ukiyo-e/'];
   const file = collection_files[idx];
 
-  console.log('/images/collections/' + file + product.img)
-
   function buttonClicked() {
     
     // Check if color and size are selected
@@ -68,7 +66,7 @@ const Item = ({addToCart, product}) => {
                 className="productCarousel"
             >
               {/* Image doesn't work with the carousel */}
-              <img src={'/images/' + file + product.img} className='h-[400px]' /> 
+              <img src={'/images/collections/' + file + product.img} className='h-[400px]' /> 
               <img src='/images/product-tshirt.png' className='h-[400px]' /> 
               {/*<Image src='/images/pigeon_rock_band.png' className='h-[400px]' />*/}
             </Carousel>
