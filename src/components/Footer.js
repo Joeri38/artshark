@@ -1,4 +1,5 @@
 import { React } from 'react'
+import Image from 'next/image'
 
 function Footer() {
   return (
@@ -6,7 +7,8 @@ function Footer() {
     <footer className="text-gray-600 bg-[#f7f7f7] body-font border-t border-gray-200">
       <div className="container px-5 py-5 mx-auto flex items-center sm:flex-row flex-col">
         <a className="flex title-font font-medium items-center md:justify-start justify-center text-gray-900">
-          <img className='ml-4 h-10' src="/logo.png" alt="" />
+          <Image className='ml-4 h-10' src="/logo.png" alt="" 
+                 width={130} height={200}/>
         </a>
         <p className="text-sm text-gray-500 sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-200 sm:py-2 sm:mt-0 mt-4">© 2023 Art Shark
         </p>

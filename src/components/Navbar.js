@@ -1,5 +1,6 @@
 import { Fragment, useState } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { Dialog, Popover, Tab, Transition, Menu } from '@headlessui/react'
 import { Bars3Icon, ShoppingBagIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { BiUserCircle } from 'react-icons/bi';
@@ -134,7 +135,7 @@ export default function Example({logout , removeFromCart, addToCart, user, cart,
               {/* Logo */}
               <div className="ml-4 flex lg:ml-0">
                 <Link href="/">
-                  <img className="h-10" src="/logo.png" alt="" />
+                  <Image className="h-10" src="/logo.png" alt="" width={130} height={300} />
                 </Link>
               </div>
 
@@ -193,9 +194,6 @@ export default function Example({logout , removeFromCart, addToCart, user, cart,
                   </Transition>
                 </Menu>
 
-
-
-              
                 {/* Cart */}
                 <div className="ml-4 flow-root lg:ml-6">
                   <ShoppingBagIcon onClick={() => setOpenCart(true)} className="h-5 md:h-6 cursor-pointer items-center flex-shrink-0 text-black group-hover:text-gray-700" aria-hidden="true"/>

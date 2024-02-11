@@ -1,6 +1,6 @@
 import React from 'react'
-import Link from 'next/link'
-
+import Image from 'next/image'
+//import homeBeach from '/images/home_beach.png'
 
 function Cta () {
   return (
@@ -14,7 +14,8 @@ function Cta () {
       </div>
 
       <div>
-        <img className='filter brightness-50 w-full md:mx-auto h-[400px] sm:h-[500px] object-cover object-bottom rounded-md' src="images/home_beach.png" alt="" />
+        <Image className='filter brightness-50 w-full md:mx-auto h-[400px] sm:h-[500px] object-cover object-bottom rounded-md' 
+               src='/images/home_beach.png' alt="" width={500} height={300}/>
       </div>
 
     </div>

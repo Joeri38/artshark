@@ -1,5 +1,6 @@
 import React from 'react'
 import Link from 'next/link'
+import Image from 'next/image';
 
 function LowerCarousel() {
   return (
@@ -7,8 +8,9 @@ function LowerCarousel() {
         <div className="container mx-auto flex flex-col md:flex-row py-6 px-12 sm:py-16 sm:px-16 items-center">
 
           <div className="hidden md:block lg:max-w-md lg:w-full md:w-1/2 w-5/6">
-            {/* <img className="object-cover object-center rounded" alt="hero" src="images/home_ai.png"/> */}
-            <img className="object-cover object-center rounded" alt="hero" src="https://cdn.discordapp.com/attachments/1105607692929749026/1198305126864126033/artshark.com_a_beach_without_people_only_palmtrees_A_guy_workin_5e5f611d-5cca-4389-8108-aaf6e910fc5e.png?ex=65be6b9d&is=65abf69d&hm=24c6cd2364d5a6899f09d279fe6bb87204e478485bd8c99a538d065c58feac87&"/>
+            <Image className="object-cover object-center rounded" alt="hero" 
+                   src="/images/working_on_beach.png"
+                   width={500} height={300}/>
           </div>
           <div className="mt-5 md:mt-0 lg:flex-grow md:ml-20 md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center">
             <h1 className="text-lg sm:text-2xl md:text-3xl mb-8 md:mb-8 tracking-widest font-bold text-gray-900">Together, we make art happen</h1>

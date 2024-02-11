@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import Head from 'next/head';
+import Image from 'next/image';
 import { useRouter } from 'next/router'
 import Product from '../../../models/Product';
 import mongoose from "mongoose";
@@ -13,7 +14,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { FormControl, InputLabel, MenuItem, Select, TextField } from '@mui/material';
 import buttonOutlined from '@material-tailwind/react/theme/components/button/buttonOutlined';
 
-const Item = ({addToCart , product}) => {
+const Item = ({addToCart, product}) => {
   const router = useRouter()
 
   const [color, setColor] = useState()
@@ -21,6 +22,13 @@ const Item = ({addToCart , product}) => {
 
   let colorArray = ["White", "Black"];
   let sizeArray = ["XS", "S", "M", "L", "XL", "XXL"];
+
+  // Get the collection file name
+  const idx = product.collection;
+  const collection_files = ['recently-added/', 'red-japan/', 'celebrities/', 'hockney/', 'ukiyo-e/'];
+  const file = collection_files[idx];
+
+  console.log('/images/' + file + product.img)
 
   function buttonClicked() {
     
@@ -59,9 +67,10 @@ const Item = ({addToCart , product}) => {
                 height={200}
                 className="productCarousel"
             >
-              <img src={product.img} className='h-[400px]' /> 
-              <img src='/images/product-tshirt.png' className='h-[400px]' />
-              <img src='/images/pigeon_rock_band.png' className='h-[400px]' />
+              {/* Image doesn't work with the carousel */}
+              <img src={'/images/' + file + product.img} className='h-[400px]' /> 
+              <img src='/images/product-tshirt.png' className='h-[400px]' /> 
+              {/*<Image src='/images/pigeon_rock_band.png' className='h-[400px]' />*/}
             </Carousel>
           </div>
 

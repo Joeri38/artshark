@@ -1,6 +1,6 @@
 import React from 'react'
 import Link from 'next/link'
-//import { AiOutlineArrowRight } from 'react-icons/ai';
+import Image from 'next/image'
 
 const products = [
     {
@@ -43,10 +43,12 @@ function Shop() {
               <div key={product.id} className="group relative flex flex-col-reverse md:flex-col">
                 {product.available ? 
                 (<div className="min-h-80 aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none lg:h-80">
-                  <img src={product.imageSrc} alt={product.imageAlt} className="h-full w-full object-cover object-center lg:h-full lg:w-full"/>
+                  <Image src={product.imageSrc} alt={product.imageAlt} width={500} height={300}
+                       className="h-full w-full object-cover object-center lg:h-full lg:w-full"/>
                 </div>) : 
                 (<div className="min-h-80 aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md bg-gray-200 opacity-50 lg:aspect-none lg:h-80">
-                <img src={product.imageSrc} alt={product.imageAlt} className="h-full w-full object-cover object-center lg:h-full lg:w-full"/>
+                  <Image src={product.imageSrc} alt={product.imageAlt} width={500} height={300}
+                       className="h-full w-full object-cover object-center lg:h-full lg:w-full"/>
                 </div>)}
                 
                 <div className="mb-4 flex justify-between sm:mb-0 md:mt-4">

@@ -5,7 +5,7 @@ import Image from 'next/image'
 import Product from '../../models/Product';
 import mongoose from "mongoose";
 
-function Collection({title, product}) {
+function Collection({title, file, product}) {
 
   return <>
         <h1 className ="pt-6 text-lg font-bold">{title}</h1>
@@ -13,13 +13,13 @@ function Collection({title, product}) {
 
           {product.map((item)=>{
 
+              console.log('/images/' + file + item.img)
+
               return <Link key={item._id} href={`/product/${item._id}`} className="group"> 
                 <div className="aspect-w-1 aspect-h-1 h-full w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-w-7 xl:aspect-h-8">
-                  <img
-                    src={item.img}
-                    className="h-full w-full object-cover object-center group-hover:opacity-75"
-                    loading="lazy"
-                  />
+                  <Image src={'/images/' + file + item.img}
+                         className="h-full w-full object-cover object-center group-hover:opacity-75"
+                         width={500} height={300} />
                 </div>
               </Link>
 
@@ -43,11 +43,11 @@ function Gallery({ product }) {
         
         <h1 className ="text-2xl md:text-2xl font-bold">Gallery</h1>
 
-        <Collection title="David Hockney style" product={product[2]} />
-        <Collection title="Ukiyo-e style" product={product[3]} />
-        <Collection title="Celebrities in different times" product={product[1]} />
-        <Collection title="Red Japan" product={product[0]} />
-        <Collection title="Recently added" product={product[product.length-1]} />
+        <Collection title="David Hockney style" file='hockney/' product={product[2]} />
+        <Collection title="Ukiyo-e style" file='ukiyo-e/' product={product[3]} />
+        <Collection title="Celebrities in different times" file='celebrities/' product={product[1]} />
+        <Collection title="Red Japan" file='red-japan/' product={product[0]} />
+        <Collection title="Recently added" file='recently-added/' product={product[product.length-1]} />
 
       </div>
     </div>

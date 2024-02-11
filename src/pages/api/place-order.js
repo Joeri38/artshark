@@ -10,7 +10,7 @@ const handler = async (req,res)=>{
   const cart = JSON.parse(req.body.cart);
   console.log('cart: ' + cart);
 
-  if( sessionId){
+  if( sessionId ){
     try {
 
       // Get details from Stripe

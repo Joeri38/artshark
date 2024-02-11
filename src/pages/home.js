@@ -2,7 +2,6 @@ import Carosel from '@/components/Carosel'
 import Cta from '@/components/Cta'
 import LowerCarousel from '@/components/LowerCarousel'
 import Shop from '@/components/Shop'
-import Testimonials from '@/components/Testimonials'
 import Head from 'next/head'
 import React from 'react'
 

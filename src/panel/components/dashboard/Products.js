@@ -47,7 +47,7 @@ const Products = ({ products }) => {
             </TableCell>
             <TableCell>
               <Typography color="textSecondary" variant="h6">
-                Title
+                Description
               </Typography>
             </TableCell>
             <TableCell>
@@ -84,7 +84,7 @@ const Products = ({ products }) => {
                     fontSize: "15px",
                     fontWeight: "500",
                   }}
-                  >{product.title} 
+                  >{product.desc} 
                 </Typography>
               </TableCell>
 
@@ -103,11 +103,8 @@ const Products = ({ products }) => {
                 </Typography>
               </TableCell>
 
-
             </TableRow>
           ))}
-
-
 
         </TableBody>
       </Table>
