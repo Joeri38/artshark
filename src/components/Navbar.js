@@ -42,16 +42,6 @@ export default function Example({logout , removeFromCart, addToCart, user, cart,
       }
     })
 
-
-    /*const cartItems = cart.map((item)=>{
-      return {
-        [item.name]: {
-          size: item.size,
-          color: item.color,
-        },
-      }
-    })*/
-
     try {
       
       const res = await fetch(`/api/checkout_sessions`, {
@@ -227,9 +217,17 @@ export default function Example({logout , removeFromCart, addToCart, user, cart,
                                       <ul role="list" className="-my-6 divide-y divide-gray-200">
                                       {cart && cart.length == 0 && <div className='text-center text-gray-600 mt-10 text-md'>Your Cart is Empty!</div> }
                                       {cart && cart.map((item, index)=>{
+
+                                          const collection_idx = item.collection;
+                                          console.log(collection_idx)
+                                          const collection_files = ['recently-added/', 'red-japan/', 'celebrities/', 'hockney/', 'ukiyo-e/'];
+                                          const file = collection_files[collection_idx];
+
+                                          console.log('/images/collections/' + file + item.img);
+
                                           return <li key={index} className="flex py-6">
                                             <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
-                                              <img src={item.img} alt="cart-image" className="h-full w-full object-cover object-center"/>
+                                              <img src={'/images/collections/' + file + item.img} alt="cart-image" className="h-full w-full object-cover object-center"/>
                                             </div>
                                             <div className="ml-4 flex flex-1 flex-col">
                                               <div>

@@ -13,7 +13,7 @@ function Carosel() {
             </div>
           </div>
           <div className="lg:max-w-md w-5/6 md:w-1/2">
-            <video width="400" height="200" autoPlay loop muted>
+            <video width="400" height="200" controlsList="nodisplay" autoPlay loop muted>
               <source src="animatie-japan.mp4" type="video/mp4" />
             </video>
           </div>
