@@ -47,7 +47,6 @@ export default function Example({logout, removeFromCart, addToCart, user, cart, 
 
     try {
       
-      console.log("Bearer " + process.env.STRIPE_SECRET_KEY)
       const res = await fetch(`/api/checkout_sessions`, {
         method: "POST",
         headers: {

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import Head from "next/head";
 import Wrapper from "../components/wrapper";
 import Link from "next/link";
@@ -55,7 +55,7 @@ const Success = ({ id, clearCart }) => {
                     <div className="text-base mt-5">
                         For any product related query, drop an email to
                     </div>
-                    <div className="underline">Artsharkbe@gmail.com</div>
+                    <div className="underline">info@artshark.be</div>
 
                     <Link href="/" className="font-bold mt-5">
                         Continue Shopping
