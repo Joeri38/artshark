@@ -1,5 +1,6 @@
 import { React } from 'react'
 import Image from 'next/image'
+import Link  from 'next/link'
 
 function Footer() {
   return (
@@ -10,10 +11,19 @@ function Footer() {
           <Image className='ml-4 h-10' src="/logo.png" alt="" 
                  width={130} height={200}/>
         </a>
-        <p className="text-sm text-gray-500 sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-200 sm:py-2 sm:mt-0 mt-4">© 2023 Art Shark
-        </p>
+        <Link href='/termsandconditions'>
+            <p className="text-sm text-gray-500 sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-200 sm:py-2 sm:mt-0 mt-4">
+              Terms and Conditions
+            </p>
+        </Link>
+        <Link href='/contact-us'>
+          <p className="text-sm text-gray-500 sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-200 sm:py-2 sm:mt-0 mt-4">
+            © Art Shark | Questwave 
+          </p>
+        </Link>
+        
         <span className="inline-flex sm:ml-auto sm:mt-0 mt-4 justify-center sm:justify-start">
-          
+            
           <a className="ml-4 text-gray-500" href='https://www.instagram.com/artshark.be/' target='_blank'>
             <svg fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="w-5 h-5" viewBox="0 0 24 24">
               <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>

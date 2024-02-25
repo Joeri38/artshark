@@ -30,7 +30,7 @@ const products = [
   ]
 
 
-function Shop() {
+function HomeShop() {
     return (
       <div className="bg-[#f7f7f7]">
         <div className="container mx-auto py-6 px-12 sm:py-6 sm:px-16">
@@ -68,4 +68,4 @@ function Shop() {
   }
 
 
-export default Shop
+export default HomeShop

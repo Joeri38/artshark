@@ -19,12 +19,12 @@ const handler = async (req,res)=>{
       // Customer info and payment info 
       const paymentIntent = await stripe.paymentIntents.retrieve(session.payment_intent);
       let customerDetails = session.customer_details;
-      
       const { name, email, phone } = customerDetails;
       const { city, country, line1, postal_code } = customerDetails.address;
       const { id, amount, status } = paymentIntent;
   
       try {
+
         // Add new order 
         let newOrder = new Order( { name, email, phone, streetAddress: line1, city, zip: postal_code, country,
                                     paymentId:id, paymentStatus:status, amount:amount / 100,

@@ -1,7 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
 
-function Carosel() {
+function HomeIntro() {
   return (
     <section className="text-gray-600 bg-[#000] body-font"> {/* bg-[#f7f7f7] */}
         <div className="container mx-auto px-12 py-0 sm:px-16 md:py-0 flex flex-col md:flex-row items-center">
@@ -22,4 +22,4 @@ function Carosel() {
   )
 }
 
-export default Carosel;
+export default HomeIntro;

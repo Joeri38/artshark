@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Head from "next/head";
-import Order from '../../models/Order';
 import Wrapper from "../components/wrapper";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import mongoose from 'mongoose';
 
 const Success = ({ id, clearCart }) => {
 
@@ -16,9 +14,10 @@ const Success = ({ id, clearCart }) => {
 
     const placeOrder = async () => {
         
+        // Get cart from local storage
         const cart = localStorage.getItem('cart');
-
-        const data = { sessionId:id  }
+        
+        // Send sessionId and cart to server
         let res = await fetch(`/api/place-order`, {
         method: 'POST',
         headers: {
@@ -27,11 +26,14 @@ const Success = ({ id, clearCart }) => {
         body: JSON.stringify({ sessionId: id, cart }),
         })
         let response = await res.json();
-
+        
+        // Clear cart
         clearCart();
+
         /*if(response.id){
             router.push(`/order?id=${response.id}&clearCart=1`)
         }*/
+
         return response.id;
     }
 
@@ -59,10 +61,6 @@ const Success = ({ id, clearCart }) => {
                         Continue Shopping
                     </Link>
 
-                    {/*<form method="post">
-                        <button type="submit">Go To the Order Page</button>
-                    </form>*/}
-
                 </div>
             </Wrapper>
         </div>
@@ -72,9 +70,10 @@ const Success = ({ id, clearCart }) => {
 
 export async function getServerSideProps(context) {
 
+    // Get session ID from URL query
     let id = context.query.id;
 
-    // Pass data to the page via props
+    // Pass data to the page 
     return {
         props: { id } 
     }

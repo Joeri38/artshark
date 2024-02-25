@@ -14,6 +14,7 @@ function MyOrder ({ order, clearCart, user }) {
 
   const router = useRouter();
 
+  // Maybe not needed as success page clears cart
   useEffect(() => {
 
     if(router.query.clearCart == 1){
@@ -82,11 +83,15 @@ function MyOrder ({ order, clearCart, user }) {
 
         <div className='mb-8'>
           {order.products && order.products.map((item,index)=>{
+
+            const collection_idx = item.collection;
+            const collection_files = ['recently-added/', 'red-japan/', 'celebrities/', 'hockney/', 'ukiyo-e/'];
+            const file = collection_files[collection_idx];
             
             return <div key={index} className="flex w-full border-b-2 border-gray-200 py-2">
               <div className="w-1/2 text-center font-medium text-gray-500 flex">
                 <div className="ml-10 h-24 w-24 overflow-hidden rounded-md border">
-                    <img src={item.img} alt="product-image" className="h-full w-full object-cover object-center"/>
+                    <img src={'/images/collections/' + file + item.img} alt="product-image" className="h-full w-full object-cover object-center"/>
                 </div>
                 <div className="w-1/2">
                   <span>T-shirt {item.size} {item.color}</span> 

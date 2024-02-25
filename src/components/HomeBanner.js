@@ -2,7 +2,7 @@ import React from 'react'
 import Image from 'next/image'
 //import homeBeach from '/images/home_beach.png'
 
-function Cta () {
+function HomeBanner() {
   return (
   <div className='bg-[#f7f7f7]'>
     <div className='container mx-auto px-12 py-6 sm:px-16 md:py-16 relative flex justify-center bg-[#f7f7f7]'>
@@ -24,4 +24,4 @@ function Cta () {
   )
 }
 
-export default Cta
+export default HomeBanner

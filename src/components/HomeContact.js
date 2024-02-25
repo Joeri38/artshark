@@ -1,8 +1,9 @@
 import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image';
+import Home from '@/pages';
 
-function LowerCarousel() {
+function HomeContact() {
   return (
     <section className="text-gray-600 bg-[#f7f7f7] body-font">
         <div className="container mx-auto flex flex-col md:flex-row py-6 px-12 sm:py-16 sm:px-16 items-center">
@@ -27,4 +28,4 @@ function LowerCarousel() {
   )
 }
 
-export default LowerCarousel;
+export default HomeContact;
