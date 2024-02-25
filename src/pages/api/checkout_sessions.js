@@ -4,19 +4,19 @@ export default async function handler(req, res) {
 
   if (req.method === 'POST') {
 
-    // Unpack data from reuqest body
+    // Unpack data from request body
     const { lineItems } = req.body;
 
     try {
 
       // Create Checkout Sessions from body params.
-      /*const session = await stripe.checkout.sessions.create({
+      const session = await stripe.checkout.sessions.create({
         line_items: lineItems,
         mode: 'payment',
         billing_address_collection: "required",
-        automatic_tax: {
+        /*automatic_tax: {
           enable: true,
-        },
+        },*/
         phone_number_collection: {
           enabled: false,
         },   
@@ -26,9 +26,9 @@ export default async function handler(req, res) {
 
       });
 
-      res.status(200).json({ success: true, message: 'Payment started', url:session.url, id:session.id })*/
+      res.status(200).json({ success: true, message: 'Payment started', url:session.url, id:session.id })
 
-      const paymentLink = await stripe.paymentLinks.create({
+      /*const paymentLink = await stripe.paymentLinks.create({
         line_items: lineItems,
         after_completion: {
           type: 'redirect',
@@ -37,9 +37,9 @@ export default async function handler(req, res) {
           },
         },
         billing_address_collection: "required",
-        /*automatic_tax: {
+        automatic_tax: {
           enable: true,
-        },*/
+        },
         invoice_creation: {
           enabled: true,
         },
@@ -49,7 +49,7 @@ export default async function handler(req, res) {
         payment_method_types: ["bancontact", "card", "paypal", "link"], // "eps", "giropay", "ideal",
       });
 
-      res.status(200).json({ success: true, message: 'Payment started', url:paymentLink.url, id:paymentLink.id })
+      res.status(200).json({ success: true, message: 'Payment started', url:paymentLink.url, id:paymentLink.id })*/
      
     } catch (err) {
       res.status(err.statusCode || 500).json(err.message);
