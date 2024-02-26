@@ -1,11 +1,9 @@
 const nodemailer = require('nodemailer')
 
-
-
 async function sendMail(){
 
     // Create transporter
-    const transporter = nodemailer.createTransport({
+    /*const transporter = nodemailer.createTransport({
         host: "smtp.gmail.com",
         port: 465,
         secure: true,
@@ -13,16 +11,26 @@ async function sendMail(){
           user: 'joeri.lenaerts36@gmail.com',
           pass: 'csbcgezyjpkekuah'
         }
+    });*/
+
+    // Create transporter
+    const transporter = nodemailer.createTransport({
+        host: "send.one.com",
+        port: 465,
+        secure: true,
+        auth: {
+          user: 'orders@artshark.be',
+          pass: `a6!7CqYgRhy@FG6` // does not work here
+        }
     });
 
     // Send mail
     const info = await transporter.sendMail({
-        from: '"phoenix" <joeri.lenaerts36@gmail.com>', // sender address
-        to: "orders.artsharkbe@gmail.com", // list of receivers
-        subject: "Hello ✔", // Subject line
+        from: 'Artshark <orders@artshark.be>',
+        to: "joeri.lenaerts36@gmail.com", 
+        subject: "Custom!!",
         text: "Hello world?" + 
-        "dear user", // plain text body
-        //html: "<b>Hello world?</b>", // html body
+        "dear user", 
     });
     
 }

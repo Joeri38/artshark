@@ -36,16 +36,16 @@ const handler = async (req,res)=>{
         const html = `
           <p>Dear ${name}</p>
 
-          <p>Thank you for choosing Art Shark! We will deliver your order within two weeks.</p>
+          <p>Thank you for choosing Artshark! We will deliver your order within two weeks.</p>
 
           <p>Shipping adress:</p>
           <p>${name} <br> ${line1} <br> ${postal_code} ${city}</p>
 
-          <p>To see all your orders, create an <a href='http://localhost:3000/signup' target='_blank'>account.</a></p>
+          <p>To see all your orders, create an <a href='http://localhost:3000/signup' target='_blank'>account</a></p>
         `
 
         const transporter = nodemailer.createTransport({
-          host: "smtp.gmail.com",
+          host: "send.one.com",
           port: 465,
           secure: true, // true for 465, false for other ports
           auth: {
@@ -55,7 +55,7 @@ const handler = async (req,res)=>{
         });
     
         let mailData = {
-          from: `"Art Shark" <${process.env.EMAIL}>`,
+          from: `"Artshark" <${process.env.EMAIL}>`,
           to: `${email}`,
           bcc: `${process.env.EMAIL}`,
           subject: `Order Confirmation`,
