@@ -66,12 +66,13 @@ const handler = async (req,res)=>{
     
         transporter.sendMail(mailData, function (err,info){
           if (!err) {
-              return res.status(200).json({ success: true, message: `Order confirmation has been sent to ${email}`})
               console.log(`Order confirmation has been sent to ${email}`)
+              return res.status(200).json({ success: true, message: `Order confirmation has been sent to ${email}`})
+              
           }
           if (err) {
-              return res.status(400).json({ success: false, message: "Some Error Occured!"})
               console.log(`error with mail`)
+              return res.status(400).json({ success: false, message: "Some Error Occured!"})    
           }
         })
   
