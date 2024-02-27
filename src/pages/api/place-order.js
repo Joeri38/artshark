@@ -21,6 +21,8 @@ const handler = async (req,res)=>{
       const { name, email, phone } = customerDetails;
       const { city, country, line1, postal_code } = customerDetails.address;
       const { id, amount, status } = paymentIntent;
+
+      console.log(`processing order sessionId ${sessionId}`)
   
       try {
 
@@ -30,6 +32,7 @@ const handler = async (req,res)=>{
                                     products: cart } );
         let order = await newOrder.save();
         res.status(200).json({ success: true, message: "New Order Added !",  id: order.id}) 
+        console.log(`Order added to database: ${order.id}`)
         
         // Mail content
         const html = `
@@ -64,14 +67,17 @@ const handler = async (req,res)=>{
         transporter.sendMail(mailData, function (err,info){
           if (!err) {
               return res.status(200).json({ success: true, message: `Order confirmation has been sent to ${email}`})
+              console.log(`Order confirmation has been sent to ${email}`)
           }
           if (err) {
               return res.status(400).json({ success: false, message: "Some Error Occured!"})
+              console.log(`error with mail`)
           }
         })
   
       } catch (error) {
         res.status(400).json({ success: false, message: "Internal Server Error!" })
+        console.log(`internal server error`)
       }
       
     } catch (error) {
