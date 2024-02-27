@@ -8,14 +8,12 @@ const handler = async (req,res)=>{
 
   const sessionId = req.body.sessionId;
   const cart = JSON.parse(req.body.cart);
-  console.log('cart: ' + cart);
 
   if( sessionId ){
     try {
 
       // Get details from Stripe
       const session = await stripe.checkout.sessions.retrieve(sessionId);
-      console.log(session)
   
       // Customer info and payment info 
       const paymentIntent = await stripe.paymentIntents.retrieve(session.payment_intent);
@@ -42,7 +40,7 @@ const handler = async (req,res)=>{
           <p>Shipping adress:</p>
           <p>${name} <br> ${line1} <br> ${postal_code} ${city}</p>
 
-          <p>To see all your orders, create an <a href='http://localhost:3000/signup' target='_blank'>account</a></p>
+          <p>To see all your orders, create an <a href='http://artshark.be/signup' target='_blank'>account</a></p>
         `
 
         const transporter = nodemailer.createTransport({
