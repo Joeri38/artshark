@@ -31,7 +31,7 @@ const handler = async (req,res)=>{
                                     paymentId:id, paymentStatus:status, amount:amount / 100,
                                     products: cart } );
         let order = await newOrder.save();
-        res.status(200).json({ success: true, message: "New Order Added !",  id: order.id}) 
+        //res.status(200).json({ success: true, message: "New Order Added !",  id: order.id}) 
         console.log(`Order added to database: ${order.id}`)
         
         // Mail content
