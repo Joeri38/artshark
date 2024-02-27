@@ -15,6 +15,7 @@ const handler = async (req,res)=>{
 
       // Get details from Stripe
       const session = await stripe.checkout.sessions.retrieve(sessionId);
+      console.log(session)
   
       // Customer info and payment info 
       const paymentIntent = await stripe.paymentIntents.retrieve(session.payment_intent);
