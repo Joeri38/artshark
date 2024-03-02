@@ -146,6 +146,7 @@ const handler = async (req,res)=>{
       } catch (error) {
         res.status(400).json({ success: false, message: "Internal Server Error!" })
         console.log(`internal server error`)
+        console.log(error.message)
       }
       
     } catch (error) {
