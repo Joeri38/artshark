@@ -33,12 +33,16 @@ const handler = async (req,res)=>{
       try {
 
         // Add new order to database
-        let newOrder = new Order( { name, email, phone, addressLine1: line1, addressLine2:line2, 
+        console.log('start')
+        console.log(Math.floor(Math.random() * Date.now()))
+        let newOrder = new Order( { orderId: Math.floor(Math.random() * Date.now()),
+                                    name, email, phone, addressLine1: line1, addressLine2:line2, 
                                     city, zip: postal_code, country,
                                     paymentId:id, paymentStatus:status, amount:amount / 100,
                                     products: cart } );
+        console.log('stop')
         let order = await newOrder.save();
-        //res.status(200).json({ success: true, message: `Order confirmation has been sent to ${email}`})
+        //res.status(200).json({ success: true, message: `Order confirmation has been sent to ${email}`}) causes error in vercel production
         console.log(`Order added to database: ${order.id}`)
 
         // Maker orderItems
