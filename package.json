@@ -21,6 +21,7 @@
     "@mui/material": "^5.11.4",
     "@stripe/stripe-js": "^1.54.0",
     "@vercel/speed-insights": "^1.0.10",
+    "api": "^6.1.1",
     "autoprefixer": "10.4.14",
     "axios": "^1.4.0",
     "crypto-js": "^4.1.1",

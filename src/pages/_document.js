@@ -9,7 +9,7 @@ export default function Document() {
       <body>
         <Main />
         <NextScript />
-        <SpeedInsights />
+        {/*<SpeedInsights />*/}
       </body>
     </Html>
   )

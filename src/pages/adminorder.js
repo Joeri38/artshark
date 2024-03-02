@@ -87,7 +87,7 @@ function MyOrder ({ order, clearCart, user }) {
 
               {/* Status */}
               <div className="flex mt-6 w-1/2">
-                <span className="title-font font-medium text-2xl text-[#44B0B7]">Delivery status: {order.deliveryStatus}</span>
+                <span className="title-font font-medium text-xl text-[#44B0B7]">Delivery status: {order.deliveryStatus}</span>
               </div>
 
               {/* Contact info */}
@@ -104,7 +104,8 @@ function MyOrder ({ order, clearCart, user }) {
                     <h1 className='title-font font-medium text-lg mb-2'>Shipping:</h1>
 
                     <p className='ml-8'>{order.name}</p>
-                    <p className='ml-8'>{order.streetAddress}</p>
+                    <p className='ml-8'>{order.addressLine1}</p>
+                    {order.addressLine2 && <p className='ml-8'>{order.addressLine2}</p>}
                     <p className='ml-8'>{order.zip} {order.city}</p>
               </div>
 

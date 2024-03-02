@@ -22,31 +22,6 @@ function MyOrder ({ order, clearCart, user }) {
     }
   }, [router.query])
 
-
-  /*const sendEmailDetails = async () => {
-
-    // Use API to send mail
-    const data = {email: order.email, orderId: order.orderId, name: order.name,
-                  streetAddress: order.streetAddress,  city: order.city, zip: order.zip,
-                  date: order.createdAt, products: order.products, amount: order.amount };
-    let res = await fetch(`/api/send-order-email`, {
-      method: 'POST',
-      headers: {
-      'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    })
-    let response = await res.json()
-
-    if (response.success === true) {
-      toast.success(response.message , { position: "bottom-center", autoClose: 1000, hideProgressBar: false, closeOnClick: true, pauseOnHover: true, draggable: true, progress: undefined, theme: "light", });
-    }
-    else {
-      toast.error(response.message , { position: "bottom-center", autoClose: 1000, hideProgressBar: false, closeOnClick: true, pauseOnHover: true, draggable: true, progress: undefined, theme: "light", });
-    }
-  }*/
-
-
   return (
     <>
     <Head>
@@ -114,7 +89,7 @@ function MyOrder ({ order, clearCart, user }) {
 
           {/* Status */}
           <div className="flex mt-6 w-2/3">
-            <span className="title-font font-medium text-2xl text-[#44B0B7]">Delivery status: {order.deliveryStatus}</span>
+            <span className="title-font font-medium text-xl text-[#44B0B7]">Delivery status: {order.deliveryStatus}</span>
           </div>
         
           {/* Address */}
@@ -122,14 +97,14 @@ function MyOrder ({ order, clearCart, user }) {
                 <h1 className='title-font font-medium text-lg mb-2'>Shipping:</h1>
 
                 <p className='ml-8'>{order.name}</p>
-                <p className='ml-8'>{order.streetAddress}</p>
+                <p className='ml-8'>{order.addressLine1}</p>
+                {order.addressLine2 && <p className='ml-8'>{order.addressLine2}</p>}
                 <p className='ml-8'>{order.zip} {order.city}</p>
           </div>
 
         </div>
 
       </div>
-      {/* <img alt="ecommerce" className="lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center rounded" src="https://media.istockphoto.com/id/1340117122/photo/cube-with-shopping-trolley-symbol-on-the-laptop-keyboard.jpg?b=1&s=170667a&w=0&k=20&c=PU8iTTvTj6TV6_Quy9Z7KQJoOgY-rp_rqI9FbFNFYEw="/> */}
     </div>}
 
 

@@ -11,7 +11,8 @@ const OrderSchema = new mongoose.Schema({
   products:{type: Array, required: true},
   amount:{type: Number, required: true},
   
-  streetAddress: {type: String, required: true},
+  addressLine1: {type: String, required: true},
+  addressLine2: {type: String},
   zip: {type: Number},
   city: {type: String, required: true},
   country: {type: String, required: true},
