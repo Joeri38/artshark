@@ -38,7 +38,7 @@ const handler = async (req,res)=>{
                                     paymentId:id, paymentStatus:status, amount:amount / 100,
                                     products: cart } );
         let order = await newOrder.save();
-        res.status(200).json({ success: true, message: `Order confirmation has been sent to ${email}`})
+        //res.status(200).json({ success: true, message: `Order confirmation has been sent to ${email}`})
         console.log(`Order added to database: ${order.id}`)
 
         // Maker orderItems
@@ -101,7 +101,7 @@ const handler = async (req,res)=>{
           .then(({ data }) => console.log(data))
           .catch(err => console.error(err));*/
         
-        // Mail content
+        // Send mail
         const html = `
           <p>Dear ${name}</p>
 
