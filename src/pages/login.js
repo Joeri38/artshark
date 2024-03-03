@@ -92,7 +92,7 @@ function Login() {
 
   <section className="bg-[#f7f7f7]">
     <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
-      <img className="w-40 h-16 mr-2" src="./logo.png" alt="logo"/>
+      <img className="h-16 mr-2" src="./logo.png" alt="logo"/>
       <div className="w-full bg-white rounded-lg shadow md:mt-5 sm:max-w-md xl:p-0">
           <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
             <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
