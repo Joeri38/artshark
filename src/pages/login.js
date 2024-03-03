@@ -3,13 +3,14 @@ import Head from 'next/head';
 import Link from 'next/link'
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
+import { useSession, signIn, signOut } from "next-auth/react"
 
 import { toast, ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
-
 function Login() {
   const router = useRouter()  
+  const { data: session } = useSession()
 
   useEffect(() => {
     
@@ -66,8 +67,6 @@ function Login() {
       }
 
     }
-
-    
         
   }
 
@@ -91,13 +90,25 @@ function Login() {
   <ToastContainer position="bottom-center" autoClose={1000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable theme="light"/>
 
   <section className="bg-[#f7f7f7]">
-    <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
-      <img className="h-16 mr-2" src="./logo.png" alt="logo"/>
+    <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto h-screen lg:py-0">
+      <img className="h-16 mr-2 mb-6 hidden sm:block sm:mb-0" src="./logo.png" alt="logo"/>
       <div className="w-full bg-white rounded-lg shadow md:mt-5 sm:max-w-md xl:p-0">
           <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
+
             <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
               Log in to your account
             </h1>
+
+            {/*{session && <p>Welcome, {session.user.name}</p>}
+
+            Google login 
+            <button onClick={() => signIn("google", {callbackUrl: '/'}, 
+                                                    {callback: ()=>console.log('hello world')})}>
+              Sign in</button>
+            <br/>
+  <button onClick={() => signOut()}>Sign out</button>*/}
+
+            {/* Mail and password login */}
             <form className="space-y-4 md:space-y-6" method='POST' onSubmit={submit}>
               <div>
                   <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900">Your email</label>

@@ -3,13 +3,12 @@ import { useState , useEffect } from 'react'
 import Footer from '../components/Footer'
 import Navbar from '../components/Navbar'
 import LoadingBar from 'react-top-loading-bar'
+import { SessionProvider } from "next-auth/react"
 
 // React Toastify
-//import { ToastContainer, toast } from 'react-toastify';
-//import 'react-toastify/dist/ReactToastify.css';
 import { useRouter } from 'next/router';
 
-export default function App({ Component, pageProps }) {
+export default function App({ Component, pageProps: { session, ...pageProps } }) {
 
   const router = useRouter();
 
@@ -21,10 +20,7 @@ export default function App({ Component, pageProps }) {
   //  Loading bar
   const [progress, setProgress] = useState(0)
 
-  // I don't think we need these
-  //const [message, setMessage] = useState('')
-
-  //  Use Effect to retain same items in shopping Cart
+  //  Use Effect to handle loading bar, user and cart
   useEffect(() => {
     
     // Loading bar
@@ -36,6 +32,7 @@ export default function App({ Component, pageProps }) {
     }, []);
 
 
+    // Cart
     try {
       if (localStorage.getItem("cart")) {
         setCart(JSON.parse(localStorage.getItem("cart")));
@@ -46,6 +43,7 @@ export default function App({ Component, pageProps }) {
       localStorage.clear();
     }
 
+    // User logged in
     let myUser = JSON.parse(localStorage.getItem("myUser"));
     if( myUser ){
       setUser({value: myUser.token , email: myUser.email, name: myUser.name });
@@ -53,7 +51,6 @@ export default function App({ Component, pageProps }) {
     }
 
   }, [router.query])
-
   
   // Logout function
   const logout = ()=>{
@@ -140,12 +137,11 @@ export default function App({ Component, pageProps }) {
     
     <Navbar key={key} user={user} cart={cart} subTotal={subTotal} logout={logout} addToCart={addToCart}
             removeFromCart={removeFromCart} clearCart={clearCart} deleteItemFromCart={deleteItemFromCart}  />
-    {/* <Component user={user} cart={cart} subTotal={subTotal} setMessage={setMessage} addToCart={addToCart} 
-               removeFromCart={removeFromCart} deleteItemFromCart={deleteItemFromCart} clearCart={clearCart}   
-{...pageProps} /> */}
-    <Component user={user} cart={cart} subTotal={subTotal} addToCart={addToCart} 
-               removeFromCart={removeFromCart} deleteItemFromCart={deleteItemFromCart} 
-               clearCart={clearCart}  {...pageProps} />
+    <SessionProvider session={session}>
+      <Component user={user} cart={cart} subTotal={subTotal} addToCart={addToCart} 
+                removeFromCart={removeFromCart} deleteItemFromCart={deleteItemFromCart} 
+                clearCart={clearCart}  {...pageProps} />
+    </SessionProvider>
     <Footer/>
   </>
 } 
