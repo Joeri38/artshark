@@ -4,6 +4,7 @@ import Footer from '../components/Footer'
 import Navbar from '../components/Navbar'
 import LoadingBar from 'react-top-loading-bar'
 import { SessionProvider } from "next-auth/react"
+import { useSession } from "next-auth/react"
 
 // React Toastify
 import { useRouter } from 'next/router';
@@ -43,12 +44,16 @@ export default function App({ Component, pageProps: { session, ...pageProps } })
       localStorage.clear();
     }
 
-    // User logged in
+    // User logged in with mail and password
     let myUser = JSON.parse(localStorage.getItem("myUser"));
     if( myUser ){
       setUser({value: myUser.token , email: myUser.email, name: myUser.name });
       setKey(Math.random());
     }
+
+    // User logged in with google
+    console.log('session')
+    console.log(pageProps);
 
   }, [router.query])
   
@@ -137,7 +142,7 @@ export default function App({ Component, pageProps: { session, ...pageProps } })
     
     <Navbar key={key} user={user} cart={cart} subTotal={subTotal} logout={logout} addToCart={addToCart}
             removeFromCart={removeFromCart} clearCart={clearCart} deleteItemFromCart={deleteItemFromCart}  />
-    <SessionProvider session={session}>
+    <SessionProvider> {/* <SessionProvider session={session}> */}
       <Component user={user} cart={cart} subTotal={subTotal} addToCart={addToCart} 
                 removeFromCart={removeFromCart} deleteItemFromCart={deleteItemFromCart} 
                 clearCart={clearCart}  {...pageProps} />

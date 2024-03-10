@@ -99,14 +99,13 @@ function Login() {
               Log in to your account
             </h1>
 
-            {/*{session && <p>Welcome, {session.user.name}</p>}
+            {session && <p>Welcome, {session.user.name}</p>}
 
-            Google login 
-            <button onClick={() => signIn("google", {callbackUrl: '/'}, 
-                                                    {callback: ()=>console.log('hello world')})}>
+            {/*Google login */}
+            <button onClick={() => signIn("google", {callbackUrl: '/'})}>
               Sign in</button>
             <br/>
-  <button onClick={() => signOut()}>Sign out</button>*/}
+  <button onClick={() => signOut()}>Sign out</button>
 
             {/* Mail and password login */}
             <form className="space-y-4 md:space-y-6" method='POST' onSubmit={submit}>

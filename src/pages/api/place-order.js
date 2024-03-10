@@ -11,6 +11,7 @@ const handler = async (req,res)=>{
   const cart = JSON.parse(req.body.cart);
 
   if( sessionId ){
+
     try {
 
       // Get details from Stripe
@@ -27,22 +28,21 @@ const handler = async (req,res)=>{
       const firstWhiteSpaceIndex = name.indexOf(' ');
       const firstName = name.substring(0, firstWhiteSpaceIndex);
       const lastName = name.substring(firstWhiteSpaceIndex + 1);
-
       console.log(`Processing order, sessionId ${sessionId}`)
   
       try {
 
         // Add new order to database
-        console.log(Math.floor(Math.random() * Date.now()))
         let newOrder = new Order( { orderId: Math.floor(Math.random() * Date.now()),
                                     name, email, phone, addressLine1: line1, addressLine2:line2, 
                                     city, zip: postal_code, country,
                                     paymentId:id, paymentStatus:status, amount:amount / 100,
                                     products: cart } );
         let order = await newOrder.save();
-        //res.status(200).json({ success: true, message: `Order confirmation has been sent to ${email}`}) causes error in vercel production
         console.log(`Order added to database: ${order.id}`)
+        //res.status(200).json({ success: true, message: `Order confirmation has been sent to ${email}`}) causes error in vercel production
 
+        
         // Helloprint: make orderItems
         const orderItems = cart.map((item) => {
 
@@ -53,36 +53,18 @@ const handler = async (req,res)=>{
 
           return { 
             itemReferenceId: '1',
-            variantKey: 'tshirtspremiumclique~TODO',
+            variantKey: 'stickers~ST-90PVC-BC-40', // TODO
             quantity: item.qty,
             serviceLevel: 'standard',
-            fileUrl: 'artshark.be/images/collections/' + file + item.img.replace('.png', '.pdf'),
+            //fileUrl: 'artshark.be/images/collections/' + file + item.img.replace('.png', '.pdf'),
           }
         })
-        
         console.log('Order items:')
         console.log(orderItems)
 
-        const shipping = {
-          shipping: {
-            companyName: 'artshark',
-            firstName: firstName,
-            lastName: lastName,
-            addressLine1: line1,
-            addressLine2: line2,
-            postcode: postal_code,
-            city: city,
-            country: country,
-            phone: phone
-          }
-        }
-
-        console.log('Shipping info')
-        console.log(shipping)
-        
         // Send order to Helloprint
-        /*sdk.auth('testapikey');
-        sdk.server('https://drukzo-michael.ngrok.io/rest/v1');
+        sdk.auth(process.env.HELLOPRINT_API_KEY);
+        //sdk.server('https://drukzo-michael.ngrok.io/rest/v1');
         sdk.createOrder({
           mode: 'test',
           shipping: {
@@ -93,15 +75,15 @@ const handler = async (req,res)=>{
             addressLine2: line2,
             postcode: postal_code,
             city: city,
-            country: country,
+            country: 'BE',
             phone: phone
           },
+          orderReferenceId: order.id.toString(),
           orderItems: orderItems,
-          callbackUrls: ['test'],
-          orderReferenceId: order.id,
+          //callbackUrls: ['test'],      
         })
           .then(({ data }) => console.log(data))
-          .catch(err => console.error(err));*/
+          .catch(err => console.error(err));
         
         // Send mail
         const html = `
