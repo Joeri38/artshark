@@ -15,9 +15,6 @@ async function buttonClicked(imgPath, imgPrompt){
     const blob = await response.blob();
     console.log(blob)
 
-    
-
-
     const file = new File([blob], 'downloaded_image.png', { type: 'image/png' });
     console.log(file)
 

@@ -56,8 +56,7 @@ const handler = async (req,res)=>{
             variantKey: 'fullcutshirtgsm140-white-' + item.qty + '-digital-fullcolorfullcolor-280x200xnoxnomm100x100xnoxnobacklargechestleft-days6?size_' + item.sex + '_' + item.size.toLowerCase() + '=1', // TODO
             quantity: item.qty,
             serviceLevel: 'standard',
-            //fileUrl: 'artshark.be/images/collections/' + file + item.img.replace('.png', '.pdf'),
-            //frontUrl: 'artshark.be/logo.pdf
+            fileUrl: 'artshark.be/images/collections/' + file + item.img.replace('.png', '.pdf'),
           }
         })
         console.log('Order items:')
