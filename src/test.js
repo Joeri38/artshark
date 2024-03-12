@@ -1,17 +1,15 @@
-const bcryptjs = require('bcryptjs');
+var fs = require('fs'),
+request = require('request');
 
-const numSaltRounds = 1;
+var download = function(uri, filename, callback){
+  request.head(uri, function(err, res, body){
+    console.log('content-type:', res.headers['content-type']);
+    console.log('content-length:', res.headers['content-length']);
 
-const password = 'password'
+    request(uri).pipe(fs.createWriteStream(filename)).on('close', callback);
+  });
+};
 
-bcryptjs.hash(password, numSaltRounds)
-.then(hash => {
-  const myHash = hash
-  console.log(hash)
-
-  bcryptjs.compare(password, hash).then(res => console.log(res))
-})
-.catch(err => console.log(err))
-
-
-//console.log(bcryptjs.compare(password, hash)); // true
+download('https://www.google.com/images/srpr/logo3w.png', 'google.png', function(){
+  console.log('done');
+});

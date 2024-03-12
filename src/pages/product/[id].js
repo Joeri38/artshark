@@ -12,16 +12,17 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { FormControl, InputLabel, MenuItem, Select, TextField } from '@mui/material';
-//import buttonOutlined from '@material-tailwind/react/theme/components/button/buttonOutlined';
 
 const Item = ({addToCart, product}) => {
   const router = useRouter()
 
   const [color, setColor] = useState()
   const [size, setSize] = useState()
+  const [sex, setSex] = useState()
 
   let colorArray = ["White", "Black"];
-  let sizeArray = ["XS", "S", "M", "L", "XL", "XXL"];
+  let sizeArray = ["S", "M", "L", "XL", "XXL"];
+  let sexArray = ["men", "women"];
 
   // Get the collection file name
   const idx = product.collection;
@@ -35,12 +36,15 @@ const Item = ({addToCart, product}) => {
     if (!size){
       toast.error('Choose size!')
     }
+    else if (!sex){
+      toast.error('Choose sex!')
+    }
     /*else if (!color){
       toast.error('Choose color!')
     }*/
     else  {
       let color = undefined;
-      addToCart(product._id, size, color, product.title, product.collection, 
+      addToCart(product._id, size, color, sex, product.title, product.collection, 
                 product.stripePriceId, product.img, 1);
       toast.success("Item is added in your Cart!");
     }
@@ -57,6 +61,7 @@ const Item = ({addToCart, product}) => {
       <div className="container px-5 py-10 mx-auto">
         <div className="lg:w-4/5 mx-auto justify-center flex flex-wrap">
 
+          {/* Product image */}
           <div className='lg:w-9/20'> 
             <Carousel
                 infiniteLoop={true}
@@ -81,8 +86,10 @@ const Item = ({addToCart, product}) => {
             <h2 className="text-sm title-font text-gray-500 tracking-widest">Art Shark</h2>
             <h1 className="text-gray-900 text-3xl title-font font-medium mb-1">{product.desc}</h1>
 
+            {/* Size and sex */}
             <div className='py-3'>
               
+              {/* Select size */}
               <FormControl className='mb-4 ml-8' variant="standard" sx={{ mx: 1, minWidth: 120 }}>
                 <InputLabel id="demo-simple-select-label">Size</InputLabel>
                 <Select
@@ -94,6 +101,23 @@ const Item = ({addToCart, product}) => {
                 >
                   <MenuItem>Select Size</MenuItem>
                   {sizeArray.map((item, index)=>{
+                    return <MenuItem key={index} value={item}>{item}</MenuItem>
+                  })}
+                </Select>
+              </FormControl>
+              
+              {/* Select sex */}
+              <FormControl className='mb-4 ml-8' variant="standard" sx={{ mx: 1, minWidth: 120 }}>
+                <InputLabel id="demo-simple-select-label">Sex</InputLabel>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value={sex}
+                  label="Sex"
+                  onChange={(e)=>setSex(e.target.value)}
+                >
+                  <MenuItem>Select Sex</MenuItem>
+                  {sexArray.map((item, index)=>{
                     return <MenuItem key={index} value={item}>{item}</MenuItem>
                   })}
                 </Select>

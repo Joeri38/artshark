@@ -13,6 +13,7 @@ import { AiFillMinusCircle, AiFillPlusCircle } from 'react-icons/ai';
 const pages = [
   { name: 'Home', href: '/' },
   { name: 'Gallery', href: '/gallery' },
+  //{ name: 'Create', href: '/create' },
   { name: 'Products', href: '/products' },
   { name: 'Our Story', href: '/our-story' },
   { name: 'Contact Us', href: '/contact-us' },
@@ -252,7 +253,7 @@ export default function Example({logout, removeFromCart, addToCart, user, cart, 
                                             {/* Title and price */}
                                             <div className="flex justify-between text-base font-medium text-gray-900">
                                                 <h3 className="w-10/12">
-                                                  <Link href={`/product/${item.id}`}>T-shirt {item.size} {item.color} </Link>
+                                                  <Link href={`/product/${item.id}`}>T-shirt {item.size} {item.sex} {item.color} </Link>
                                                 </h3>
                                                 <p className="ml-4">€{item.price*item.qty}</p>
                                             </div>
@@ -262,14 +263,14 @@ export default function Example({logout, removeFromCart, addToCart, user, cart, 
 
                                               {/* Quantity button */}
                                               <p className="flex text-black text-sm ">Qty: 
-                                                <AiFillMinusCircle onClick={()=>{removeFromCart(item.id, item.size, item.color)}} className='my-auto ml-2 text-lg cursor-pointer'/> 
+                                                <AiFillMinusCircle onClick={()=>{removeFromCart(item.id, item.size, item.color, item.sex)}} className='my-auto ml-2 text-lg cursor-pointer'/> 
                                                 <span className='mx-[9px]'>{item.qty}</span> 
-                                                <AiFillPlusCircle onClick={()=>{addToCart(item.id, item.size, item.color, item.name, item.stripePriceId, item.img, 1)}} className='my-auto text-lg cursor-pointer'/>
+                                                <AiFillPlusCircle onClick={()=>{addToCart(item.id, item.size, item.color, item.sex, item.name, item.collection, item.stripePriceId, item.img, 1)}} className='my-auto text-lg cursor-pointer'/>
                                               </p>
 
                                               {/* Remove button */}
                                               <div className="flex">
-                                                <button onClick={()=>{deleteItemFromCart(item.id, item.size, item.color)}} type="button" className="font-medium text-red-600 hover:text-red-500">Remove</button>
+                                                <button onClick={()=>{deleteItemFromCart(item.id, item.size, item.color, item.sex)}} type="button" className="font-medium text-red-600 hover:text-red-500">Remove</button>
                                               </div>
 
                                             </div>

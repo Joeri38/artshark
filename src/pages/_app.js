@@ -78,13 +78,13 @@ export default function App({ Component, pageProps: { session, ...pageProps } })
   }
 
   // Add item to cart 
-  const addToCart = (id, size, color, name, collection, stripePriceId, img,  qty) =>{
+  const addToCart = (id, size, color, sex, name, collection, stripePriceId, img, qty) =>{
     let newCart = cart;
 
     // Check if item with this id, size and color is already in the cart array
     console.log(cart);
     const itemIdx = cart.findIndex((item) => {
-      return item.id === id && item.size === size && item.color === color;
+      return item.id === id && item.size === size && item.color === color && item.sex; 
     })
     console.log(itemIdx);
       
@@ -92,7 +92,7 @@ export default function App({ Component, pageProps: { session, ...pageProps } })
       newCart[itemIdx].qty= cart[itemIdx].qty + qty;
       console.log('Item already exists in the cart.');
     } else {
-      newCart.push({ id, size, color, name, collection, stripePriceId, img, price: 40, qty: 1});
+      newCart.push({ id, size, color, sex, name, collection, stripePriceId, img, price: 40, qty: 1});
       console.log('Item does not exist in the cart.');
     }
 
@@ -101,10 +101,10 @@ export default function App({ Component, pageProps: { session, ...pageProps } })
   }
 
   // Remove item from cart 
-  const removeFromCart = (id, size, color) =>{
+  const removeFromCart = (id, size, color, sex) =>{
     
     const itemIdx = cart.findIndex((item) => {
-      return item.id === id && item.size === size && item.color === color;
+      return item.id === id && item.size === size && item.color === color && item.sex == sex;
     })
     
     if (cart[itemIdx].qty == 1){
@@ -120,10 +120,10 @@ export default function App({ Component, pageProps: { session, ...pageProps } })
   } 
 
   // Delete item from cart 
-  const deleteItemFromCart = (id, size, color) =>{
+  const deleteItemFromCart = (id, size, color, sex) =>{
 
     const itemIdx = cart.findIndex((item) => {
-      return item.id === id && item.size === size && item.color === color;
+      return item.id === id && item.size === size && item.color === color && item.sex === sex;
     })
     let newCart = cart.filter((element, index) => index !== itemIdx);
     

@@ -53,10 +53,11 @@ const handler = async (req,res)=>{
 
           return { 
             itemReferenceId: '1',
-            variantKey: 'stickers~ST-90PVC-BC-40', // TODO
+            variantKey: 'fullcutshirtgsm140-white-' + item.qty + '-digital-fullcolorfullcolor-280x200xnoxnomm100x100xnoxnobacklargechestleft-days6?size_' + item.sex + '_' + item.size.toLowerCase() + '=1', // TODO
             quantity: item.qty,
             serviceLevel: 'standard',
             //fileUrl: 'artshark.be/images/collections/' + file + item.img.replace('.png', '.pdf'),
+            //frontUrl: 'artshark.be/logo.pdf
           }
         })
         console.log('Order items:')
@@ -66,7 +67,7 @@ const handler = async (req,res)=>{
         sdk.auth(process.env.HELLOPRINT_API_KEY);
         //sdk.server('https://drukzo-michael.ngrok.io/rest/v1');
         sdk.createOrder({
-          mode: 'test',
+          mode: 'test', //prod
           shipping: {
             companyName: 'artshark',
             firstName: firstName,

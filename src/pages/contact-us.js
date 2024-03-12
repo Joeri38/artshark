@@ -5,7 +5,7 @@ function Contact() {
   return (
     <>
     <Head>
-      <title>About</title>
+      <title>Contact us</title>
       <meta name="description" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0" />
    </Head>
     <div>
