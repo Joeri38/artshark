@@ -66,7 +66,7 @@ const handler = async (req,res)=>{
         sdk.auth(process.env.HELLOPRINT_API_KEY);
         //sdk.server('https://drukzo-michael.ngrok.io/rest/v1');
         sdk.createOrder({
-          mode: 'test', //prod
+          mode: 'prod', //prod
           shipping: {
             companyName: 'artshark',
             firstName: firstName,
