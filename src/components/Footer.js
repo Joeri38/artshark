@@ -16,6 +16,11 @@ function Footer() {
               Terms and Conditions
             </p>
         </Link>
+        <Link href='/privacy-policy'>
+            <p className="text-sm text-gray-500 sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-200 sm:py-2 sm:mt-0 mt-4">
+              Privacy Policy
+            </p>
+        </Link>
         <Link href='/contact-us'>
           <p className="text-sm text-gray-500 sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-200 sm:py-2 sm:mt-0 mt-4">
             © Art Shark | Questwave 

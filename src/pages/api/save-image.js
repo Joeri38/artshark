@@ -1,37 +1,30 @@
 import formidable from 'formidable'; 
-import fs from 'fs';
-
-export const config = {
-  api: {
-    bodyParser: false, // Disable built-in body parser
-  },
-};
+const fs = require('fs');
 
 export default async function handler(req, res) {
   if (req.method === 'POST') {
-    const form = new formidable.IncomingForm();
 
-    form.parse(req, (err, fields, files) => {
+    // Retrieve image 
+    const response = await fetch(req.body.imgPath);
+    const blob = await response.blob();
+    const arrayBuffer = await blob.arrayBuffer();
+    const buffer = Buffer.from(arrayBuffer);
 
-      if (err) {
-        res.status(500).json({ error: 'Image parsing error' });
-        return;
-      }
+    // Set file name
+    const fileName = req.body.imgPrompt.toLowerCase().replaceAll(' ', '_') + '.png';
 
-      const uploadedFile = files.image;
-      const newFilePath = `/public/images/user-created/${uploadedFile.originalFilename}`; 
-
-      fs.rename(uploadedFile.filepath, newFilePath, (err) => {
-        if (err) {
-          res.status(500).json({ error: 'Error saving image' });
-        } else {
-          res.status(200).json({ 
-            message: `/uploads/${uploadedFile.originalFilename}` // New image URL
-          });
-        }
-      });
+    // Save image
+    fs.writeFile('public/images/user-created/' + fileName, buffer, function (err) {
+      if (err) throw err;
+      console.log('File written: ' + fileName);
     });
-  } else {
+
+    // Return status code
+    res.status(200).json({ message: 'Image saved' })
+
+  } 
+  
+  else {
     res.status(405).end(); // Method Not Allowed
   }
 }

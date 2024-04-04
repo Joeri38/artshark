@@ -53,10 +53,21 @@ const handler = async (req,res)=>{
 
           return { 
             itemReferenceId: '1',
-            variantKey: 'fullcutshirtgsm140-white-' + item.qty + '-digital-fullcolorfullcolor-280x200xnoxnomm100x100xnoxnobacklargechestleft-days6?size_' + item.sex + '_' + item.size.toLowerCase() + '=1', // TODO
+            variantKey: 'fullcutshirt140gsm~FULLCUTSHIRT140GSM-COTTON-100X100-QTY-FULL_COLOR+CHEST_LEFT+DIGITAL-FRUIT_OF_THE_LOOM+WHITE+NONE+CLASSIC_M_SLIM_F+UNISEX_FEMALE+ROUND_NECK+SHORT',
             quantity: item.qty,
             serviceLevel: 'standard',
             fileUrl: 'artshark.be/images/collections/' + file + item.img.replace('.png', '.pdf'),
+            options: [
+              { code: "apparelSize",
+                value: [
+                  {
+                    quantity: item.qty,
+                    size: item.size,
+                    type: "unisex"
+                  }
+                ]
+              }
+            ]
           }
         })
         console.log('Order items:')
@@ -64,6 +75,7 @@ const handler = async (req,res)=>{
 
         // Send order to Helloprint
         sdk.auth(process.env.HELLOPRINT_API_KEY);
+        //sdk.server('https://api.helloprint.com/rest/v1');
         //sdk.server('https://drukzo-michael.ngrok.io/rest/v1');
         sdk.createOrder({
           mode: 'prod', //prod
@@ -86,15 +98,30 @@ const handler = async (req,res)=>{
           .catch(err => console.error(err));
         
         // Send mail
+        const orderString = cart.map((item) => {
+          if (item.qty == 1){
+            return `${item.qty}x T-shirt ${item.size} ${item.sex}`
+          } else{
+            return `${item.qty}x T-shirts ${item.size} ${item.sex}`
+          }
+        }).join('<br>')
+        console.log(orderString)
+        
         const html = `
           <p>Dear ${name}</p>
 
           <p>Thank you for choosing Artshark! We will deliver your order within two weeks.</p>
 
+          <p>Order details:</p>
+          <p>${orderString}</p>
+
           <p>Shipping adress:</p>
           <p>${name} <br> ${line1} ${line2 ? '<br> ' + line2 : ''} <br> ${postal_code} ${city}</p>
 
           <p>To see all your orders, create an <a href='http://artshark.be/signup' target='_blank'>account</a></p>
+
+          <br><br><br>
+          <p><a href='http://artshark.be/termsandconditions' target='_blank'>Terms and conditions</a> | <a href='http://artshark.be/privacy-policy' target='_blank'>Privacy Policy</a> </p>
         `
 
         const transporter = nodemailer.createTransport({

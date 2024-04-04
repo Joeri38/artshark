@@ -26,10 +26,17 @@ const Item = ({addToCart, product}) => {
 
   // Get the collection file name
   const idx = product.collection;
-  const collection_files = ['recently-added/', 'red-japan/', 'celebrities/', 'hockney/', 'ukiyo-e/'];
+  let fileName;
+  if(idx == -1){
+    fileName = '/images/user-created/' + product.img;
+  } else {
+    const collection_files = ['recently-added/', 'red-japan/', 'celebrities/', 'hockney/', 'ukiyo-e/'];
+    fileName = '/images/collections/' + collection_files[idx] + product.img;
+    console.log(fileName);
+  }
+  
   const sizeSquare = [true, true, false, false, false]
-  const file = collection_files[idx];
-
+  
   function buttonClicked() {
     
     // Check if color and size are selected
@@ -73,7 +80,7 @@ const Item = ({addToCart, product}) => {
                 className="productCarousel"
             >
               {/* Image doesn't work with the carousel */}
-              <img src={'/images/collections/' + file + product.img} /> 
+              <img src={fileName} /> 
               {sizeSquare ? <img src='/images/product-tshirt.png' /> 
                           : <img src='/images/product-tshirt-rect.png' /> }
               {/*<img src='/images/product-tshirt-rect.png' /> */}

@@ -7,9 +7,11 @@ const handler = async (req,res)=>{
         let addProduct = new Product({
             desc: req.body.desc,
             img: req.body.img,
+            collection: req.body.collection,
         })
         await addProduct.save();
-        res.status(200).json({ success: true,  message: "Item added succesfully!" })
+        res.status(200).json({ success: true,  message: "Item added succesfully!", 
+                               productID: addProduct._id})
     }
     else{
         res.status(400).json({ error: "Item not added!" })
