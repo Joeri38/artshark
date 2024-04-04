@@ -51,9 +51,8 @@ const Item = ({addToCart, product}) => {
     }*/
     else  {
       let color = undefined;
-      let customPriceID = 'price_1OnM5QBIDAiFaigFe6620jhN'; // Default price ID
       addToCart(product._id, size, color, sex, product.title, product.collection, 
-                customPriceID, product.img, 1);
+                product.stripePriceId, product.img, 1);
       toast.success("Item is added in your Cart!");
     }
     

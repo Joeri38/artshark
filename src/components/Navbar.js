@@ -41,7 +41,8 @@ export default function Example({logout, removeFromCart, addToCart, user, cart, 
     const lineItems = cart.map((item)=>{
       return {
         //price: item.stripePriceId, 
-        price: 'price_1OnM7FBIDAiFaigFKNyOAIIH',
+        //price: 'price_1OnM7FBIDAiFaigFKNyOAIIH',
+        price: 'price_1OnM5QBIDAiFaigFe6620jhN',
         quantity: item.qty,
       }
     })
