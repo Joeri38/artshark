@@ -20,7 +20,7 @@ export default async function handler(req, res) {
         phone_number_collection: {
           enabled: true,
         },   
-        payment_method_types: ["bancontact", "card", "paypal", "link"], // "eps", "giropay", "ideal",
+        payment_method_types: ["bancontact", "card", "link"], // "eps", "giropay", "ideal", "paypal"
         success_url: `${process.env.HOST}/success?id={CHECKOUT_SESSION_ID}`,//
         cancel_url: `${process.env.HOST}/failed`, 
 
