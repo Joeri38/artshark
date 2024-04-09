@@ -10,14 +10,16 @@ const Products = () => {
       <title>Products</title>
       <meta name="description" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0" />
     </Head>
-    <div className='min-h-screen bg-[#f7f7f7] text-black py-6'>
-      <div className=''>
+    <div className='bg-[#f7f7f7] text-black pt-6'>
+      {/*<div className=''>
         <GalleryItem title={'Products'}/>
-      </div>
+  </div>*/}
 
-      {/* 100% cotton */}
-      <section className="text-gray-600 bg-[#f7f7f7] body-font">
-        <div className="container mx-auto flex px-5 md:px-10 py-12 md:flex-row flex-col items-center">
+      {/* Text blocks */}
+      <section className="text-gray-600 bg-[#f7f7f7] body-font md:mb-44">
+
+        {/* 100% cotton */}
+        <div className="container mx-auto flex px-5 md:px-10 py-8 md:flex-row flex-col items-center">
 
           <div className="lg:flex-grow md:ml-20 md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-8 md:mb-0 items-center text-center">
             <h1 className="text-lg sm:text-2xl mb-3 md:text-3xl tracking-widest font-bold text-gray-900">100% cotton</h1>
@@ -43,7 +45,8 @@ const Products = () => {
           </div>   
         </div>
 
-        <div className="container mx-auto flex px-5 md:px-10 py-12 md:flex-row flex-col items-center">
+        {/* Printing and Supplier */}
+        <div className="container mx-auto flex px-5 md:px-10 pt-0 md:pt-12 md:flex-row flex-col items-center">
           <div className="lg:flex-grow md:ml-20 md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center">
             <h1 className="text-lg sm:text-2xl mb-3 md:text-3xl tracking-widest font-bold text-gray-900">Printing</h1>
             <p className="mb-2 w-full leading-relaxed">
@@ -51,7 +54,7 @@ const Products = () => {
             </p>
           </div>
 
-          <div className="lg:flex-grow md:ml-20 md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-8 md:mb-0 items-center text-center">
+          <div className="lg:flex-grow md:ml-20 md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-12 md:mb-0 items-center text-center">
             <h1 className="text-lg sm:text-2xl mb-3 md:text-3xl tracking-widest font-bold text-gray-900">Supplier</h1>
             <p className="mb-2 w-full leading-relaxed">
             Fruit of Loom -  We chose this supplier because sustainability is high on their agenda. Their shirts are comfortable and adhere to high quality standards.
