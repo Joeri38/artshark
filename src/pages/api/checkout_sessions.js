@@ -14,9 +14,9 @@ export default async function handler(req, res) {
         line_items: lineItems,
         mode: 'payment',
         billing_address_collection: "required",
-        /*automatic_tax: {
-          enable: true,
-        },*/
+        shipping_options: [ 
+          {shipping_rate: 'shr_1P3m75BIDAiFaigFqd6SS6Eq'}
+        ],
         phone_number_collection: {
           enabled: true,
         },   
@@ -28,29 +28,6 @@ export default async function handler(req, res) {
 
       res.status(200).json({ success: true, message: 'Payment started', url:session.url, id:session.id })
 
-      /*const paymentLink = await stripe.paymentLinks.create({
-        line_items: lineItems,
-        after_completion: {
-          type: 'redirect',
-          redirect: {
-            url: `${process.env.HOST}/success?id={CHECKOUT_SESSION_ID}`,
-          },
-        },
-        billing_address_collection: "required",
-        automatic_tax: {
-          enable: true,
-        },
-        invoice_creation: {
-          enabled: true,
-        },
-        phone_number_collection: {
-          enabled: true,
-        },   
-        payment_method_types: ["bancontact", "card", "paypal", "link"], // "eps", "giropay", "ideal",
-      });
-
-      res.status(200).json({ success: true, message: 'Payment started', url:paymentLink.url, id:paymentLink.id })*/
-     
     } catch (err) {
       res.status(err.statusCode || 500).json(err.message);
     }

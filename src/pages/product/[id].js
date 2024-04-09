@@ -32,7 +32,6 @@ const Item = ({addToCart, product}) => {
   } else {
     const collection_files = ['recently-added/', 'red-japan/', 'celebrities/', 'hockney/', 'ukiyo-e/'];
     fileName = '/images/collections/' + collection_files[idx] + product.img;
-    console.log(fileName);
   }
   
   const sizeSquare = [true, true, false, false, false]
@@ -52,7 +51,7 @@ const Item = ({addToCart, product}) => {
     else  {
       let color = undefined;
       addToCart(product._id, size, color, sex, product.title, product.collection, 
-                product.stripePriceId, product.img, 1);
+                product.price, product.stripePriceId, product.img, 1);
       toast.success("Item is added in your Cart!");
     }
     
@@ -132,12 +131,13 @@ const Item = ({addToCart, product}) => {
 
             </div>
             
+            {/* Price and add to cart */}
             <div className="flex mt-5">
-              <span className="title-font font-medium text-2xl text-gray-900">€40</span>
+              <span className="title-font font-medium text-2xl text-gray-900">€35</span>
               <button onClick={buttonClicked} className="flex -mt-1 ml-auto bg-[#29D0d1] hover:bg-[#44B0B7] text-white rounded-xl font-semibold border-0 py-3 px-6 focus:outline-none text-sm md:text-base">Add to Cart</button>
               <ToastContainer position="bottom-center" autoClose={2000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover theme="light"/>
-
             </div>
+
           </div>
         </div>
       </div>

@@ -296,7 +296,7 @@ export default function Example({logout, removeFromCart, addToCart, user, cart, 
                                   <p>€{subTotal}</p>
                                 </div>
                                 <p className="mt-0.5 text-sm text-gray-500">
-                                  Shipping and taxes calculated at checkout.
+                                  Shipping and taxes calculated at checkout
                                 </p>   
                                 
                                 {/* Checkout button */}
