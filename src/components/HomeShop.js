@@ -6,7 +6,7 @@ const products = [
     {
       id: 1,
       name: 'T-shirts',
-      href: '/products',
+      href: '/gallery',
       imageSrc: '/images/product-tshirt.png',
       imageAlt: "T-shirts",
       available: true,
@@ -14,7 +14,7 @@ const products = [
     {
       id: 2,
       name: 'Posters',
-      href: '/items',
+      href: '/gallery',
       imageSrc: '/images/poster_coming_soon.png',
       imageAlt: "Posters",
       available: false,
@@ -22,7 +22,7 @@ const products = [
     {
       id: 3,
       name: 'Merch',
-      href: '/items',
+      href: '/gallery',
       imageSrc: '/images/mug_coming_soon.png',
       imageAlt: "Merch",
       available: false,
