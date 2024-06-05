@@ -7,6 +7,7 @@ import Router from 'next/router';
 
 import { useState } from 'react';
 
+// Click to buy product
 async function buyProduct(imgPath, imgPrompt){
 
     // Save image in database
@@ -45,6 +46,7 @@ async function buyProduct(imgPath, imgPrompt){
     Router.push(`product/${response.productID}`)
 }
 
+// Generate image
 async function generate(){
     console.log('Generating image');
 }
