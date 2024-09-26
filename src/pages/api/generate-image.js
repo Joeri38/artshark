@@ -11,7 +11,10 @@ const openai = new OpenAI({
   apiKey: process.env['OPENAI_API_KEY'],
 });
 
-export const maxDuration = 60; // max runtime 60s
+// max runtime 60s
+export const config = {
+    maxDuration: 5,
+  }; 
 
 export default async function handler(req, res) {
 
