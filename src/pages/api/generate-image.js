@@ -13,7 +13,7 @@ const openai = new OpenAI({
 
 // max runtime 60s
 export const config = {
-    maxDuration: 5,
+    maxDuration: 60,
   }; 
 
 export default async function handler(req, res) {
