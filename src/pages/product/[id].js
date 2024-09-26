@@ -29,7 +29,8 @@ const Item = ({addToCart, product}) => {
   const idx = product.series;
   let fileName;
   if(idx == -1){
-    fileName = '/images/user-created/' + product.img;
+    //fileName = '/images/user-created/' + product.img;
+    fileName = product.img;
   } else {
     const collection_files = ['recently-added/', 'red-japan/', 'celebrities/', 'hockney/', 'ukiyo-e/'];
     fileName = '/images/collections/' + collection_files[idx] + product.img;

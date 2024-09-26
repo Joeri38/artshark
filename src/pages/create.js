@@ -63,8 +63,8 @@ async function buyProduct(imgPath, imgPrompt){
         },
         body: JSON.stringify({
             desc: imgPrompt,
-            //img: imgPrompt.toLowerCase().replaceAll(' ', '_') + '.png',
-            img: fileName,
+            //img: fileName,
+            img: imgPath,
             series: -1,
         }),
     })

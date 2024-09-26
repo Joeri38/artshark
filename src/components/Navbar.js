@@ -239,18 +239,18 @@ export default function Example({logout, removeFromCart, addToCart, user, cart, 
                                         {/* Collection file name for images */}
                                         const series_idx = item.series;
                                         const series_files = ['recently-added/', 'red-japan/', 'celebrities/', 'hockney/', 'ukiyo-e/'];
-                                        let file;
+                                        let fileName;
                                         if (series_idx == -1) {
-                                          file = 'user-created/';
+                                          fileName = item.img;
                                         } else {
-                                          file = 'collections/' + series_files[series_idx];
+                                          fileName = '/images/collections/' + series_files[series_idx] + item.img;
                                         }
                                         
                                         return <li key={index} className="flex py-6">
                                           
                                           {/* Image */}
                                           <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
-                                            <img src={'/images/' + file + item.img} alt="cart-image" className="h-full w-full object-cover object-center"/>
+                                            <img src={fileName} alt="cart-image" className="h-full w-full object-cover object-center"/>
                                           </div>
 
                                           {/* Text */}
