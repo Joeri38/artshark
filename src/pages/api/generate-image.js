@@ -1,8 +1,14 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import { Configuration, OpenAIApi } from "openai"
+//import { Configuration, OpenAIApi } from "openai"
 
-const configuration = new Configuration({ apiKey: process.env.OPENAI_API_KEY })
-const openai = new OpenAIApi(configuration)
+//const configuration = new Configuration({ apiKey: process.env.OPENAI_API_KEY })
+//const openai = new OpenAIApi(configuration)
+
+// openai version ^4.0.0
+import OpenAI from 'openai';
+
+const openai = new OpenAI({
+  apiKey: process.env.OPEN_API_KEY,
+});
 
 export default async function handler(req, res) {
 
