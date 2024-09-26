@@ -41,8 +41,8 @@ export default function Example({logout, removeFromCart, addToCart, user, cart, 
     const lineItems = cart.map((item)=>{
       return {
         //price: item.stripePriceId, 
-        price: 'price_1OnM7FBIDAiFaigFKNyOAIIH', // Test price
-        //price: 'price_1OnM5QBIDAiFaigFe6620jhN', // Live price
+        //price: 'price_1OnM7FBIDAiFaigFKNyOAIIH', // Test price
+        price: 'price_1OnM5QBIDAiFaigFe6620jhN', // Live price
         quantity: item.qty,
       }
     })
