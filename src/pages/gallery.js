@@ -29,6 +29,9 @@ function Collection({title, file, product}) {
 
 function Gallery({ product }) {
 
+  console.log('series 0')
+  console.log(product[4])
+
   return (
     <>
     <Head>
@@ -67,13 +70,13 @@ function Gallery({ product }) {
 
     // Add regular collections
     for (let i = 1; i < 5; i++) {
-      let collection = await Product.find({ collection: i })
-      products.push(collection)
+      let series = await Product.find({ series: i })
+      products.push(series)
     }
 
     // Add fan collection
-    let collection = await Product.find({ collection: 0 })
-    products.push(collection)
+    let series = await Product.find({ series: 0 })
+    products.push(series)
   
     // Pass data to the page via props
     return {

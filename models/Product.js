@@ -4,7 +4,8 @@ const ProductSchema = new mongoose.Schema({
     title:{type: String, default: 'no title'},
     desc: {type: String, required: true},
     img: {type: String, required: true},
-    price: {type: Number, default: 40},
+    series: {type: Number, default: -1},
+    price: {type: Number, default: 35},
     stripePriceId: {type: String, default: 'price_1NL5edBIDAiFaigFzqaKakWB'},
   },{timestamps:true});
 

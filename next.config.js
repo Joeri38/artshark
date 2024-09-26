@@ -9,6 +9,12 @@ const nextConfig = {
         port: '',
         pathname: '/attachments/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'oaidalleapiprodscus.blob.core.windows.net',
+        port: '',
+        pathname: '/private/**',
+      },
     ],
   },
 }

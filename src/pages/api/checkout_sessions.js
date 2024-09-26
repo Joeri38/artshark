@@ -1,4 +1,5 @@
-const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+//const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+const stripe = require('stripe')('sk_test_51NH0MHBIDAiFaigFKTI4IvEbBzsekhmVxSnC5BHkHarxvUx0DCJxcWlgfrzSTcUa5t9fZLzV0W3jY6xb8yCUvN4m008XcPyN19');
 
 export default async function handler(req, res) {
 
@@ -14,9 +15,9 @@ export default async function handler(req, res) {
         line_items: lineItems,
         mode: 'payment',
         billing_address_collection: "required",
-        shipping_options: [ 
+        /*shipping_options: [ 
           {shipping_rate: 'shr_1P3m75BIDAiFaigFqd6SS6Eq'}
-        ],
+        ],*/
         phone_number_collection: {
           enabled: true,
         },   

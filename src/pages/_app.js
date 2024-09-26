@@ -78,7 +78,7 @@ export default function App({ Component, pageProps: { session, ...pageProps } })
   }
 
   // Add item to cart 
-  const addToCart = (id, size, color, sex, name, collection, price, stripePriceId, img, qty) =>{
+  const addToCart = (id, size, color, sex, name, series, price, stripePriceId, img, qty) =>{
     let newCart = cart;
 
     // Check if item with this id, size and color is already in the cart array
@@ -91,7 +91,7 @@ export default function App({ Component, pageProps: { session, ...pageProps } })
       newCart[itemIdx].qty= cart[itemIdx].qty + qty;
       console.log('Item already exists in the cart.');
     } else {
-      newCart.push({ id, size, color, sex, name, collection, stripePriceId, img, price: price, qty: 1});
+      newCart.push({ id, size, color, sex, name, series, stripePriceId, img, price: price, qty: 1});
       console.log('Item does not exist in the cart.');
     }
 

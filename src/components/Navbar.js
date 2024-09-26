@@ -13,7 +13,7 @@ import { AiFillMinusCircle, AiFillPlusCircle } from 'react-icons/ai';
 const pages = [
   { name: 'Home', href: '/' },
   { name: 'Gallery', href: '/gallery' },
-  //{ name: 'Create', href: '/create' },
+  { name: 'Create', href: '/create' },
   { name: 'Products', href: '/products' },
   { name: 'Our Story', href: '/our-story' },
   { name: 'Contact Us', href: '/contact-us' },
@@ -41,8 +41,8 @@ export default function Example({logout, removeFromCart, addToCart, user, cart, 
     const lineItems = cart.map((item)=>{
       return {
         //price: item.stripePriceId, 
-        //price: 'price_1OnM7FBIDAiFaigFKNyOAIIH',
-        price: 'price_1OnM5QBIDAiFaigFe6620jhN',
+        price: 'price_1OnM7FBIDAiFaigFKNyOAIIH', // Test price
+        //price: 'price_1OnM5QBIDAiFaigFe6620jhN', // Live price
         quantity: item.qty,
       }
     })
@@ -52,7 +52,7 @@ export default function Example({logout, removeFromCart, addToCart, user, cart, 
       const res = await fetch(`/api/checkout_sessions`, {
         method: "POST",
         headers: {
-            Authorization: "Bearer " + process.env.STRIPE_SECRET_KEY,
+            //Authorization: "Bearer " + process.env.STRIPE_SECRET_KEY,
             "Content-Type": "application/json",
         },
         body: JSON.stringify({ lineItems }),
@@ -237,15 +237,20 @@ export default function Example({logout, removeFromCart, addToCart, user, cart, 
                                     {cart && cart.map((item, index)=>{
 
                                         {/* Collection file name for images */}
-                                        const collection_idx = item.collection;
-                                        const collection_files = ['recently-added/', 'red-japan/', 'celebrities/', 'hockney/', 'ukiyo-e/'];
-                                        const file = collection_files[collection_idx];
-
+                                        const series_idx = item.series;
+                                        const series_files = ['recently-added/', 'red-japan/', 'celebrities/', 'hockney/', 'ukiyo-e/'];
+                                        let file;
+                                        if (series_idx == -1) {
+                                          file = 'user-created/';
+                                        } else {
+                                          file = 'collections/' + series_files[series_idx];
+                                        }
+                                        
                                         return <li key={index} className="flex py-6">
                                           
                                           {/* Image */}
                                           <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
-                                            <img src={'/images/collections/' + file + item.img} alt="cart-image" className="h-full w-full object-cover object-center"/>
+                                            <img src={'/images/' + file + item.img} alt="cart-image" className="h-full w-full object-cover object-center"/>
                                           </div>
 
                                           {/* Text */}

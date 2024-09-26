@@ -19,7 +19,7 @@ const OrderSchema = new mongoose.Schema({
 
   paymentId:{type: String, unique:true},
   paymentStatus:{type: String, required: true},
-  deliveryStatus: {type: String, default: 'working on order 📦'},
+  deliveryStatus: {type: String, default: 'order received'},
   
 },{timestamps:true});
 

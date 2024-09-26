@@ -16,16 +16,17 @@ import { FormControl, InputLabel, MenuItem, Select, TextField } from '@mui/mater
 const Item = ({addToCart, product}) => {
   const router = useRouter()
 
-  const [color, setColor] = useState()
+  //const [color, setColor] = useState()
   const [size, setSize] = useState()
   const [sex, setSex] = useState()
 
-  let colorArray = ["White", "Black"];
+  //let colorArray = ["White", "Black"];
   let sizeArray = ["S", "M", "L", "XL", "XXL"];
   let sexArray = ["men", "women"];
 
   // Get the collection file name
-  const idx = product.collection;
+  //const idx = product.collection;
+  const idx = product.series;
   let fileName;
   if(idx == -1){
     fileName = '/images/user-created/' + product.img;
@@ -50,7 +51,7 @@ const Item = ({addToCart, product}) => {
     }*/
     else  {
       let color = undefined;
-      addToCart(product._id, size, color, sex, product.title, product.collection, 
+      addToCart(product._id, size, color, sex, product.title, product.series, 
                 product.price, product.stripePriceId, product.img, 1);
       toast.success("Item is added in your Cart!");
     }
@@ -79,7 +80,7 @@ const Item = ({addToCart, product}) => {
                 className="productCarousel"
             >
               {/* Image doesn't work with the carousel */}
-              <img src={fileName} /> 
+              <img src={fileName.replace('#', '%23')} /> 
               {sizeSquare ? <img src='/images/product-tshirt.png' /> 
                           : <img src='/images/product-tshirt-rect.png' /> }
               {/*<img src='/images/product-tshirt-rect.png' /> */}
@@ -144,9 +145,6 @@ const Item = ({addToCart, product}) => {
     </section>
   </>
 }
-
-
-
 
 export async function getServerSideProps(context) {
 
