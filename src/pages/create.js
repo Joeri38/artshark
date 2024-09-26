@@ -35,7 +35,7 @@ async function generate(imgPrompt, setImgPath, setIsGenerating) {
 async function buyProduct(imgPath, imgPrompt){
 
     // Save image in database
-    const uploadResponse = await fetch('/api/save-image', {
+    /*const uploadResponse = await fetch('/api/save-image', {
         method: 'POST',
         headers: {
             "Content-Type": "application/json",
@@ -53,7 +53,7 @@ async function buyProduct(imgPath, imgPrompt){
     }
 
     const data = await uploadResponse.json();
-    const fileName = await data.fileName;
+    const fileName = await data.fileName;*/
 
      // Add to product database
     let res = await fetch('/api/add-product', {
